@@ -7,7 +7,7 @@ $ROOT_URL = "/kinStar";
 $CONTENT_URL = "$ROOT_URL/content";
 $ADMIN_URL = "$ROOT_URL/admin";
 $SITE_URL = "$ROOT_URL/site";
-$UPLOAD_PRODUCT_URL = "../../uploaded/product/";
+$UPLOAD_FILM_URL = "../../uploaded/films/";
 $UPLOAD_USER_URL = "../../uploaded/user/";
 
 function exist_parma($fieldname)

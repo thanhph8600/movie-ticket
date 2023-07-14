@@ -1,2 +1,2 @@
 <?php
-header('location: lich_chieu');
+header('location: film');

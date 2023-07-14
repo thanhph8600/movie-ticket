@@ -41,4 +41,6 @@
     include $VIEW_NAME;
 ?>
 
+<script src="<?= $CONTENT_URL ?>/js/validate.js"></script>
+
 
