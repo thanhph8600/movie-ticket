@@ -1,5 +1,5 @@
 <?php
-include '../../DAO/PDO.php';
+require_once '../../DAO/PDO.php';
 
 function user_insert($name,$phone,$birtday,$email,$pass,$sex,$role,$activated,$thumb){
     $sql = "INSERT INTO `user` ( `name`, `phone`, `birtday`, `email`, `pass`, `sex`, `role`, `activated`, `thumb`) VALUES (?,?,?,?,?,?,?,?,?)";

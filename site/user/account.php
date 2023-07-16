@@ -93,7 +93,7 @@
                         <button class="update my-4 text-white py-2 m-auto bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 cursor-pointer rounded text-center w-1/4">
                             Cập nhật
                         </button>
-                        <input type="hidden" name="id_user" value="<?= $user['id_user'] ?>">
+                        <input type="hidden" name="id_user" value="<?= $user['id'] ?>">
                         <input type="hidden" name="thumb_old" value="<?= $user['thumb'] ?>">
                     </form>
                 </div>

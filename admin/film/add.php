@@ -126,7 +126,7 @@
                             <div class="row pb-4">
                                 <div class="col-6">
                                     <label for="">Tên film</label>
-                                    <input name="name" type="text" id="name" 
+                                    <input name="name" type="text" 
                                         value=""
                                     >
                                     <?php
@@ -215,9 +215,7 @@
         </div>
 
     </div>
-    <script>
-        CKEDITOR.replace('content');
-    </script>
+
 
 </div>
 </main>
@@ -403,16 +401,13 @@
             console.log('Bạn chưa điền phần này')
             return false
         } else {
-            if (ngay_nhap[0] < d.getFullYear()) {
-                console.log('Bạn không được nhập ngày quá khứ')
+            if (Number(ngay_nhap[0]) < d.getFullYear()) {
                 return false
-            } else {
-                if (ngay_nhap[1] < (d.getMonth())) {
-                    console.log('Bạn không được nhập ngày quá khứs')
+            } else if (Number(ngay_nhap[0]) == d.getFullYear()) {
+                if (Number(ngay_nhap[1]) < d.getMonth() + 1) {
                     return false
-                } else {
-                    if (ngay_nhap[2] < d.getDate()) {
-                        console.log('Bạn không được nhập ngày quá khứ')
+                } else if (Number(ngay_nhap[1]) == d.getMonth() + 1) {
+                    if (Number(ngay_nhap[2]) < d.getDate()) {
                         return false
                     }
                 }

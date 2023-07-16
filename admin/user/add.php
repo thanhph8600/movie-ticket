@@ -161,6 +161,44 @@
                                     ?>
                                 </div>
                                 <div class="col-4">
+                                    <label for="">Nhập mật khẩu</label>
+                                    <input class="input flex-auto focus:outline-none" type="password" id="pass" name="pass" placeholder="">
+                                    <p class="chkPass text-danger"></p>
+                                    <?php
+                                    if (!empty($pass_err)) echo $pass_err;
+                                    ?>
+                                </div>
+                                <div class="col-4">
+                                    <label for="">Nhập lại mật khẩu</label>
+                                    <input class="input flex-auto focus:outline-none" type="password" id="rePass" name="rePass" placeholder="">
+                                    <p class="chkRePass text-danger"></p>
+                                    <?php
+                                    if (!empty($rePass_err)) echo $rePass_err;
+                                    ?>
+                                </div>
+
+                            </div>
+                            <div class="row pb-4">
+
+                                <div class="col-4">
+                                    <label for="" class="">Trạng thái:</label>
+                                    <div class=" py-3 d-flex">
+                                        <div>
+                                            <input class="sex" type="radio" name="activated" value="1" id="hoat_dong" checked>
+                                            <label for="hoat_dong">Hoạt động</label>
+                                        </div>
+                                        <div class=" ps-3">
+                                            <input class="sex" type="radio" name="activated" id="khong_hoat_dong" value="0">
+                                            <label for="khong_hoat_dong">Không hoạt động</label>
+                                        </div>
+                                    </div>
+                                    <p class="chkRole text-danger"></p>
+
+                                    <?php
+                                    if (!empty($activated_err)) echo $activated_err;
+                                    ?>
+                                </div>
+                                <div class="col-4">
                                     <label for="" class="">Giới tính:</label>
                                     <div class=" py-3 d-flex">
                                         <div>
@@ -197,42 +235,6 @@
                                     ?>
                                 </div>
                             </div>
-                            <div class="row pb-4">
-                                <div class="col-4">
-                                    <label for="">Nhập mật khẩu</label>
-                                    <input class="input flex-auto focus:outline-none" type="password" id="pass" name="pass" placeholder="">
-                                    <p class="chkPass text-danger"></p>
-                                    <?php
-                                    if (!empty($pass_err)) echo $pass_err;
-                                    ?>
-                                </div>
-                                <div class="col-4">
-                                    <label for="">Nhập lại mật khẩu</label>
-                                    <input class="input flex-auto focus:outline-none" type="password" id="rePass" name="rePass" placeholder="">
-                                    <p class="chkRePass text-danger"></p>
-                                    <?php
-                                    if (!empty($rePass_err)) echo $rePass_err;
-                                    ?>
-                                </div>
-                                <div class="col-4">
-                                    <label for="" class="">Trạng thái:</label>
-                                    <div class=" py-3 d-flex">
-                                        <div>
-                                            <input class="sex" type="radio" name="activated" value="1" id="hoat_dong" checked>
-                                            <label for="hoat_dong">Hoạt động</label>
-                                        </div>
-                                        <div class=" ps-3">
-                                            <input class="sex" type="radio" name="activated" id="khong_hoat_dong" value="0">
-                                            <label for="khong_hoat_dong">Không hoạt động</label>
-                                        </div>
-                                    </div>
-                                    <p class="chkRole text-danger"></p>
-
-                                    <?php
-                                    if (!empty($activated_err)) echo $activated_err;
-                                    ?>
-                                </div>
-                            </div>
 
                             <label for="">Hình ảnh</label>
                             <input type="file" name="upload" id="file-input" accept="image/*">
@@ -250,9 +252,7 @@
         </div>
 
     </div>
-    <script>
-        CKEDITOR.replace('content');
-    </script>
+
 
 </div>
 </main>
@@ -395,7 +395,7 @@
                     required: '<div class="text-danger">Chưa điền mật khẩu</div>',
                 },
                 rePass: {
-                    required:  '<div class="text-danger">Chưa điền nhập lại mật khẩu</div>',
+                    required: '<div class="text-danger">Chưa điền nhập lại mật khẩu</div>',
                 },
                 upload: {
                     required: '<div class="text-danger">Chưa chọn ảnh</div>',

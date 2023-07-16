@@ -126,7 +126,7 @@
                             <div class="row pb-4">
                                 <div class="col-4">
                                     <label for="name">Tên khách hàng </label>
-                                    <input class=" flex-auto focus:outline-none" type="text" id="name" name="name" value="<?=$user['name']?>">
+                                    <input class=" flex-auto focus:outline-none" type="text" id="name" name="name" value="<?= $user['name'] ?>">
                                     <div class="chkName text-danger"></div>
                                     <?php
                                     if (!empty($name_err)) echo $name_err;
@@ -134,7 +134,7 @@
                                 </div>
                                 <div class="col-4">
                                     <label for="phone">Số điện thoại </label>
-                                    <input class=" flex-auto focus:outline-none" type="text" id="phone" name="phone"  value="0<?=$user['phone']?>">
+                                    <input class=" flex-auto focus:outline-none" type="text" id="phone" name="phone" value="0<?= $user['phone'] ?>">
                                     <p class="chkPhone text-danger"></p>
                                     <?php
                                     if (!empty($phone_err)) echo $phone_err;
@@ -142,7 +142,7 @@
                                 </div>
                                 <div class="col-4">
                                     <label for="">Email</label>
-                                    <input class=" flex-auto focus:outline-none" type="text" id="email" name="email"  value="<?=$user['email']?>">
+                                    <input class=" flex-auto focus:outline-none" type="text" id="email" name="email" value="<?= $user['email'] ?>">
                                     <p class="chkEmail text-danger"></p>
 
                                     <?php
@@ -154,25 +154,59 @@
 
                                 <div class="col-4">
                                     <label for="">Ngày sinh</label>
-                                    <input class=" flex-auto focus:outline-none" type="date" id="date" name="birtday"  value="<?=$user['birtday']?>">
+                                    <input class=" flex-auto focus:outline-none" type="date" id="date" name="birtday" value="<?= $user['birtday'] ?>">
                                     <p class="chkBirtday text-danger"></p>
                                     <?php
                                     if (!empty($birtday_err)) echo $birtday_err;
                                     ?>
                                 </div>
                                 <div class="col-4">
+                                    <label for="">Nhập mật khẩu</label>
+                                    <input class="input flex-auto focus:outline-none" type="password" id="pass" name="pass" value="<?= $user['pass'] ?>">
+                                    <p class="chkPass text-danger"></p>
+                                    <?php
+                                    if (!empty($pass_err)) echo $pass_err;
+                                    ?>
+                                </div>
+                                <div class="col-4">
+                                    <label for="">Nhập lại mật khẩu</label>
+                                    <input class="input flex-auto focus:outline-none" type="password" id="rePass" name="rePass" value="<?= $user['pass'] ?>">
+                                    <p class="chkRePass text-danger"></p>
+                                    <?php
+                                    if (!empty($rePass_err)) echo $rePass_err;
+                                    ?>
+                                </div>
+
+                            </div>
+                            <div class="row pb-4">
+
+                                <div class="col-4">
+                                    <label for="" class="">Trạng thái:</label>
+                                    <div class=" py-3 d-flex">
+                                        <div>
+                                            <input class="sex" type="radio" name="activated" value="1" id="hoat_dong" <?= ($user['activated'] == 1) ? 'checked' : '' ?>>
+                                            <label for="hoat_dong">Hoạt động</label>
+                                        </div>
+                                        <div class=" ps-3">
+                                            <input class="sex" type="radio" name="activated" id="khong_hoat_dong" value="0" <?= ($user['activated'] == 0) ? 'checked' : '' ?>>
+                                            <label for="khong_hoat_dong">Không hoạt động</label>
+                                        </div>
+                                    </div>
+                                    <p class="chkRole text-danger"></p>
+
+                                    <?php
+                                    if (!empty($activated_err)) echo $activated_err;
+                                    ?>
+                                </div>
+                                <div class="col-4">
                                     <label for="" class="">Giới tính:</label>
                                     <div class=" py-3 d-flex">
                                         <div>
-                                            <input class="sex" type="radio" name="sex" id="nam" value="1" 
-                                                <?=($user['sex']==1) ? 'checked' : ''?>
-                                            >
+                                            <input class="sex" type="radio" name="sex" id="nam" value="1" <?= ($user['sex'] == 1) ? 'checked' : '' ?>>
                                             <label for="nam">Nam</label>
                                         </div>
                                         <div class=" ps-3">
-                                            <input class="sex" type="radio" name="sex" id="nu" value="0"
-                                                <?=($user['sex']==0) ? 'checked' : ''?>
-                                            >
+                                            <input class="sex" type="radio" name="sex" id="nu" value="0" <?= ($user['sex'] == 0) ? 'checked' : '' ?>>
                                             <label for="nu">Nữ</label>
                                         </div>
                                     </div>
@@ -186,15 +220,11 @@
                                     <label for="" class="">Vai trò:</label>
                                     <div class=" py-3 d-flex">
                                         <div>
-                                            <input class="sex" type="radio" name="role" value="1" id="khach_hang" 
-                                                <?=($user['role']==1) ? 'checked' : ''?>
-                                            >
+                                            <input class="sex" type="radio" name="role" value="1" id="khach_hang" <?= ($user['role'] == 1) ? 'checked' : '' ?>>
                                             <label for="khach_hang">Khách hàng</label>
                                         </div>
                                         <div class=" ps-3">
-                                            <input class="sex" type="radio" name="role" id="nhan_vien" value="0"
-                                                <?=($user['role']==0) ? 'checked' : ''?>
-                                            >
+                                            <input class="sex" type="radio" name="role" id="nhan_vien" value="0" <?= ($user['role'] == 0) ? 'checked' : '' ?>>
                                             <label for="nhan_vien">Nhân viên</label>
                                         </div>
                                     </div>
@@ -205,58 +235,18 @@
                                     ?>
                                 </div>
                             </div>
-                            <div class="row pb-4">
-                                <div class="col-4">
-                                    <label for="">Nhập mật khẩu</label>
-                                    <input class="input flex-auto focus:outline-none" type="password" id="pass" name="pass"  value="<?=$user['pass']?>">
-                                    <p class="chkPass text-danger"></p>
-                                    <?php
-                                    if (!empty($pass_err)) echo $pass_err;
-                                    ?>
-                                </div>
-                                <div class="col-4">
-                                    <label for="">Nhập lại mật khẩu</label>
-                                    <input class="input flex-auto focus:outline-none" type="password" id="rePass" name="rePass"  value="<?=$user['pass']?>">
-                                    <p class="chkRePass text-danger"></p>
-                                    <?php
-                                    if (!empty($rePass_err)) echo $rePass_err;
-                                    ?>
-                                </div>
-                                <div class="col-4">
-                                    <label for="" class="">Trạng thái:</label>
-                                    <div class=" py-3 d-flex">
-                                        <div>
-                                            <input class="sex" type="radio" name="activated" value="1" id="hoat_dong"
-                                                <?=($user['activated']==1) ? 'checked' : ''?>
-                                            >
-                                            <label for="hoat_dong">Hoạt động</label>
-                                        </div>
-                                        <div class=" ps-3">
-                                            <input class="sex" type="radio" name="activated" id="khong_hoat_dong" value="0"
-                                                <?=($user['activated']==0) ? 'checked' : ''?>
-                                            >
-                                            <label for="khong_hoat_dong">Không hoạt động</label>
-                                        </div>
-                                    </div>
-                                    <p class="chkRole text-danger"></p>
-
-                                    <?php
-                                    if (!empty($activated_err)) echo $activated_err;
-                                    ?>
-                                </div>
-                            </div>
 
                             <label for="">Hình ảnh</label>
-                            <input type="file" name="upload" id="file-input" >
+                            <input type="file" name="upload" id="file-input">
                             <?php
                             if (!empty($file_err)) echo $file_err;
                             ?>
                             <div class="img-product">
-                                <img style="display: block;" src="<?=$UPLOAD_USER_URL.$user['thumb']?>" alt="<?=$user['name']?>" id="img-preview">
+                                <img style="display: block;" src="<?= $UPLOAD_USER_URL . $user['thumb'] ?>" alt="<?= $user['name'] ?>" id="img-preview">
                             </div>
-                            <input type="hidden" name="id_user" value="<?=$user['id']?>">
-                            <input type="hidden" name="pass_old" value="<?=$user['pass']?>">
-                            <input type="hidden" name="thumb_old" value="<?=$user['thumb']?>">
+                            <input type="hidden" name="id_user" value="<?= $user['id'] ?>">
+                            <input type="hidden" name="pass_old" value="<?= $user['pass'] ?>">
+                            <input type="hidden" name="thumb_old" value="<?= $user['thumb'] ?>">
                             <input name="update" type="submit" value="Cập nhật">
                         </form>
                     </div>
@@ -406,7 +396,7 @@
                     required: '<div class="text-danger">Chưa điền mật khẩu</div>',
                 },
                 rePass: {
-                    required:  '<div class="text-danger">Chưa điền nhập lại mật khẩu</div>',
+                    required: '<div class="text-danger">Chưa điền nhập lại mật khẩu</div>',
                 },
             }
 

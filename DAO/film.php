@@ -1,5 +1,5 @@
 <?php
-include_once '../../DAO/PDO.php';
+require_once '../../DAO/PDO.php';
 
 
 function film_insert($name,$directors,$actor,$genre,$premiere,$time,$language, $rated, $trailer, $description, $thumb){
@@ -14,7 +14,6 @@ function film_update($name,$directors,$actor,$genre,$premiere,$time,$language, $
 }
 
 
-
 function film_select_all(){
     $sql = "SELECT * FROM `film`";
     return pdo_query($sql);
@@ -23,6 +22,11 @@ function film_select_all(){
 function film_select_by_id($id){
     $sql = "SELECT * FROM `film` where `id` = ?";
     return pdo_query_one($sql,$id);
+}
+
+function film_select_name_by_id($id){
+    $sql = "SELECT `name` FROM `film` where `id` = ?";
+    return pdo_query_value($sql,$id);
 }
 
 function film_delete_by_id($id){
