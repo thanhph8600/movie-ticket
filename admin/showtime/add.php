@@ -157,40 +157,14 @@
                                     if (!empty($name_err)) echo $name_err;
                                     ?>
                                 </div>
+                                <div class="col-3">
+                                    <label for="id_film">Ngày khởi chiếu</label>
+                                    <input type="text" name="" readonly id="">
+                                </div>
                             </div>
                             <div class="div1">
                                 <div class="row pb-4">
-                                    <div class="col-2">
-                                        <label for="date"> Chọn ngày </label>
-                                        <input type="date" name="date[]" class="date">
-                                        <span class="checkDate text-danger"></span>
 
-                                    </div>
-                                    <div class="col-2">
-                                        <label for="id_room"> Chọn phòng chiếu </label>
-                                        <select name="id_room[]" class="id_room">
-                                            <option value="0">- - - Chọn phòng - - -</option>
-                                        </select>
-                                        <span class="checkRoom text-danger"></span>
-
-                                    </div>
-                                    <div class="col-5">
-                                        <label for="time_start"> Chọn Xuất chiếu</label>
-                                        <div class="time_start d-flex gap-3 justify-content-center align-items-center">
-
-                                        </div>
-                                        <span class="checkTime text-danger"></span>
-
-                                    </div>
-                                    <div class="col-2">
-                                        <label for="price"> Giá vé</label>
-                                        <input type="text" readonly name="price[]" class="price input" id="">
-                                        <span class="checkPrice text-danger"></span>
-
-                                    </div>
-                                    <div class="col-1 d-flex justify-content-center align-items-center">
-                                        <i class="fa fa-times close_row cursor-pointer" aria-hidden="true"></i>
-                                    </div>
                                 </div>
                             </div>
                             <div class=" row pb-4 ps-4">
@@ -202,7 +176,7 @@
                             <input name="add" type="submit" value="Thêm">
                         </form>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -303,174 +277,29 @@
 
 
     function checkForm() {
-
-    }
-
-    function kiem_tra_ngay(ngay_nhap_vao) {
-        let ngay_nhap = ngay_nhap_vao.split('-')
-
-        let d = new Date();
-        if (ngay_nhap.length < 2) {
-            console.log('Bạn chưa điền phần này')
+        let check =0;
+        if($('.id_film').val()==0 || $('.id_film').val()==''){
+            $('.id_film').css('border','1px solid red')
             return false
-        } else {
-            if (Number(ngay_nhap[0]) < d.getFullYear()) {
-                return false
-            } else if (Number(ngay_nhap[0]) == d.getFullYear()) {
-                if (Number(ngay_nhap[1]) < d.getMonth() + 1) {
-                    return false
-                } else if (Number(ngay_nhap[1]) == d.getMonth() + 1) {
-                    if (Number(ngay_nhap[2]) <= d.getDate()) {
-                        return false
-                    }
-                }
-            }
         }
-        return true
+        for (let index = 0; index < $('.price').length; index++) {
+            if($('.price')[index].value==0){
+                $('.price')[index].style.border = '1px solid red';
+                check ++;
+            }          
+        }
+        if(check != 0){
+            return false
+        }
     }
 
-    $(document).on("change", ".id_film ", function() {
-        if ($('.id_film').val() == 0) {
-            $('.checkFiml').html('Bạn phải chọn phim')
-            $(this).css('border', '1px solid red')
-            $(".div1").html('');
-        } else {
-            $('.checkFiml').html('')
-            $(this).css('border', '')
-            $.ajax({
-                url: "./ajax.php?first",
-                data: {
-                    nameFilm: $('.id_film').val()
-                },
-                success: function(result) {
-                    $(".div1").html(result);
-                },
-            });
-        }
-
-    });
-
-    $(document).on("click", ".add-rowShow", function() {
-        if ($('.id_film').val() == 0) {
-            $('.checkFiml').html('Bạn phải chọn phim')
-            $(this).css('border', '1px solid red')
-        } else {
-            $('.checkFiml').html('')
-            $(this).css('border', '')
-            $.ajax({
-                url: "./ajax.php?first",
-                data: {
-                    nameFilm: $('.id_film').val()
-                },
-                success: function(result) {
-                    $(".div1").append(result);
-                },
-            });
-        }
-    });
-
-    $(document).on("change", '.date', function() {
-        let parent = $(this).parent().parent().children('div')
-
-        if($('.id_film').val() == 0){
-            parent.children('.checkDate').html('Chọn phim trước')
-            $(this).css('border', '1px solid red')
-            parent.children('.date').val('')
-        }else{
-            if (!kiem_tra_ngay(parent.children('.date').val())) {
-            parent.children('.checkDate').html('Bắt đầu từ ngày mai trở đi')
-            parent.children('select').html('<option value="0">- - - Chọn phòng - - -</option>')
-            $(this).css('border', '1px solid red')
-            parent.children('div.time_start ').html('')
-
-        } else {
-            parent.children('span').html('')
-            $(this).css('border', '')
-
-            $.ajax({
-                url: "./ajax.php?show_room",
-                data: {
-                    show_room: $('.id_film').val()
-                },
-                success: function(result) {
-                    parent.children('select').html(result)
-                },
-            });
-        }
-        }
-        
-    })
-
-    $(document).on("click", ".id_room ", function() {
-        let parent = $(this).parent().parent().children('div')
-        if (!kiem_tra_ngay(parent.children('.date').val())) {
-            parent.children('.checkRoom').html('Chọn ngày trước')
-            $(this).css('border', '1px solid red')
-            
-        } else {
-            parent.children('.checkRoom').html('')
-            $(this).css('border', '')
-            
-        }
-    })
-
-    $(document).on("change", ".id_room ", function() {
-        let parent = $(this).parent().parent().children('div')
-        if ($(this).val() != 0 || $(this).val() == '') {
-            $(this).css('border', '')
-            $.ajax({
-                url: "./ajax.php?show_shift",
-                data: {
-                    id_room: parent.children('.id_room').val(),
-                    date: parent.children('.date').val()
-                },
-                success: function(result) {
-                    parent.children('div.time_start').html(result)
-                    parent.children('div.time_start').removeClass('py-4')
-                },
-            });
-        } else {
-            $(this).css('border', '1px solid red')
-            parent.children('div.time_start ').html('')
-        }
-    })
-
-
-    $(document).on("click", "div.time_start ", function() {
-        let parent = $(this).parent().parent().children('div')
-        if (parent.children('.id_room').val() == 0 || parent.children('.id_room').val() == '') {
-            parent.children('.checkTime').html('Chọn phòng trước')
-            $(this).css('border', '1px solid red')
-        } else {
-            parent.children('.checkTime').html('')
-            $(this).css('border', '')
-        }
-    });
-
-    $(document).on("click", ".price ", function() {
-        let parent = $(this).parent().parent().children('div')
-        let input =  parent.children('div').children('div').children('input:checked').val()
-        if (input == undefined) {
-            parent.children('.checkPrice').html('Chọn giờ trước')
-            $(this).css('border', '1px solid red')
-            parent.children('.price').attr('readonly', true)
-        } else {
-            parent.children('.price').removeAttr('readonly')
-            parent.children('.checkPrice').html('')
-            $(this).css('border', '')
-        }
-    });
-
-
-    $(document).on("click", ".close_row ", function() {
-        let parent = $(this).parent().parent()
-        parent.remove()
-    });
 
     $('.showtime').addClass('active')
     $('.showtime').addClass('bg-gradient-primary')
 </script>
 <!-- Github buttons -->
+<script src="<?= $CONTENT_URL ?>/js/admin/showtime.js"></script>
+
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="../../public/admin/assets/js/material-dashboard.min.js?v=3.0.2"></script>

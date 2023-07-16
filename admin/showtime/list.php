@@ -83,7 +83,7 @@
                                 <?php
                                 foreach ($showtimes as $item) {
                                     extract($item);
-                                    $nameFilm =  film_select_name_by_id($item['id_film']);
+                                    $nameFilm =  film_find_name_by_id($item['id_film']);
                                 ?>
                                     <tr>
                                         <td>

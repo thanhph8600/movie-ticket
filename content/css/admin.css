@@ -1,0 +1,44 @@
+.cursor_load {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    background-color: #000;
+    opacity: 0.3;
+    z-index: 10000;
+    cursor: wait;
+}
+
+
+.alert-ERR{
+    position: fixed;
+    display: none;
+    top: -100px;
+    right: 3%;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 5px gray;
+    background-color: rgb(242, 242, 113);
+    color: rgb(10, 10, 10);
+    font-size: 20px;
+    font: bold;
+    animation: loadAlert 5s ease-in-out;
+    z-index: 100;
+}
+
+@keyframes loadAlert {
+    0%{
+        top: 100%;
+    }
+    20%{
+        top: 75%;
+    }
+    80%{
+        top: 75%;
+    }
+    100%{
+        top: -100px;
+    }
+}
