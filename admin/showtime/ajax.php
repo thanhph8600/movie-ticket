@@ -5,6 +5,12 @@ require_once '../../DAO/film.php';
 require_once '../../DAO/room.php';
 require_once '../../DAO/shift.php';
 require_once '../../DAO/ticket.php';
+class DivideByZeroException extends Exception
+{
+};
+class DivideByNegativeException extends Exception
+{
+};
 extract($_REQUEST);
 $rooms = room_select_all();
 
@@ -49,24 +55,24 @@ if (exist_parma('first')) {
     $film = film_select_by_id($id_film);
     $dateFilm =  explode('-', $film['premiere']);
     $date =  explode('-', $date);
-    $check=0;
+    $check = 0;
     if (count($date) < 2) {
         $date_err = '<div class="text-danger">Nhập thiếu</div>';
         $check = 1;
     } else {
         if ($date[0] < $dateFilm[0]) {
             $check = 1;
-        } elseif($date[0] == $dateFilm[0]) {
+        } elseif ($date[0] == $dateFilm[0]) {
             if ($date[1] < $dateFilm[1]) {
                 $check = 1;
-            } elseif($date[1] == $dateFilm[1]) {
+            } elseif ($date[1] == $dateFilm[1]) {
                 if ($date[2] < $dateFilm[2]) {
                     $check = 1;
                 }
             }
         }
     }
-    if ($check==1) {
+    if ($check == 1) {
         echo 'Nhập sau ngày khởi chiếu';
     } else {
         echo '<option value="0">- - - Chọn phòng - - -</option>';
@@ -74,7 +80,6 @@ if (exist_parma('first')) {
             echo '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
         }
     }
-
 } elseif (exist_parma('show_shift')) {
     $times = Showtime::select_by_id_room_and_date($date, $id_room);
     $shifts = shift_select_by_id_room($id_room);
@@ -104,15 +109,14 @@ if (exist_parma('first')) {
             ';
         }
     }
-} 
-elseif(exist_parma('check_shift')){
-    $id_showtime= Showtime::find_id_by_date_idRoom_idShift($date,$id_room,$id_shift);
+} elseif (exist_parma('check_shift')) {
+
+    $id_showtime = Showtime::find_id_by_date_idRoom_idShift($date, $id_room, $id_shift);
     $ticket = ticket_select_by_idShowtime($id_showtime);
-    if($ticket){
-        echo 'Xuất chiếu đã được mua';
+    if ($ticket) {
+        echo 'okddd';
     }
-}
-else {
+} else {
     echo 1;
 }
 ?>

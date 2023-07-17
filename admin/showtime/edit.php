@@ -358,8 +358,8 @@
             },
             success: function(result) {
                 $('.alert-ERR').css('display', 'none')
-                if (result.length > 10) {
-                    $('.alert-ERR').html(result)
+                if (result.length > 5 && result.length < 10) {
+                    $('.alert-ERR').html('Đã có khách đặt chỗ')
                     $('.alert-ERR').css('display', 'inline')
                     setTimeout(() => {
                         $('.alert-ERR').css('display', 'none')
@@ -388,6 +388,12 @@
             return false
         }
     }
+
+    $(document).on("click", ".close_row ", function() {
+        let parent = $(this).parent().parent()
+        parent.remove()
+    });
+
 
 
     $('.showtime').addClass('active')

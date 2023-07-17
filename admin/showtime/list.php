@@ -107,13 +107,6 @@
 
                                             </form>
                                         </td>
-                                        <td class="align-middle">
-                                            <form action="./index.php?btn_delete" method="post" onsubmit="return deleteproduct()">
-                                                <i class="fa fa-trash delete" aria-hidden="true"></i>
-                                                <input type="hidden" name="id_room" value="<?= $id ?>">
-                                                <input name="deleteProduct" type="submit" value="Delete" class="text-xs delete">
-                                            </form>
-                                        </td>
                                     </tr>
 
                                 <?php
