@@ -29,7 +29,7 @@ function film_find_name_by_id($id){
     return pdo_query_value($sql,$id);
 }
 
-function film_delete_by_id($id){
+function film_delete($id){
     $sql = "DELETE FROM `film` WHERE `id` = ?";
     pdo_execute($sql,$id);
 }

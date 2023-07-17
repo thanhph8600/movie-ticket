@@ -4,6 +4,7 @@ require_once '../../DAO/showtime.php';
 require_once '../../DAO/film.php';
 require_once '../../DAO/room.php';
 require_once '../../DAO/shift.php';
+require_once '../../DAO/ticket.php';
 extract($_REQUEST);
 $rooms = room_select_all();
 
@@ -75,7 +76,7 @@ if (exist_parma('first')) {
     }
 
 } elseif (exist_parma('show_shift')) {
-    $times = Showtime::select_shift_by_id_room_and_date($date, $id_room);
+    $times = Showtime::select_by_id_room_and_date($date, $id_room);
     $shifts = shift_select_by_id_room($id_room);
     for ($i = 0; $i < 5; $i++) {
 
@@ -103,7 +104,15 @@ if (exist_parma('first')) {
             ';
         }
     }
-} else {
+} 
+elseif(exist_parma('check_shift')){
+    $id_showtime= Showtime::find_id_by_date_idRoom_idShift($date,$id_room,$id_shift);
+    $ticket = ticket_select_by_idShowtime($id_showtime);
+    if($ticket){
+        echo 'Xuất chiếu đã được mua';
+    }
+}
+else {
     echo 1;
 }
 ?>

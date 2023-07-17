@@ -32,14 +32,29 @@ class Showtime{
         pdo_execute($sql,$id);
     }
 
-    static public function select_groupBy_nameFilm(){
-        $sql = "SELECT *,COUNT(*) as tong FROM `showtimes` JOIN `film` on showtimes.id_film = film.id GROUP BY showtimes.id_film";
-        return pdo_query($sql);
+    static public function select_groupBy_nameFilm($date){
+        $sql = "SELECT *,COUNT(*) as tong FROM `showtimes` WHERE `date` > ? GROUP BY id_film";
+        return pdo_query($sql,$date);
     }
 
-    static public function select_shift_by_id_room_and_date($date,$id_room){
+    static public function select_by_date_and_idFilm_groupByDate($date,$id_film){
+        $sql = "SELECT * FROM `showtimes` WHERE `date` > ? AND `id_film` = ?  GROUP BY `date`";
+        return pdo_query($sql,$date,$id_film);
+    }
+
+    static public function select_by_date_and_idFilm_and_id_room($date,$id_film,$id_room){
+        $sql = "SELECT * FROM `showtimes` WHERE `date` = ? AND `id_film` = ?  AND `id_room` = ?";
+        return pdo_query($sql,$date,$id_film,$id_room);
+    }
+
+    static public function select_by_id_room_and_date($date,$id_room){
         $sql = "SELECT * FROM `showtimes` WHERE date = ? AND id_room = ?";
         return pdo_query($sql,$date,$id_room);
+    }
+    
+    static public function find_id_by_date_idRoom_idShift($date,$id_room,$id_shift){
+        $sql = "SELECT * FROM `showtimes` WHERE date = ? AND id_room = ? AND id_shift = ?";
+        return pdo_query_value($sql,$date,$id_room,$id_shift);
     }
 }
 ?>

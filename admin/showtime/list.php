@@ -100,7 +100,7 @@
 
                                         <td class="align-middle">
                                             <form action="./index.php?btn_edit" method="post">
-                                                <input type="hidden" name="id_room" value="<?= $id ?>">
+                                                <input type="hidden" name="id_film" value="<?= $id_film ?>">
                                                 <i class="fa fa-wrench edit" aria-hidden="true"></i>
 
                                                 <input name="" type="submit" value="Edit" class="text-xs edit">
