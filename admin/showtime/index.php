@@ -32,8 +32,39 @@ if (exist_parma('btn_add')) {
     $date =  date("Y-m-d");
     $showtimes = Showtime::select_by_date_and_idFilm_groupByDate($date, $id_film);
 } elseif (exist_parma('btn_update')) {
+    
+    $date_now =  date("Y-m-d");
+    $showtimes = Showtime::select_by_date_and_idFilm_groupByDate($date_now, $id_film);
+
+    //xóa 1 hàng
+    if(empty($date)) $date =[];
+    if(empty($id_room)) $id_room =[];
+    $date_idRoom =[];
+    
+    $date_had = [];
+    $idRoom_had =[];
+    $date_idRoom_had =[];
+
+    for ($i = 0; $i < count($date); $i++) {
+        $date_idRoom[] = array($date[$i], $id_room[$i]);
+    }
+
+    foreach ($showtimes as $key => $value) {
+        array_push($date_had,$value['date']);
+        array_push($idRoom_had,$value['id_room']);
+    }
+    for ($i = 0; $i < count($date_had); $i++) {
+        $date_idRoom_had[] = array($date_had[$i], $idRoom_had[$i]);
+    }
+    $result = array_diff_key($date_idRoom_had, $date_idRoom);
+    foreach ($result as $key => $value) {
+        Showtime::delete_by_idFilm_date_id_Room($id_film,$value[0],$value[1]);
+    }
+
+
+    //xóa và cập nhật từng ngày
     if (!empty($date)) {
-        var_dump($date);
+
         try {
             for ($i = 0; $i < count($date); $i++) {
                 $shift = 'id_shift-' . $date[$i] . '-' . $id_room[$i];
@@ -72,13 +103,7 @@ if (exist_parma('btn_add')) {
     $VIEW_NAME = './edit.php';
     $film = film_select_by_id($id_film);
     $date_now =  date("Y-m-d");
-    $date_had = [];
     $showtimes = Showtime::select_by_date_and_idFilm_groupByDate($date_now, $id_film);
-    foreach ($showtimes as $key => $value) {
-        array_push($date_had,$value['date']);
-    }
-    $result = array_diff($date_had,$date);
-    var_dump($result);
 
 } else {
     $date = date("Y-m-d");

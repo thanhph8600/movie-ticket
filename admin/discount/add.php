@@ -114,7 +114,7 @@
             <div class="card my-4">
                 <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                     <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                        <h6 class="text-white text-capitalize ps-3">cập nhật Phòng</h6>
+                        <h6 class="text-white text-capitalize ps-3">Thêm mã khuyến mãi</h6>
                     </div>
                     <div class="pst-ab">
                         <a href="./index.php"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i></a>
@@ -122,27 +122,48 @@
                 </div>
                 <div class="card-body px-0 pb-2">
                     <div class="table-responsive p-0">
-                        <form action="./index.php?btn_update" enctype="multipart/form-data" method="post" style="display:flex;width:95%;margin:auto">
+                        <form action="./index.php?btn_insert" enctype="multipart/form-data" method="post" style="display:flex;width:95%;margin:auto">
                             <div class="row pb-4">
-                                <div class="col-6">
-                                    <label for="name">Tên phòng </label>
-                                    <input class=" flex-auto focus:outline-none" type="text" name="name"
-                                        value="<?=$room['name']?>"
-                                    >
+                                <div class="col-4">
+                                    <label for="name">Tên mã khuyễn mãi</label>
+                                    <input class=" flex-auto focus:outline-none" type="text" name="name">
+                                    <div class="chkName text-danger"></div>
                                     <?php
                                     if (!empty($name_err)) echo $name_err;
                                     ?>
                                 </div>
-                                <div class="col-6">
-                                    <label for="phone">Số ghế</label>
-                                    <input class=" flex-auto focus:outline-none" type="number"  name="seats" placeholder="" value="<?=$room['seats']?>">
+
+                            </div>
+                            <div class="row pb-4">
+
+                                <div class="col-4">
+                                    <label for="">Ngày bắt đầu</label>
+                                    <input class=" date_start flex-auto focus:outline-none" type="date" name="date_start">
+                                    <p class="chkDate_start text-danger"></p>
                                     <?php
-                                    if (!empty($seats_err)) echo $seats_err;
+                                    if (!empty($date_start_err)) echo $birtday_err;
                                     ?>
                                 </div>
+                                <div class="col-4">
+                                    <label for="">Ngày kết thúc</label>
+                                    <input class="date_end flex-auto focus:outline-none" type="date" name="date_end">
+                                    <p class="chkDate_end text-danger"></p>
+                                    <?php
+                                    if (!empty($date_end_err)) echo $birtday_err;
+                                    ?>
+                                </div>
+                                <div class="col-4">
+                                    <label for="">Mức giảm 0-100%</label>
+                                    <input class=" percent	flex-auto focus:outline-none" type="number" name="percent">
+                                    <p class="chkPercent text-danger"></p>
+                                    <?php
+                                    if (!empty($percent_err)) echo $birtday_err;
+                                    ?>
+                                </div>
+
                             </div>
-                            <input type="hidden" name="id_room" value="<?=$room['id']?>">
-                            <input name="update" type="submit" value="Cập nhật">
+
+                            <input name="add" type="submit" value="Add">
                         </form>
                     </div>
                 </div>
@@ -150,9 +171,7 @@
         </div>
 
     </div>
-    <script>
-        CKEDITOR.replace('content');
-    </script>
+
 
 </div>
 </main>
@@ -245,36 +264,73 @@
     }
 
 
-    $.validator.addMethod('yourRule_date', function(value, element, param) {
-        return kiem_tra_ngay()
+
+    $.validator.addMethod('checkMaKhuyenMai', function(value, element, param) {
+        value = removeAscent(value)
+        if ((/^([a-zA-Z0-9]){3,30}$/).test(value)) {
+            return true
+        }
+
+        return false;
+    }, '<div class="text-danger">Bạn phải nhập từ 3 đến 30 kí tự, không có kí tự đặt biệt</div> ');
+
+    $.validator.addMethod('date_start', function(value, element, param) {
+        return date_start()
     }, '<div class="text-danger">Bạn không được nhập ngày quá khứ</div> ');
+
+    $.validator.addMethod('date_end', function(value, element, param) {
+        return date_end()
+    }, '<div class="text-danger">Không được nhập sau ngày bắt đầu</div> ');
 
     $(function() {
         $("form").validate({
             rules: {
                 name: {
+                    checkMaKhuyenMai:true,
                     required: true,
                 },
-                seats: {
+                date_start: {
+                    date_start: true,
+                    date: true,
                     required: true,
-                }
-                
+                },
+                date_end: {
+                    date_end: true,
+                    date: true,
+                    required: true,
+                },
+                percent: {
+                    min: 1,
+                    max: 100,
+                    required: true,
+                },
             },
             messages: {
 
                 name: {
-                    required: '<div class="text-danger">Chưa điền tên</div>',
+                    name: '<div class="text-danger">Không được có kí tự đặt biệt</div>',
+                    required: '<div class="text-danger">Chưa điền mã khuyến mãi</div>',
                 },
-                seats: {
-                    required:  '<div class="text-danger">Chưa ghế</div>',
-                }
+                date_start: {
+                    date: '<div class="text-danger">không đúng định dạng ngày</div>',
+                    required: '<div class="text-danger">Chưa điền ngày bắt đầu</div>',
+                },
+                date_end: {
+                    date: '<div class="text-danger">không đúng định dạng ngày</div>',
+                    required: '<div class="text-danger">Chưa điền ngày kết thúc</div>',
+                },
+                percent: {
+                    min: '<div class="text-danger">Thấp nhất là 1</div>',
+                    max: '<div class="text-danger">Cao nhất là 100%</div>',
+                    required: '<div class="text-danger">Chưa nhập mức giảm</div>',
+                },
             }
 
         });
     });
 
-    function kiem_tra_ngay() {
-        let ngay_nhap = $('.date').val().split('-')
+    function date_start() {
+        let ngay_nhap = $('.date_start').val().split('-')
         let d = new Date();
         if (ngay_nhap.length < 2) {
             console.log('Bạn chưa điền phần này')
@@ -283,11 +339,11 @@
             if (ngay_nhap[0] < d.getFullYear()) {
                 console.log('Bạn không được nhập ngày quá khứ')
                 return false
-            } else {
-                if (ngay_nhap[1] < (d.getMonth())) {
+            } else if (ngay_nhap[0] == d.getFullYear()) {
+                if (ngay_nhap[1] < (d.getMonth()+1)) {
                     console.log('Bạn không được nhập ngày quá khứs')
                     return false
-                } else {
+                } else if (ngay_nhap[1] == (d.getMonth()+1)) {
                     if (ngay_nhap[2] < d.getDate()) {
                         console.log('Bạn không được nhập ngày quá khứ')
                         return false
@@ -298,47 +354,35 @@
         return true;
     }
 
-
-    const input = document.getElementById('file-input');
-    const image = document.getElementById('img-preview');
-
-
-    input.addEventListener('change', (e) => {
-        if (e.target.files.length) {
-
-            if (window.File && window.FileReader && window.FileList && window.Blob) {
-                // lay dung luong va kieu file tu the input file
-                var fsize = e.target.files[0].size;
-                var ftype = e.target.files[0].type;
-                var fname = e.target.files[0].name;
-
-
-                if (fsize > 1048576) //thuc hien dieu gi do neu dung luong file vuot qua 1MB
-                {
-
-                    alert(fsize + " bites\nToo big!");
-                } else {
-                    switch (ftype) {
-                        case 'image/png':
-                        case 'image/gif':
-                        case 'image/jpeg':
-                        case 'image/jpg':
-                        case 'image/pjpeg':
-                            break;
-                        default:
+    function date_end() {
+        let date_start = $('.date_start').val().split('-')
+        let date_end = $('.date_end').val().split('-');
+        if (date_end.length < 2) {
+            console.log('Bạn chưa điền phần này')
+            return false
+        } else {
+            if (date_end[0] < date_start[0]) {
+                console.log('Bạn không được nhập ngày quá khứ')
+                return false
+            } else if (date_end[0] == date_start[0]) {
+                if (date_end[1] < date_start[1]) {
+                    console.log('Bạn không được nhập ngày quá khứs')
+                    return false
+                } else if (date_end[1] == date_start[1]) {
+                    if (date_end[2] < date_start[2]) {
+                        console.log('Bạn không được nhập ngày quá khứ')
+                        return false
                     }
-
-                    image.style.display = 'block'
-                    const src = URL.createObjectURL(e.target.files[0]);
-                    image.src = src;
                 }
             }
-
         }
-    });
+        return true;
+    }
 
-    $('.room').addClass('active')
-    $('.room').addClass('bg-gradient-primary')
+
+
+    $('.discount').addClass('active')
+    $('.discount').addClass('bg-gradient-primary')
 </script>
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>

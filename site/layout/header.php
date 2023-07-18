@@ -44,7 +44,7 @@
                                 <i class="fa fa-wrench" aria-hidden="true"></i>
                                 Quản lý tài khoản
                             </a>
-                            <?= ($_SESSION['user']['role'] == 0) ? '
+                            <?= ($_SESSION['user']['role'] == 0 || $_SESSION['user']['role'] == 99) ? '
                                 <a href="../../admin/" class="  block mb-2 border py-1 text-gray-700  rounded-md w-full hover:bg-gray-500 hover:text-white cursor-pointer">
                                     <i class="fa fa-cogs" aria-hidden="true"></i>
                                     Quản trị website

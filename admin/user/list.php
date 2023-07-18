@@ -86,6 +86,8 @@
                                     extract($item);
                                     if ($role == 0) {
                                         $role = '<p class="text-xl font-weight-bold text-primary">Nhân viên</p>';
+                                    }elseif($role ==99){
+                                        $role = '<p class="text-xl font-weight-bold text-primary">Admin</p>';
                                     } else {
                                         $role = '<p class="text-xl font-weight-bold">Khách hàng</p>';
                                     }

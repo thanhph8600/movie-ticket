@@ -26,82 +26,26 @@
         background: none;
     }
 
-    form {
+    tr td {
+        max-width: 350px;
+    }
+
+    .name {
+        width: 300px !important;
+        word-break: break-all !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+    }
+
+    .spagination {
         display: flex;
-        flex-direction: column;
-    }
-
-    input[type=text],
-    .input,
-    input[type=number],
-    input[type=date],
-    select {
-        outline: none;
-        width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-
-    input[type=submit] {
-        width: 100px;
-        background-color: #4CAF50;
-        color: white;
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-    input[type=submit]:hover {
-        background-color: #45a049;
-    }
-
-    .pst-re {
-        position: relative;
-    }
-
-    .pst-ab {
-        position: absolute;
-        top: 50%;
-        right: 10%;
-        transform: translate(100%, -50%);
-        color: #fff;
-        font-size: 25px;
-    }
-
-    a {
-        color: #fff;
-        text-decoration: none;
-        transition: all .2s ease-in-out;
-    }
-
-    .pst-ab a:hover {
-        color: #4CAF50;
-        font-size: 30px;
-
-    }
-
-    .img-product {
-        width: 300px;
-        padding: 15px 0;
-    }
-
-    .img-product img {
-        width: 100%;
-        display: none;
-    }
-
-    input[type=file] {
-        border: none;
-        background: none;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
     }
 </style>
-
 
 <div class="container-fluid py-4">
     <div class="ket-qua ">
@@ -114,48 +58,87 @@
             <div class="card my-4">
                 <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                     <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                        <h6 class="text-white text-capitalize ps-3">cập nhật Phòng</h6>
-                    </div>
-                    <div class="pst-ab">
-                        <a href="./index.php"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i></a>
+                        <h6 class="text-white text-capitalize ps-3">danh sách khuyến mãi</h6>
                     </div>
                 </div>
                 <div class="card-body px-0 pb-2">
                     <div class="table-responsive p-0">
-                        <form action="./index.php?btn_update" enctype="multipart/form-data" method="post" style="display:flex;width:95%;margin:auto">
-                            <div class="row pb-4">
-                                <div class="col-6">
-                                    <label for="name">Tên phòng </label>
-                                    <input class=" flex-auto focus:outline-none" type="text" name="name"
-                                        value="<?=$room['name']?>"
-                                    >
-                                    <?php
-                                    if (!empty($name_err)) echo $name_err;
-                                    ?>
-                                </div>
-                                <div class="col-6">
-                                    <label for="phone">Số ghế</label>
-                                    <input class=" flex-auto focus:outline-none" type="number"  name="seats" placeholder="" value="<?=$room['seats']?>">
-                                    <?php
-                                    if (!empty($seats_err)) echo $seats_err;
-                                    ?>
-                                </div>
-                            </div>
-                            <input type="hidden" name="id_room" value="<?=$room['id']?>">
-                            <input name="update" type="submit" value="Cập nhật">
-                        </form>
+                        <div class="d-flex justify-content-between col-11 m-auto">
+                            <div></div>
+                            <form action="./index.php?btn_add" method="post">
+                                <input name="next" type="submit" value="Thêm khách mã khuyến mãi" class="input_Addproduct">
+                            </form>
+                        </div>
+                        <table class="table align-items-center mb-0" style="width:99%;margin:auto">
+                            <thead>
+                                <tr>
+                                    <th class="text-secondary opacity-7">Mã khuyến mãi</th>
+                                    <th class="text-secondary opacity-7">Thời gian bắt đầu</th>
+                                    <th class="text-secondary opacity-7">Thời gian kết thúc</th>
+                                    <th class="text-secondary opacity-7">Được giảm</th>
+                                    <th class="text-secondary opacity-7"></th>
+                                    <th class="text-secondary opacity-7"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                foreach ($discounts as $item) {
+                                    extract($item);
+                                ?>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex px-2 py-1">
+                                                
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <h6 class="name"><?= $name ?></h6>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <p class="text-xl font-weight-bold mb-0 ms-4"><?= $date_start ?>
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p class="text-xl font-weight-bold mb-0 ms-4"><?= $date_end ?>
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p class="text-xl font-weight-bold mb-0 ms-4"><?= $percent ?> %
+                                            </p>
+                                        </td>
+                                        <td class="align-middle">
+                                            <form action="./index.php?btn_edit" method="post">
+                                                <input type="hidden" name="id_discount" value="<?= $id ?>">
+                                                <i class="fa fa-wrench edit" aria-hidden="true"></i>
+                                                <input name="" type="submit" value="Edit" class="text-xs edit">
+                                            </form>
+                                        </td>
+                                        <td class="align-middle">
+                                            <form action="./index.php?btn_delete" method="post" onsubmit="return deleteproduct()">
+                                                <i class="fa fa-trash delete" aria-hidden="true"></i>
+                                                <input type="hidden" name="id_discount" value="<?= $id ?>">
+                                                <input name="deleteProduct" type="submit" value="Delete" class="text-xs delete">
+                                            </form>
+                                        </td>
+                                    </tr>
+
+                                <?php
+
+                                }
+                                ?>
+
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
-    <script>
-        CKEDITOR.replace('content');
-    </script>
+
 
 </div>
 </main>
+
 <div class="fixed-plugin">
     <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
         <i class="material-icons py-2">settings</i>
@@ -244,101 +227,15 @@
         Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
 
-
-    $.validator.addMethod('yourRule_date', function(value, element, param) {
-        return kiem_tra_ngay()
-    }, '<div class="text-danger">Bạn không được nhập ngày quá khứ</div> ');
-
-    $(function() {
-        $("form").validate({
-            rules: {
-                name: {
-                    required: true,
-                },
-                seats: {
-                    required: true,
-                }
-                
-            },
-            messages: {
-
-                name: {
-                    required: '<div class="text-danger">Chưa điền tên</div>',
-                },
-                seats: {
-                    required:  '<div class="text-danger">Chưa ghế</div>',
-                }
-            }
-
-        });
-    });
-
-    function kiem_tra_ngay() {
-        let ngay_nhap = $('.date').val().split('-')
-        let d = new Date();
-        if (ngay_nhap.length < 2) {
-            console.log('Bạn chưa điền phần này')
+    function deleteproduct() {
+        var result = confirm('Bạn có chắc chắn không!')
+        if (result != true) {
             return false
-        } else {
-            if (ngay_nhap[0] < d.getFullYear()) {
-                console.log('Bạn không được nhập ngày quá khứ')
-                return false
-            } else {
-                if (ngay_nhap[1] < (d.getMonth())) {
-                    console.log('Bạn không được nhập ngày quá khứs')
-                    return false
-                } else {
-                    if (ngay_nhap[2] < d.getDate()) {
-                        console.log('Bạn không được nhập ngày quá khứ')
-                        return false
-                    }
-                }
-            }
         }
-        return true;
     }
 
-
-    const input = document.getElementById('file-input');
-    const image = document.getElementById('img-preview');
-
-
-    input.addEventListener('change', (e) => {
-        if (e.target.files.length) {
-
-            if (window.File && window.FileReader && window.FileList && window.Blob) {
-                // lay dung luong va kieu file tu the input file
-                var fsize = e.target.files[0].size;
-                var ftype = e.target.files[0].type;
-                var fname = e.target.files[0].name;
-
-
-                if (fsize > 1048576) //thuc hien dieu gi do neu dung luong file vuot qua 1MB
-                {
-
-                    alert(fsize + " bites\nToo big!");
-                } else {
-                    switch (ftype) {
-                        case 'image/png':
-                        case 'image/gif':
-                        case 'image/jpeg':
-                        case 'image/jpg':
-                        case 'image/pjpeg':
-                            break;
-                        default:
-                    }
-
-                    image.style.display = 'block'
-                    const src = URL.createObjectURL(e.target.files[0]);
-                    image.src = src;
-                }
-            }
-
-        }
-    });
-
-    $('.room').addClass('active')
-    $('.room').addClass('bg-gradient-primary')
+    $('.discount').addClass('active')
+    $('.discount').addClass('bg-gradient-primary')
 </script>
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>

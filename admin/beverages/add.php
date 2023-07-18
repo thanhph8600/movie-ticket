@@ -114,7 +114,7 @@
             <div class="card my-4">
                 <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                     <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                        <h6 class="text-white text-capitalize ps-3">cập nhật Phòng</h6>
+                        <h6 class="text-white text-capitalize ps-3">Thêm nước uống</h6>
                     </div>
                     <div class="pst-ab">
                         <a href="./index.php"><i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i></a>
@@ -122,27 +122,35 @@
                 </div>
                 <div class="card-body px-0 pb-2">
                     <div class="table-responsive p-0">
-                        <form action="./index.php?btn_update" enctype="multipart/form-data" method="post" style="display:flex;width:95%;margin:auto">
+                        <form action="./index.php?btn_insert" enctype="multipart/form-data" method="post" style="display:flex;width:95%;margin:auto">
                             <div class="row pb-4">
                                 <div class="col-6">
-                                    <label for="name">Tên phòng </label>
-                                    <input class=" flex-auto focus:outline-none" type="text" name="name"
-                                        value="<?=$room['name']?>"
-                                    >
+                                    <label for="name">Tên thức uống</label>
+                                    <input class=" flex-auto focus:outline-none" type="text" name="name">
+                                    <div class="chkName text-danger"></div>
                                     <?php
                                     if (!empty($name_err)) echo $name_err;
                                     ?>
                                 </div>
                                 <div class="col-6">
-                                    <label for="phone">Số ghế</label>
-                                    <input class=" flex-auto focus:outline-none" type="number"  name="seats" placeholder="" value="<?=$room['seats']?>">
+                                    <label for="phone">Giá tiền</label>
+                                    <input class=" flex-auto focus:outline-none" type="number"  name="price" placeholder="">
+                                    <p class="chkPhone text-danger"></p>
                                     <?php
-                                    if (!empty($seats_err)) echo $seats_err;
+                                    if (!empty($phone_err)) echo $phone_err;
                                     ?>
                                 </div>
                             </div>
-                            <input type="hidden" name="id_room" value="<?=$room['id']?>">
-                            <input name="update" type="submit" value="Cập nhật">
+
+                            <label for="">Hình ảnh</label>
+                            <input type="file" name="upload" id="file-input" accept="image/*">
+                            <?php
+                            if (!empty($file_err)) echo $file_err;
+                            ?>
+                            <div class="img-product">
+                                <img style="display: none;" alt="" id="img-preview">
+                            </div>
+                            <input name="add" type="submit" value="Add">
                         </form>
                     </div>
                 </div>
@@ -150,9 +158,7 @@
         </div>
 
     </div>
-    <script>
-        CKEDITOR.replace('content');
-    </script>
+
 
 </div>
 </main>
@@ -255,18 +261,27 @@
                 name: {
                     required: true,
                 },
-                seats: {
+                price: {
+                    min:1,
                     required: true,
+                },
+                upload: {
+                    required: true,
+                    accept: "jpg,png,gif,jpeg,pjpeg,avif,jfif",
                 }
-                
             },
             messages: {
 
                 name: {
                     required: '<div class="text-danger">Chưa điền tên</div>',
                 },
-                seats: {
-                    required:  '<div class="text-danger">Chưa ghế</div>',
+                price: {
+                    min:'<div class="text-danger">Phải là số dương</div>',
+                    required: '<div class="text-danger">Chưa điền giá tiền</div>',
+                },
+                upload: {
+                    required: '<div class="text-danger">Chưa chọn ảnh</div>',
+                    accept: '<div class="text-danger">Phải đúng định dạng ảnh/div>',
                 }
             }
 
@@ -302,7 +317,6 @@
     const input = document.getElementById('file-input');
     const image = document.getElementById('img-preview');
 
-
     input.addEventListener('change', (e) => {
         if (e.target.files.length) {
 
@@ -337,8 +351,8 @@
         }
     });
 
-    $('.room').addClass('active')
-    $('.room').addClass('bg-gradient-primary')
+    $('.beverages').addClass('active')
+    $('.beverages').addClass('bg-gradient-primary')
 </script>
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>

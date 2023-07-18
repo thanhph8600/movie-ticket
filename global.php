@@ -9,6 +9,7 @@ $ADMIN_URL = "$ROOT_URL/admin";
 $SITE_URL = "$ROOT_URL/site";
 $UPLOAD_FILM_URL = "../../uploaded/films/";
 $UPLOAD_USER_URL = "../../uploaded/user/";
+$UPLOAD_BEVERAGES_URL = "../../uploaded/beverages/";
 
 function exist_parma($fieldname)
 {
@@ -42,7 +43,7 @@ function check_login()
     global $SITE_URL;
     if (isset($_SESSION['user'])) {
         //kiểm tra có phải là admin không
-        if ($_SESSION['user']['role'] == 0) {
+        if ($_SESSION['user']['role'] == 0 || $_SESSION['user']['role']==99) {
             return;
         }
         //kiểm tra đường dẫn có /admin/ hay không

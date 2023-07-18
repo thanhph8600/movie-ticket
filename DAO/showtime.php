@@ -43,7 +43,7 @@ class Showtime{
     }
 
     static public function select_by_date_and_idFilm_groupByDate($date,$id_film){
-        $sql = "SELECT * FROM `showtimes` WHERE  `date` > ? AND `id_film` = ?  GROUP BY `date`";
+        $sql = "SELECT * FROM `showtimes` WHERE  `date` > ? AND `id_film` = ?  GROUP BY `date`,id_room";
         return pdo_query($sql,$date,$id_film);
     }
 
