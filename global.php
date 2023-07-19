@@ -2,6 +2,8 @@
 if (!session_start()) {
     session_start();
 }
+date_default_timezone_set('Asia/Ho_Chi_Minh');
+
 // session_unset();
 $ROOT_URL = "/kinStar";
 $CONTENT_URL = "$ROOT_URL/content";

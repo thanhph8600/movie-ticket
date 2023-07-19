@@ -72,59 +72,36 @@
                         <table class="table align-items-center mb-0" style="width:99%;margin:auto">
                             <thead>
                                 <tr>
-                                    <th class="text-secondary opacity-7">Khách hàng</th>
-                                    <th class="text-secondary opacity-7">Số điện thoại</th>
-                                    <th class="text-secondary opacity-7">Giới tính</th>
-                                    <th class="text-secondary opacity-7">Vai trò</th>
+                                    <th class="text-secondary opacity-7">Hàng hóa</th>
+                                    <th class="text-secondary opacity-7">Giá tiền</th>
                                     <th class="text-secondary opacity-7"></th>
                                     <th class="text-secondary opacity-7"></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                foreach ($users as $item) {
+                                foreach ($beverages as $item) {
                                     extract($item);
-                                    if ($role == 0) {
-                                        $role = '<p class="text-xl font-weight-bold text-primary">Nhân viên</p>';
-                                    }elseif($role ==99){
-                                        $role = '<p class="text-xl font-weight-bold text-primary">Admin</p>';
-                                    } else {
-                                        $role = '<p class="text-xl font-weight-bold">Khách hàng</p>';
-                                    }
-
-                                    if ($sex == 0) {
-                                        $sex = 'Nữ';
-                                    } else {
-                                        $sex = 'Nam';
-                                    }
                                 ?>
                                     <tr>
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div>
-                                                    <img src="../../uploaded/user/<?= $thumb ?>" class="avatar avatar-xxl me-3 border-radius-lg" alt="user2">
+                                                    <img src="../../uploaded/beverages/<?= $thumb ?>" class="avatar avatar-xxl me-3 border-radius-lg" alt="user2">
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="name"><?= $name ?></h6>
-                                                    <p class="text-xs text-secondary mb-0"><span><?= $birtday ?></span></p>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-                                            <p class="text-xl font-weight-bold mb-0 ms-4">0<?= $phone ?>
+                                            <p class="text-xl font-weight-bold mb-0 ms-4"><?= currency_format($price) ?>
                                             </p>
                                         </td>
-                                        <td>
-                                            <p class="text-xl font-weight-bold mb-0 ms-4"><?= $sex ?>
-                                            </p>
-                                        </td>
-                                        <td>
-                                            <p class="text-xl font-weight-bold mb-0 ms-4"><?= $role ?>
-                                            </p>
-                                        </td>
+
                                         <td class="align-middle">
                                             <form action="./index.php?btn_edit" method="post">
-                                                <input type="hidden" name="id_user" value="<?= $id ?>">
+                                                <input type="hidden" name="id_beverages" value="<?= $id ?>">
                                                 <i class="fa fa-wrench edit" aria-hidden="true"></i>
 
                                                 <input name="" type="submit" value="Edit" class="text-xs edit">
@@ -134,7 +111,7 @@
                                         <td class="align-middle">
                                             <form action="./index.php?btn_delete" method="post" onsubmit="return deleteproduct()">
                                                 <i class="fa fa-trash delete" aria-hidden="true"></i>
-                                                <input type="hidden" name="id_user" value="<?= $id ?>">
+                                                <input type="hidden" name="id_beverages" value="<?= $id ?>">
                                                 <input name="deleteProduct" type="submit" value="Delete" class="text-xs delete">
                                             </form>
                                         </td>

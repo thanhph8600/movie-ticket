@@ -66,6 +66,8 @@ if (exist_parma('btn_add')) {
         $MESS = '<div class="alert alert-warning text-white">Không thể xóa nhân viên khác</div>';
     } else {
         try {
+            if(!empty($user['thumb']))
+                unlink($UPLOAD_USER_URL.$user['thumb']);
             user_delete($id_user);
             $MESS = '<div class="alert alert-success text-white " role="alert">Xóa thành công</div>';
         } catch (Exception $th) {

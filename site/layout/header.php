@@ -11,13 +11,13 @@
                 </div>
                 <nav class=" flex-none rounded-3xl border border-menu p-0.5">
                     <div class=" rounded-3xl text-white font-semibold text-base flex bg-menu overflow-hidden uppercase">
-                        <a href="../page" class=" py-2 px-4 hover:bg-yellow-600">Trang chủ <i class="fa fa-home" aria-hidden="true"></i></a>
-                        <a href="../film" class=" py-2 px-4 hover:bg-yellow-600">Phim</a>
-                        <a href="../film?showtime" class=" py-2 px-4 hover:bg-yellow-600">Lịch chiếu</a>
-                        <a href="../page?hoi_dap" class=" py-2 px-4 hover:bg-yellow-600">Hỏi đáp</a>
-                        <a href="../page?tin_tuc" class=" py-2 px-4 hover:bg-yellow-600">Tin tức</a>
-                        <a href="../page?gioi_thieu" class=" py-2 px-4 hover:bg-yellow-600">Giới thiệu</a>
-                        <a href="../page?lien_he" class=" py-2 px-4 hover:bg-yellow-600">liên hệ</a>
+                        <a href="../page" class="trang_chu py-2 px-4 hover:bg-yellow-600 border-r">Trang chủ <i class="fa fa-home" aria-hidden="true"></i></a>
+                        <a href="../film" class="phim py-2 px-4 hover:bg-yellow-600 border-r">Phim</a>
+                        <a href="../film?showtime" class="lich_chieu py-2 px-4 hover:bg-yellow-600 border-r">Lịch chiếu</a>
+                        <a href="../page?hoi_dap" class="hoi_dap py-2 px-4 hover:bg-yellow-600 border-r">Hỏi đáp</a>
+                        <a href="../page?tin_tuc" class="tin_tuc py-2 px-4 hover:bg-yellow-600 border-r">Tin tức</a>
+                        <a href="../page?gioi_thieu" class="gioi_thieu py-2 px-4 hover:bg-yellow-600 border-r">Giới thiệu</a>
+                        <a href="../page?lien_he" class="lien_he py-2 px-4 hover:bg-yellow-600">liên hệ</a>
                     </div>
                 </nav>
             </div>

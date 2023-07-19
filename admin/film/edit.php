@@ -400,65 +400,31 @@
         });
     });
 
-    function kiem_tra_ngay() {
-        let ngay_nhap = $('.date').val().split('-')
-        let d = new Date();
-        if (ngay_nhap.length < 2) {
-            console.log('Bạn chưa điền phần này')
-            return false
-        } else {
-            if (Number(ngay_nhap[0]) < d.getFullYear()) {
-                return false
-            } else if (Number(ngay_nhap[0]) == d.getFullYear()) {
-                if (Number(ngay_nhap[1]) < d.getMonth() + 1) {
-                    return false
-                } else if (Number(ngay_nhap[1]) == d.getMonth() + 1) {
-                    if (Number(ngay_nhap[2]) <= d.getDate()) {
-                        return false
-                    }
-                }
-            }
-        }
-        return true;
-    }
+    // function kiem_tra_ngay() {
+    //     let ngay_nhap = $('.date').val().split('-')
+    //     let d = new Date();
+    //     if (ngay_nhap.length < 2) {
+    //         console.log('Bạn chưa điền phần này')
+    //         return false
+    //     } else {
+    //         if (Number(ngay_nhap[0]) < d.getFullYear()) {
+    //             return false
+    //         } else if (Number(ngay_nhap[0]) == d.getFullYear()) {
+    //             if (Number(ngay_nhap[1]) < d.getMonth() + 1) {
+    //                 return false
+    //             } else if (Number(ngay_nhap[1]) == d.getMonth() + 1) {
+    //                 if (Number(ngay_nhap[2]) <= d.getDate()) {
+    //                     return false
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     return true;
+    // }
 
 
     const input = document.getElementById('file-input');
     const image = document.getElementById('img-preview');
-
-    // function checkproduct() {
-    //     var lf = 0;
-    //     var name = document.getElementById('nameproduct')
-    //     var price = document.getElementById('priceproduct')
-    //     var category = document.getElementById('category')
-
-    //     if (name.value == '') {
-    //         name.style.border = '1px solid red'
-    //         lf = 1;
-    //     } else {
-    //         name.style.border = '1px solid green'
-    //     }
-
-    //     var priceRegex = /^\w([0-9.,]{1,13})$/;
-    //     if (!price.value.match(priceRegex)) {
-    //         price.style.border = '1px solid red'
-    //         lf = 1;
-    //     } else {
-    //         price.style.border = '1px solid green'
-    //     }
-
-
-    //     if (category.value == 0) {
-    //         category.style.border = '1px solid red'
-    //         lf = 1;
-    //     } else {
-    //         category.style.border = '1px solid green'
-    //     }
-
-    //     if (!lf == 0) {
-    //         return false
-    //     }
-    // }
 
 
     input.addEventListener('change', (e) => {

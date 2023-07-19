@@ -33,6 +33,8 @@
 
         <div class=" flex-auto">
             <?php
+            if(!empty($SLIDE))
+                require $SLIDE;
             require $VIEW_NAME;
             ?>
         </div>

@@ -20,16 +20,18 @@
 </section>
 
 <style>
-  .owl-carousel .owl-nav button.owl-next, .owl-carousel .owl-nav button.owl-prev, .owl-carousel button.owl-dot  {
-    background: 0 0;
-    color: inherit;
-    border: none;
-    padding: 5px 15px !important;
-    font: inherit;
-    background: gray;
-    font-size: 18px;
-    opacity: 0.5;
-  }
+    .owl-carousel .owl-nav button.owl-next,
+    .owl-carousel .owl-nav button.owl-prev,
+    .owl-carousel button.owl-dot {
+        background: 0 0;
+        color: inherit;
+        border: none;
+        padding: 5px 15px !important;
+        font: inherit;
+        background: gray;
+        font-size: 18px;
+        opacity: 0.5;
+    }
 </style>
 <section>
     <div class="container m-auto py-4">
@@ -42,20 +44,32 @@
             <div class="owl-carousel slide-first owl-theme owl-loaded">
                 <div class="owl-stage-outer ">
                     <div class="owl-stage flex">
-                        <div class="owl-item">
-                            <a href="" class=" relative item">
-                                <div class=" rounded overflow-hidden hover:opacity-80">
-                                    <img src="https://cinestar.com.vn/pictures/Cinestar/05-2023/nang-tien-ca.jpg" alt="">
-                                </div>
-                                <div class=" absolute bg-main w-full bottom-0 hidden">
-                                    <h3 class=" text-white uppercase text-lg text-center font-bold pt-2">Nàng tiên cá</h3>
-                                    <div class=" flex m-auto w-full justify-center">
-                                        <a href="" class=" block text-white py-2 px-4 bg-menu m-2 rounded hover:bg-red-500">Xem chi tiết</a>
-                                        <a href="" class=" block text-white py-2 px-4 bg-menu m-2 rounded hover:bg-red-500 ">Mua vé</a>
+
+                        <?php
+                        foreach ($top10_film as $key => $value) {
+                            extract($value); ?>
+                            <div class=" h-full owl-item ">
+                                <div class=" h-full relative item">
+                                    <div class=" h-full rounded overflow-hidden hover:opacity-80">
+                                        <a href="../film/?detail&id_film=<?= $id ?>">
+                                            <img class=" h-full" src="<?= $UPLOAD_FILM_URL . $thumb ?>" alt="">
+
+                                        </a>
+                                    </div>
+                                    <div class=" absolute bg-black w-full bottom-0 bg-opacity-80 hidden">
+                                        <h3 class=" text-white uppercase text-lg text-center font-bold pt-2"><?= $name ?></h3>
+                                        <div class=" flex m-auto w-full justify-center">
+                                            <a href="../film/?detail&id_film=<?= $id ?>" class=" block text-white py-2 px-4 bg-menu m-2 rounded hover:bg-red-500">Xem chi tiết</a>
+                                            <a href="" class=" block text-white py-2 px-4 bg-menu m-2 rounded hover:bg-red-500 ">Mua vé</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </a>
-                        </div>
+                            </div>
+
+                        <?php
+                        }
+                        ?>
+
                     </div>
                 </div>
             </div>
@@ -129,3 +143,7 @@
         </div>
     </div>
 </section>
+
+<script>
+    $('.trang_chu').addClass('bg-yellow-600')
+</script>

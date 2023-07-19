@@ -159,12 +159,13 @@
                                     $room = room_select_by_id($value['id_room']);
                                     $shitfs = Showtime::select_by_date_and_idFilm_and_id_room($value['date'], $value['id_film'], $value['id_room']);
                                     $shitfs_chose = Showtime::select_by_id_room_and_date($value['date'], $value['id_room']);
-                                    $i = 1;
-                                    if ($value['id_room'] == 2) {
-                                        $i = 6;
-                                    } elseif ($value['id_room'] == 3) {
-                                        $i = 10;
-                                    }
+                                    $id_shift = shift_select_by_id_room($value['id_room']);
+                                    // $i = 1;
+                                    // if ($value['id_room'] == 2) {
+                                    //     $i = 6;
+                                    // } elseif ($value['id_room'] == 3) {
+                                    //     $i = 10;
+                                    // }
                                 ?>
                                     <div class="row pb-4 row-select">
                                         <div class="col-2">
@@ -182,42 +183,44 @@
                                             <div class="time_start d-flex gap-3 justify-content-evenly align-items-center">
 
                                                 <?php
-                                                $end = $i + 5;
-                                                for ($i; $i < $end; $i++) {
-                                                    $time = shift_select_by_id($i);
+                                                // $end = $i + 5;
+
+                                                foreach ($id_shift as $key => $item) {
                                                     $check = 0;
-                                                    foreach ($shitfs as $key => $value) {
-                                                        if ($value['id_shift'] == $i) {
+
+                                                    foreach ($shitfs as $key => $value1) {
+                                                        if ($value1['id_shift'] == $item['id']) {
                                                             $check = 1;
                                                             break;
                                                         } else {
-                                                            foreach ($shitfs_chose as $key => $value) {
-                                                                if ($value['id_shift'] == $i) {
+                                                            foreach ($shitfs_chose as $key => $value2) {
+                                                                if ($value2['id_shift'] == $item['id']) {
                                                                     $check = 2;
                                                                     break;
                                                                 }
                                                             }
                                                         }
                                                     }
+
                                                     if ($check == 0) {
                                                         echo '
                                                         <div class="d-flex flex-column gap-2 justify-content-center align-items-center">
-                                                            <input type="checkbox" name="id_shift-' . $value['date'] . '-' . $value['id_room'] . '[]" id="" class="id_shift" value="' . $i . '">
-                                                            <label class="m-0" for="">' . $time['time_start'] . '</label>
+                                                            <input type="checkbox" name="id_shift-' . $value['date'] . '-' . $value['id_room'] . '[]" id="" class="id_shift" value="' . $item['id'] . '">
+                                                            <label class="m-0" for="">' . $item['time_start'] . '</label>
                                                         </div>  
                                                         ';
                                                     } else if ($check == 1) {
                                                         echo '
                                                         <div class="d-flex flex-column gap-2 justify-content-center align-items-center">
-                                                            <input type="checkbox" name="id_shift-' . $value['date'] . '-' . $value['id_room'] . '[]" id="" class="id_shift" value="' . $i . '" checked>
-                                                            <label class="m-0" for="">' . $time['time_start'] . '</label>
+                                                            <input type="checkbox" name="id_shift-' . $value['date'] . '-' . $value['id_room'] . '[]" id="" class="id_shift" value="' . $item['id'] . '" checked>
+                                                            <label class="m-0" for="">' . $item['time_start'] . '</label>
                                                         </div>  
                                                         ';
                                                     } else {
                                                         echo '
                                                         <div class="d-flex flex-column gap-2 justify-content-center align-items-center">
                                                         <i class="fa fa-check-square" aria-hidden="true"></i>
-                                                            <label class="m-0" for="">' . $time['time_start'] . '</label>
+                                                            <label class="m-0" for="">' . $item['time_start'] . '</label>
                                                         </div>  
                                                         ';
                                                     }

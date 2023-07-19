@@ -68,6 +68,11 @@ class Showtime{
         return pdo_query_value($sql,$date,$id_room,$id_shift);
     }
 
+    static public function find_id_shift_by_date_idRoom($date,$id_room){
+        $sql = "SELECT id_shift FROM `showtimes` WHERE `date` = ? AND id_room = ?";
+        return pdo_query($sql,$date,$id_room);
+    }
+
     // static public function check_exist($date,$id_room,$id_shift){
     //     $sql = "SELECT * FROM `showtimes` WHERE `date` = ? AND id_room = ? AND id_shift = ?";
     //     return pdo_query_value($sql,$date,$id_room,$id_shift);

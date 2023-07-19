@@ -1,56 +1,78 @@
 <section>
-    <div class="container m-auto pt-8 pb-4 ">
+    <div class=" lg:w-4/5 m-auto container pt-8 pb-4 ">
         <div class=" flex pb-4">
             <div class=" w-4/12 rounded">
-                <img class="rounded-xl" src="https://media.lottecinemavn.com/Media/MovieFile/MovieImg/202306/11128_103_100003.jpg" alt="">
+                <img class="rounded-xl" src="<?= $UPLOAD_FILM_URL . $film['thumb'] ?>" alt="">
             </div>
             <div class=" flex flex-col gap-2 w-full pl-12">
-                <h2 class=" text-3xl font-semibold pb-3 mb-3 border-b-2">XỨ SỞ CÁC NGUYÊN TỐ</h2>
+                <h2 class=" text-3xl font-semibold pb-3 mb-3 border-b-2"><?= $film['name'] ?></h2>
                 <div class="flex gap-2">
                     <p class=" font-bold">Đạo diễn: </p>
-                    <p> Choi Ju Yeon</p>
+                    <p><?= $film['directors'] ?></p>
                 </div>
                 <div class="flex gap-2">
                     <p class=" font-bold">Diễn viên: </p>
-                    <p> Park Sung Woong, Park Seon Ho, Kim Hee Jung</p>
+                    <p><?= $film['actor'] ?></p>
                 </div>
                 <div class="flex gap-2">
                     <p class=" font-bold">Thể loại: </p>
-                    <p>Hồi hộp</p>
+                    <p><?= $film['genre'] ?></p>
                 </div>
                 <div class="flex gap-2">
                     <p class=" font-bold">Khởi chiếu: </p>
-                    <p>30/06/2023</p>
+                    <p><?= $film['premiere'] ?></p>
                 </div>
                 <div class="flex gap-2">
                     <p class=" font-bold">Thời lượng: </p>
-                    <p>90 phút</p>
+                    <p><?= $film['time'] ?> phút</p>
                 </div>
                 <div class="flex gap-2">
                     <p class=" font-bold">Ngôn ngữ: </p>
-                    <p>Tiếng Hàn - Phụ đề tiếng Việt</p>
+                    <p><?= $film['language'] ?></p>
                 </div>
                 <div class="flex gap-2 items-center">
                     <p class=" font-bold">Rated: </p>
-                    <p class=" font-bold text-lg">T16 - PHIM ĐƯỢC PHỔ BIẾN ĐẾN NGƯỜI XEM TỪ ĐỦ 16 TUỔI TRỞ LÊN (16+)</p>
+                    <p class=" font-bold text-lg"><?= $film['rated'] ?></p>
+                </div>
+                <div class="gap-2 items-center ">
+                    <h2 class=" text-xl font-bold">Tóm tắt</h2>
+                    <p class=""><?= $film['description'] ?></p>
                 </div>
                 <div class="flex gap-2 items-center py-8">
-                    <a href="" class=" uppercase font-bold text-base bg-menu hover:bg-yellow-600 text-white px-4 py-2 rounded"><i class="fa fa-play-circle" aria-hidden="true"></i> trailer</a>
-                    <a href="" class="uppercase font-bold text-base bg-menu hover:bg-yellow-600 text-white px-4 py-2 rounded "><i class="fa fa-cart-plus" aria-hidden="true"></i> đặt vé</a>
+                    <p class="watch-movie cursor-pointer uppercase font-bold text-base bg-menu hover:bg-yellow-600 text-white px-4 py-2 rounded"><i class="fa fa-play-circle" aria-hidden="true"></i> trailer</p>
+                    <?php
+                    if (!empty($check_phim)) {
+                        echo '<a href="" class="uppercase font-bold text-base bg-menu hover:bg-yellow-600 text-white px-4 py-2 rounded "><i class="fa fa-cart-plus" aria-hidden="true"></i> đặt vé</a>';
+                    }
+                    ?>
+
                 </div>
 
             </div>
 
         </div>
-        <div class="gap-2 items-center">
-            <h2 class=" text-xl font-bold">Tóm tắt</h2>
-            <p class="">Xứ Sở Các Nguyên Tố từ Disney và Pixar lấy bối cảnh tại thành phố các nguyên tố, nơi lửa, nước, đất và không khí cùng chung sống với nhau. Câu chuyện xoay quanh nhân vật Ember, một cô nàng cá tính, thông minh, mạnh mẽ và đầy sức hút. Tuy nhiên, mối quan hệ của cô với Wade - một anh chàng hài hước, luôn thuận thế đẩy dòng - khiến Ember cảm thấy ngờ vực với thế giới này. Được đạo diễn bởi Peter Sohn, sản xuất bởi Denise Ream, và lồng tiếng bởi Leah Lewis (Ember) và Mamoudou Athie (Wade), phim khởi chiếu tại rạp vào 23.06.2023.</p>
+
+    </div>
+</section>
+
+
+<section>
+    <div class="movie fixed top-0 left-0 w-full h-full z-40 bg-black bg-opacity-80">
+        <div class="container relative m-auto z-40">
+            <div class="close text-3xl flex justify-center items-center cursor-pointer text-white bg-opacity-40 hover:bg-black absolute top-0 right-0 w-20 h-20 bg-rose-600 rounded-full">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </div>
+            <div class=" flex justify-center items-center h-screen">
+                <iframe id="id_movie" width="100%" height="600" src="<?= $film['trailer'] ?>" title="<?= $film['name'] ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+                </iframe>
+            </div>
         </div>
+        <div class=" close bg-black bg-opacity-80"></div>
     </div>
 </section>
 
 <section>
-    <div class="container m-auto pb-4">
+    <div class="lg:w-4/5 m-auto container pb-4">
         <div class=" flex border-t border-b">
             <div class=" w-1/2 border-r py-6 text-center ">
                 <h4 class=" text-lg font-semibold pb-3">Sở thích theo độ tuổi</h4>
@@ -110,7 +132,7 @@
 </section>
 
 <section>
-    <div class="container  w-3/4 m-auto py-8">
+    <div class="lg:w-3/5 m-auto container  py-8">
         <div class=" flex border">
             <div class=" w-1/5 text-center border-r p-4 flex flex-col gap-3">
                 <p>Xếp hạng</p>
@@ -158,35 +180,13 @@
     </div>
 </section>
 
-<section>
-    <div class="container m-auto pb-2 mb-4  px-2 bg-gray-200 rounded">
-        <h2 class=" text-center font-bold text-3xl py-4 "> PHIM HAY TRONG TUẦN</h2>
-        <div class="slide">
-            <div class="owl-carousel slide-first owl-theme owl-loaded">
-                <div class="owl-stage-outer ">
-                    <div class="owl-stage flex">
-                        <div class="owl-item">
-                            <a href="" class=" relative item">
-                                <div class=" rounded overflow-hidden hover:opacity-80">
-                                    <img src="https://cinestar.com.vn/pictures/Cinestar/05-2023/nang-tien-ca.jpg" alt="">
-                                </div>
-                                <div class=" absolute bg-main w-full bottom-0 hidden">
-                                    <h3 class=" text-white uppercase text-lg text-center font-bold pt-2">Nàng tiên cá</h3>
-                                    <div class=" flex m-auto w-full justify-center">
-                                        <a href="" class=" block text-white py-2 px-4 bg-menu m-2 rounded hover:bg-red-500">Xem chi tiết</a>
-                                        <a href="" class=" block text-white py-2 px-4 bg-menu m-2 rounded hover:bg-red-500 ">Mua vé</a>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<?php
+include './top_week.php';
+?>
 
 <script>
+    $('.phim').addClass('bg-yellow-600')
+
     var vote = 0
     $(document).on('click', '.vote', function() {
         // console.log($(this).attr('data-vote'))
@@ -223,5 +223,15 @@
     })
 
 
+    $('.movie').css('display', 'none')
 
+
+    $(document).on('click', '.watch-movie', function() {
+        $(".movie").css('display', 'block')
+    });
+
+    $(document).on('click', '.close', function() {
+       window.location.reload(true);
+
+    })
 </script>

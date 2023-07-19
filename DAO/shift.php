@@ -16,3 +16,8 @@ function shift_find_id($id_room,$name){
     $sql = "SELECT * FROM `shift` WHERE `id_room` = ? AND `name` = ?";
     return pdo_query_value($sql,$id_room,$name);
 }
+
+function shift_find_id_by_idRoom($id_room){
+    $sql = "SELECT `id` FROM `shift` WHERE `id_room` = ?";
+    return pdo_query($sql,$id_room);
+}
