@@ -73,6 +73,7 @@
                             <thead>
                                 <tr>
                                     <th class="text-secondary opacity-7">Hàng hóa</th>
+                                    <th class="text-secondary opacity-7">Chi tiết</th>
                                     <th class="text-secondary opacity-7">Giá tiền</th>
                                     <th class="text-secondary opacity-7"></th>
                                     <th class="text-secondary opacity-7"></th>
@@ -93,6 +94,10 @@
                                                     <h6 class="name"><?= $name ?></h6>
                                                 </div>
                                             </div>
+                                        </td>
+                                        <td>
+                                            <p class="text-xl font-weight-bold mb-0 ms-4"><?= $detail?>
+                                            </p>
                                         </td>
                                         <td>
                                             <p class="text-xl font-weight-bold mb-0 ms-4"><?= currency_format($price) ?>

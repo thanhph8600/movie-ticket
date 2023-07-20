@@ -124,7 +124,7 @@
                     <div class="table-responsive p-0">
                         <form action="./index.php?btn_update" enctype="multipart/form-data" method="post" style="display:flex;width:95%;margin:auto">
                             <div class="row pb-4">
-                                <div class="col-6">
+                                <div class="col-4">
                                     <label for="name">Tên thức uống</label>
                                     <input class=" flex-auto focus:outline-none" type="text" name="name" value="<?=$item['name']?>">
                                     <div class="chkName text-danger"></div>
@@ -132,7 +132,15 @@
                                     if (!empty($name_err)) echo $name_err;
                                     ?>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-5">
+                                    <label for="name">Chi tiết</label>
+                                    <input class=" flex-auto focus:outline-none" type="text" name="detail" value="<?=$item['detail']?>">
+                                    <div class="chkDetail text-danger"></div>
+                                    <?php
+                                    if (!empty($name_err)) echo $name_err;
+                                    ?>
+                                </div>
+                                <div class="col-3">
                                     <label for="phone">Giá tiền</label>
                                     <input class=" flex-auto focus:outline-none" type="number"  name="price"  value="<?=$item['price']?>">
                                     <p class="chkPhone text-danger"></p>
@@ -263,22 +271,34 @@
                 name: {
                     required: true,
                 },
+                detail: {
+                    required: true,
+                },
                 price: {
                     min:1,
                     required: true,
                 },
-
+                upload: {
+                    required: true,
+                    accept: "jpg,png,gif,jpeg,pjpeg,avif,jfif",
+                }
             },
             messages: {
 
                 name: {
                     required: '<div class="text-danger">Chưa điền tên</div>',
                 },
+                detail: {
+                    required: '<div class="text-danger">Chưa điền chi tiết</div>',
+                },
                 price: {
                     min:'<div class="text-danger">Phải là số dương</div>',
                     required: '<div class="text-danger">Chưa điền giá tiền</div>',
                 },
-
+                upload: {
+                    required: '<div class="text-danger">Chưa chọn ảnh</div>',
+                    accept: '<div class="text-danger">Phải đúng định dạng ảnh/div>',
+                }
             }
 
         });

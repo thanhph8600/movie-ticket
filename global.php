@@ -98,5 +98,15 @@ function currency_format($number, $suffix = 'đ') {
         return number_format($number, 0, ',', '.') . "{$suffix}";
     }
 }
+
+//định dạng ngày
+function format_date($date) {
+    return date("d-m-Y", strtotime($date));
+}
+
+//chuyển số thành chữ theo ASCII
+function number_to_letter($number) {
+    return chr($number + 64);
+}
 ?>
 

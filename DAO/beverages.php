@@ -12,14 +12,14 @@ class Beverages{
         return pdo_query_one($sql,$id);
     }
 
-    static public function insert($name,$price,$thumb){
-        $sql ="INSERT INTO `beverages`( `name`, `price`, `thumb`) VALUES (? , ? , ?)";
-        pdo_execute($sql,$name,$price,$thumb);
+    static public function insert($name,$price,$detail,$thumb){
+        $sql ="INSERT INTO `beverages`( `name`, `price`, `detail`, `thumb`) VALUES (? , ? , ?, ?)";
+        pdo_execute($sql,$name,$price,$detail,$thumb);
     }
 
-    static public function update($name,$price,$thumb,$id){
-        $sql ="UPDATE `beverages` SET `name`=?,`price`=?,`thumb`=? WHERE `id` =?";
-        pdo_execute($sql,$name,$price,$thumb,$id);
+    static public function update($name,$price,$detail,$thumb,$id){
+        $sql ="UPDATE `beverages` SET `name`=?,`price`=?, `detail` = ?,`thumb`=? WHERE `id` =?";
+        pdo_execute($sql,$name,$price,$detail,$thumb,$id);
     }
     
     static public function delete($id){

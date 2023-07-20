@@ -124,7 +124,7 @@
                     <div class="table-responsive p-0">
                         <form action="./index.php?btn_insert" enctype="multipart/form-data" method="post" style="display:flex;width:95%;margin:auto">
                             <div class="row pb-4">
-                                <div class="col-6">
+                                <div class="col-4">
                                     <label for="name">Tên thức uống</label>
                                     <input class=" flex-auto focus:outline-none" type="text" name="name">
                                     <div class="chkName text-danger"></div>
@@ -132,7 +132,15 @@
                                     if (!empty($name_err)) echo $name_err;
                                     ?>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-5">
+                                    <label for="name">Chi tiết</label>
+                                    <input class=" flex-auto focus:outline-none" type="text" name="detail">
+                                    <div class="chkDetail text-danger"></div>
+                                    <?php
+                                    if (!empty($name_err)) echo $name_err;
+                                    ?>
+                                </div>
+                                <div class="col-3">
                                     <label for="phone">Giá tiền</label>
                                     <input class=" flex-auto focus:outline-none" type="number"  name="price" placeholder="">
                                     <p class="chkPhone text-danger"></p>
@@ -261,6 +269,9 @@
                 name: {
                     required: true,
                 },
+                detail: {
+                    required: true,
+                },
                 price: {
                     min:1,
                     required: true,
@@ -274,6 +285,9 @@
 
                 name: {
                     required: '<div class="text-danger">Chưa điền tên</div>',
+                },
+                detail: {
+                    required: '<div class="text-danger">Chưa điền chi tiết</div>',
                 },
                 price: {
                     min:'<div class="text-danger">Phải là số dương</div>',

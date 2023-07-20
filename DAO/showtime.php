@@ -42,8 +42,13 @@ class Showtime{
         return pdo_query($sql,$date);
     }
 
-    static public function select_by_date_and_idFilm_groupByDate($date,$id_film){
+    static public function select_by_date_and_idFilm_groupBy_date_idFilm($date,$id_film){
         $sql = "SELECT * FROM `showtimes` WHERE  `date` > ? AND `id_film` = ?  GROUP BY `date`,id_room";
+        return pdo_query($sql,$date,$id_film);
+    }
+
+    static public function select_by_date_and_idFilm_groupBy_date($date,$id_film){
+        $sql = "SELECT * FROM `showtimes` WHERE  `date` >= ? AND `id_film` = ?  GROUP BY `date`";
         return pdo_query($sql,$date,$id_film);
     }
 
@@ -71,6 +76,17 @@ class Showtime{
     static public function find_id_shift_by_date_idRoom($date,$id_room){
         $sql = "SELECT id_shift FROM `showtimes` WHERE `date` = ? AND id_room = ?";
         return pdo_query($sql,$date,$id_room);
+    }
+
+    
+    static public function select_nameFilm_date_time_by_idShowtime($id_showtime){
+        $sql = "SELECT film.name, showtimes.date, room.seats, room.name as name_room, ".
+        " showtimes.price, shift.time_start, shift.time_end ".
+        " FROM `showtimes` JOIN film on showtimes.id_film = film.id ".
+        " JOIN shift on shift.id = showtimes.id_shift ".
+        " JOIN room ON showtimes.id_room = room.id ".
+        " WHERE showtimes.id = ?";
+        return pdo_query_one($sql,$id_showtime);
     }
 
     // static public function check_exist($date,$id_room,$id_shift){

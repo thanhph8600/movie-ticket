@@ -21,13 +21,13 @@
                                 <h3 class=" text-white uppercase text-lg text-center m-auto font-bold pt-2"><?= $film['name'] ?></h3>
                                 <div class=" flex m-auto w-full justify-center">
                                     <a href="../film?detail&&id_film=<?= $film['id'] ?>" class=" block text-white py-2 px-4 bg-menu m-2 rounded hover:bg-red-500">Xem chi tiết</a>
-                                    <a href="" class=" block text-white py-2 px-4 bg-menu m-2 rounded hover:bg-red-500 ">Mua vé</a>
+                                    <a href="../film/?detail_showtime&id_film=<?= $film['id'] ?>" class=" block text-white py-2 px-4 bg-menu m-2 rounded hover:bg-red-500 ">Mua vé</a>
                                 </div>
                             </div>
                             <div class="border flex-auto flex flex-col">
                                 <p class=" flex-auto truncate px-2 border-b uppercase text-lg text-center font-bold py-2"><?= $film['name'] ?></p>
                                 <div class=" text-center text-sm py-2">
-                                    <p><?= $film['time'] ?> phút | <?= $film['premiere'] ?></p>
+                                    <p><?= $film['time'] ?> phút | <?=  date("d-m-Y", strtotime($film['premiere']))?></p>
                                 </div>
                             </div>
 
@@ -59,7 +59,7 @@
                             <div class="border flex-auto flex flex-col">
                                 <p class=" flex-auto truncate px-2 border-b uppercase text-lg text-center font-bold py-2"><?= $name ?></p>
                                 <div class=" text-center text-sm py-2">
-                                    <p><?= $time ?> phút | <?= $premiere ?></p>
+                                    <p><?= $time ?> phút | <?= date("d-m-Y", strtotime($premiere)) ?></p>
                                 </div>
                             </div>
                         </a>

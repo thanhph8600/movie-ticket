@@ -10,7 +10,7 @@ if(exist_parma('btn_add')){
 elseif(exist_parma('btn_insert')){
     try {
         $thumb =  save_file('upload', $UPLOAD_BEVERAGES_URL);
-        Beverages::insert($name,$price,$thumb);
+        Beverages::insert($name,$price,$detail,$thumb);
         $MESS = '<div class="alert alert-success text-white " role="alert">Thêm thành công</div>';
         $VIEW_NAME = './list.php';
     } catch (Exception $e) {
@@ -31,7 +31,7 @@ elseif(exist_parma('btn_update')){
         }else{
             $thumb = $thumb_old;
         }
-        Beverages::update($name,$price,$thumb,$id_beverages);
+        Beverages::update($name,$price,$detail,$thumb,$id_beverages);
         $MESS = '<div class="alert alert-success text-white " role="alert">Cập nhật thành công</div>';
         $VIEW_NAME = './list.php';
     } catch (Exception $e) {

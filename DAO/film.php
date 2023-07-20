@@ -25,8 +25,9 @@ function film_select_by_id($id){
 }
 
 function film_select_top10($date){
-    $sql = "SELECT * FROM `film` WHERE premiere <= ? ORDER BY premiere DESC LIMIT 0, 9";
-    return pdo_query($sql,$date);
+    $sql = "SELECT film.* FROM `film` JOIN showtimes on film.id = showtimes.id_film WHERE film.premiere <= ? AND showtimes.date >= ? GROUP BY film.id DESC LIMIT 0, 9;
+    ";
+    return pdo_query($sql,$date,$date);
 }
 
 function film_select_dang_chieu($date){
@@ -55,7 +56,7 @@ function film_select_trong_ngay($date){
 }
 
 function film_select_xuat_chieu_trong_ngay($date,$id_film){
-    $sql = "SELECT room.name,shift.time_start, shift.time_end,ticket.quantity, room.seats".
+    $sql = "SELECT room.name,shift.time_start, shift.time_end,ticket.quantity, room.seats, showtimes.id as id_showtime".
     " FROM `showtimes` JOIN shift on showtimes.id_shift = shift.id ".
     " JOIN room on room.id = showtimes.id_room ".
     " LEFT JOIN ticket on showtimes.id = ticket.id_showtime ".
@@ -64,7 +65,7 @@ function film_select_xuat_chieu_trong_ngay($date,$id_film){
 }
 
 function film_select_xuat_chieu_chua_chieu_trong_ngay($date,$id_film,$time){
-    $sql = "SELECT room.name,shift.time_start, shift.time_end,ticket.quantity, room.seats".
+    $sql = "SELECT room.name,shift.time_start, shift.time_end,ticket.quantity, room.seats, showtimes.id as id_showtime".
     " FROM `showtimes` JOIN shift on showtimes.id_shift = shift.id ".
     " JOIN room on room.id = showtimes.id_room ".
     " LEFT JOIN ticket on showtimes.id = ticket.id_showtime ".
@@ -73,7 +74,7 @@ function film_select_xuat_chieu_chua_chieu_trong_ngay($date,$id_film,$time){
 }
 
 function film_select_xuat_chieu_da_chieu_trong_ngay($date,$id_film,$time){
-    $sql = "SELECT room.name,shift.time_start, shift.time_end,ticket.quantity, room.seats".
+    $sql = "SELECT room.name,shift.time_start, shift.time_end,ticket.quantity, room.seats, showtimes.id as id_showtime".
     " FROM `showtimes` JOIN shift on showtimes.id_shift = shift.id ".
     " JOIN room on room.id = showtimes.id_room ".
     " LEFT JOIN ticket on showtimes.id = ticket.id_showtime ".

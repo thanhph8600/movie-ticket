@@ -20,7 +20,7 @@
                 </div>
                 <div class="flex gap-2">
                     <p class=" font-bold">Khởi chiếu: </p>
-                    <p><?= $film['premiere'] ?></p>
+                    <p><?= date("d-m-Y", strtotime($film['premiere'])) ?></p>
                 </div>
                 <div class="flex gap-2">
                     <p class=" font-bold">Thời lượng: </p>
@@ -42,7 +42,7 @@
                     <p class="watch-movie cursor-pointer uppercase font-bold text-base bg-menu hover:bg-yellow-600 text-white px-4 py-2 rounded"><i class="fa fa-play-circle" aria-hidden="true"></i> trailer</p>
                     <?php
                     if (!empty($check_phim)) {
-                        echo '<a href="" class="uppercase font-bold text-base bg-menu hover:bg-yellow-600 text-white px-4 py-2 rounded "><i class="fa fa-cart-plus" aria-hidden="true"></i> đặt vé</a>';
+                        echo '<a href="../film/?detail_showtime&id_film='.$film['id'] .'"  class="uppercase font-bold text-base bg-menu hover:bg-yellow-600 text-white px-4 py-2 rounded "><i class="fa fa-cart-plus" aria-hidden="true"></i> đặt vé</a>';
                     }
                     ?>
 

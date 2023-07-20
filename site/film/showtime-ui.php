@@ -56,7 +56,7 @@
                         ?>
                             <div class="  bg-gray-600 border border-black  rounded text-black shadow-sm text-center">
                                 <p class=" py-1 px-6 border-b border-b-black text-sm"><?= $name ?></p>
-                                <p class=" py-2 px-6 border-b border-b-black "><?= $time_start ?></p>
+                                <p class=" py-2 px-6 border-b border-b-black "><?= substr($time_start, 0, 5); ?></p>
                                 <p class=" py-1 px-6 text-sm"><?= $seats - $quantity . '/' . $seats ?> ghế</p>
                             </div>
 
@@ -65,9 +65,10 @@
                         foreach ($xuat_chieu2 as $key => $value) {
                             extract($value)
                         ?>
-                            <a href="" class="  bg-orange-400 border border-white hover:bg-orange-600 rounded text-white text-center">
+
+                            <a href="" class="hover  bg-orange-400 border border-white hover:bg-orange-600 rounded text-white text-center">
                                 <p class=" py-1 px-6 border-b border-b-white text-sm"><?= $name ?></p>
-                                <p class=" py-2 px-6 border-b border-b-white "><?= $time_start ?></p>
+                                <p class=" py-2 px-6 border-b border-b-white  "><?=  substr($time_start, 0, 5)?></p>
                                 <p class=" py-1 px-6 text-sm"><?= $seats - $quantity . '/' . $seats ?> ghế</p>
                             </a>
 
@@ -95,9 +96,10 @@
         $(this).addClass('bg-slate-700').removeClass('text-black').addClass('text-white')
         console.log($(this).parent().children('input').val());
         $.ajax({
-            url: './list_in_showtime.php',
+            url: './ajax.php',
             type: 'POST',
             data: {
+                list_in_showtime : '',
                 date: $(this).parent().children('input').val(),
                 date_today: $(this).parent().children('.date_today').val(),
             },

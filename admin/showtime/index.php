@@ -30,11 +30,11 @@ if (exist_parma('btn_add')) {
     $VIEW_NAME = './edit.php';
     $film = film_select_by_id($id_film);
     $date =  date("Y-m-d");
-    $showtimes = Showtime::select_by_date_and_idFilm_groupByDate($date, $id_film);
+    $showtimes = Showtime::select_by_date_and_idFilm_groupBy_date_idFilm($date, $id_film);
 } elseif (exist_parma('btn_update')) {
     
     $date_now =  date("Y-m-d");
-    $showtimes = Showtime::select_by_date_and_idFilm_groupByDate($date_now, $id_film);
+    $showtimes = Showtime::select_by_date_and_idFilm_groupBy_date_idFilm($date_now, $id_film);
 
     //xóa 1 hàng
     if(empty($date)) $date =[];
@@ -103,7 +103,7 @@ if (exist_parma('btn_add')) {
     $VIEW_NAME = './edit.php';
     $film = film_select_by_id($id_film);
     $date_now =  date("Y-m-d");
-    $showtimes = Showtime::select_by_date_and_idFilm_groupByDate($date_now, $id_film);
+    $showtimes = Showtime::select_by_date_and_idFilm_groupBy_date_idFilm($date_now, $id_film);
 
 } else {
     $date = date("Y-m-d");
