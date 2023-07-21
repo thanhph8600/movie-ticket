@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 21, 2023 lúc 07:44 PM
+-- Thời gian đã tạo: Th7 20, 2023 lúc 07:57 PM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.2.4
 
@@ -40,10 +40,7 @@ CREATE TABLE `beverages` (
 --
 
 INSERT INTO `beverages` (`id`, `name`, `price`, `detail`, `thumb`) VALUES
-(1, '1 Ly nước', 35000, '1 Ly Pepsi 350ml', '48tải xuống (4).jfif'),
-(2, 'Bắp', 55000, '1  túi bắp 160g', '3photo1569834628378-1569834628687-crop-15698346881461785318215.jpg'),
-(3, 'Combo2', 110000, '2 ly nước 350ml, 1 túi bắp 160g ', '14gia-bap-nuoc-cgv-4.png'),
-(4, 'Combo1', 80000, '1 Ly Pepsi 350ml, 1 túi bắp 160g', '174dcf799a77eafbbf0b2c7c0ee79c4938.jpg');
+(1, '1 Ly nước', 35000, '1 Ly Pepsi 350ml', '48tải xuống (4).jfif');
 
 -- --------------------------------------------------------
 
@@ -56,20 +53,6 @@ CREATE TABLE `bill_beverages` (
   `id_ticket` int(11) NOT NULL,
   `id_beverages` int(11) NOT NULL,
   `quantity` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `chair_is_waiting`
---
-
-CREATE TABLE `chair_is_waiting` (
-  `id` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `id_showtime` int(11) NOT NULL,
-  `col_index` int(10) NOT NULL,
-  `row_index` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 -- --------------------------------------------------------
@@ -370,14 +353,6 @@ ALTER TABLE `bill_beverages`
   ADD KEY `bill_beverages` (`id_beverages`);
 
 --
--- Chỉ mục cho bảng `chair_is_waiting`
---
-ALTER TABLE `chair_is_waiting`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id_showtime` (`id_showtime`,`col_index`,`row_index`),
-  ADD KEY `waiting_user` (`id_user`);
-
---
 -- Chỉ mục cho bảng `comment`
 --
 ALTER TABLE `comment`
@@ -453,19 +428,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT cho bảng `beverages`
 --
 ALTER TABLE `beverages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `bill_beverages`
 --
 ALTER TABLE `bill_beverages`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT cho bảng `chair_is_waiting`
---
-ALTER TABLE `chair_is_waiting`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=304;
 
 --
 -- AUTO_INCREMENT cho bảng `comment`
@@ -531,13 +500,6 @@ ALTER TABLE `user`
 ALTER TABLE `bill_beverages`
   ADD CONSTRAINT `bill_beverages` FOREIGN KEY (`id_beverages`) REFERENCES `beverages` (`id`),
   ADD CONSTRAINT `bill_ticket` FOREIGN KEY (`id_ticket`) REFERENCES `ticket` (`id`);
-
---
--- Các ràng buộc cho bảng `chair_is_waiting`
---
-ALTER TABLE `chair_is_waiting`
-  ADD CONSTRAINT `waiting_showtime` FOREIGN KEY (`id_showtime`) REFERENCES `showtimes` (`id`),
-  ADD CONSTRAINT `waiting_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`);
 
 --
 -- Các ràng buộc cho bảng `comment`

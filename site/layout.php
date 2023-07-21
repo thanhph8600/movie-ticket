@@ -16,6 +16,7 @@
 
     <link rel="stylesheet" href="<?= $CONTENT_URL ?>/css/output.css">
     <link rel="stylesheet" href="<?= $CONTENT_URL ?>/css/home.css">
+    <link rel="stylesheet" href="<?= $CONTENT_URL ?>/css/admin.css">
     <!-- carousel -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.2/assets/owl.carousel.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.2/assets/owl.theme.default.min.css" />
@@ -24,7 +25,9 @@
 </head>
 
 <body>
+<div class="cursor_load">
 
+</div>
     <div class=" min-h-screen flex flex-col">
 
         <?php

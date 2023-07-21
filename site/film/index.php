@@ -3,6 +3,7 @@ require_once '../../global.php';
 require_once '../../DAO/film.php';
 require_once '../../DAO/showtime.php';
 require_once '../../DAO/seat.php';
+require_once '../../DAO/beverages.php';
 
 extract($_REQUEST);
 $date = date("Y-m-d");
@@ -34,9 +35,22 @@ elseif(exist_parma('detail_showtime')){
     $VIEW_NAME = 'detail_showtime.php';
 }
 elseif(exist_parma('room')){
+    $id_showtime = $_GET['id_showtime'];
     $showtime = Showtime::select_nameFilm_date_time_by_idShowtime($_GET['id_showtime']);
+    if($showtime['date']<$date || $showtime['date'] == $date && $showtime['time_start'] < date('H:i:s')){
+        header('location: ../404-not-found/');
+    }
+
+    $id_user = 0;
+    if(!empty($_SESSION['user'])){
+        $id_user = $_SESSION['user']['id'];
+    }
     $ghe_da_chon = seat_select_by_id_showtime($_GET['id_showtime']);
+    $ghe_dang_chon = chair_is_waiting_select_by_id_showtime($_GET['id_showtime']);
+
+    $beverages = Beverages::getAll();
     $VIEW_NAME = 'room.php';
+
 }
 else{
     $SLIDE = './slide.php';

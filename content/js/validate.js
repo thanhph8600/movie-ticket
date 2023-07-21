@@ -179,3 +179,9 @@ $(document).on('click','.fa-eye-slash',function(){
   $(this).parent().children('input').prop("type", "password");
   $(this).removeClass('fa-eye-slash').addClass('fa-eye')
 })
+
+
+const formatter = new Intl.NumberFormat('vi-VN', {
+  style: 'currency',
+  currency: 'VND',
+});

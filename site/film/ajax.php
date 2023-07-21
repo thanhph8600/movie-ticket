@@ -2,6 +2,8 @@
 require_once '../../global.php';
 require_once '../../DAO/film.php';
 require_once '../../DAO/showtime.php';
+require_once '../../DAO/chair_is_waiting.php';
+require_once '../../DAO/beverages.php';
 extract($_REQUEST);
 
 if (exist_parma('list_in_showtime')) {
@@ -47,7 +49,7 @@ if (exist_parma('list_in_showtime')) {
                 foreach ($xuat_chieu1 as $key => $value) {
                     extract($value)
                     ?>
-                    <a href="../film/?room&&id_showtime=<?=$id_showtime?>" class="  bg-orange-400 border border-white hover:bg-orange-600 cursor-pointer rounded text-white text-center">
+                    <a href="../film/?room&&id_showtime=<?= $id_showtime ?>" class="  bg-orange-400 border border-white hover:bg-orange-600 cursor-pointer rounded text-white text-center">
                         <p class=" py-1 px-6 border-b border-b-white text-sm"><?= $name ?></p>
                         <p class=" py-2 px-6 border-b border-b-white "><?= substr($time_start, 0, 5); ?></p>
                         <p class=" py-1 px-6 text-sm"><?= $seats - $quantity . '/' . $seats ?> ghế</p>
@@ -97,7 +99,7 @@ if (exist_parma('list_in_showtime')) {
                 foreach ($xuat_chieu1 as $key => $value) {
                     extract($value)
                     ?>
-                    <a href="../film/?room&&id_showtime=<?=$id_showtime?>"  class="  bg-orange-400 border border-white hover:bg-orange-600 cursor-pointer rounded text-white text-center">
+                    <a href="../film/?room&&id_showtime=<?= $id_showtime ?>" class="  bg-orange-400 border border-white hover:bg-orange-600 cursor-pointer rounded text-white text-center">
                         <p class=" py-1 px-6 border-b border-b-white text-sm"><?= $name ?></p>
                         <p class=" py-2 px-6 border-b border-b-white "><?= substr($time_start, 0, 5); ?></p>
                         <p class=" py-1 px-6 text-sm"><?= $seats - $quantity . '/' . $seats ?> ghế</p>
@@ -113,8 +115,37 @@ if (exist_parma('list_in_showtime')) {
         </div>
     </div>
 <?php
-}
-elseif(exist_parma('chon_ghe')){
+} elseif (exist_parma('nuoc_uong')) {
+    $sum = 0;
+    if (!empty($nuoc_uong)) {
+        foreach ($nuoc_uong as $key => $value) {
+            $beverages = Beverages::select_by_id($value[0]);
+            $price = $beverages['price'] * $value[1];
+            $sum += $price;
+        }
+        echo '<div>
+                <img src="https://www.cinestar.com.vn/catalog/view/theme/default/images/icon-promotion.png" alt="">
+            </div>
+            <div class=" text-xl font-bold text-rose-500">'.currency_format($sum).'</div>';
+        foreach ($nuoc_uong as $key => $value) {
+            $beverages = Beverages::select_by_id($value[0]);
+            echo '<div>'. $value[1].' x '.$beverages['detail'].'</div>';
+        }
+    }
+} elseif (exist_parma('kiem_tra_ghe')) {
+    $check = chair_is_waiting_check_chair($id_showtime, $row_index, $col_index);
+    if (empty($check)) {
+        return false;
+    }
+} elseif (exist_parma('them_ghe')) {
+    chair_is_waiting_insert($id_user, $id_showtime, $col_index, $row_index);
+} elseif (exist_parma('xoa_ghe')) {
+    chair_is_waiting_delete_row($id_user, $id_showtime, $col_index, $row_index);
+} elseif (exist_parma('xoa_tat_ca_ghe_dang_chon')) {
+    chair_is_waiting_delete_by_user_idShowtime($id_user, $id_showtime);
+} elseif (exist_parma('form_thanh_toan')) {
     extract($_REQUEST);
     var_dump($_REQUEST);
 }
+
+?>

@@ -278,10 +278,7 @@
                     min:1,
                     required: true,
                 },
-                upload: {
-                    required: true,
-                    accept: "jpg,png,gif,jpeg,pjpeg,avif,jfif",
-                }
+
             },
             messages: {
 
@@ -295,10 +292,7 @@
                     min:'<div class="text-danger">Phải là số dương</div>',
                     required: '<div class="text-danger">Chưa điền giá tiền</div>',
                 },
-                upload: {
-                    required: '<div class="text-danger">Chưa chọn ảnh</div>',
-                    accept: '<div class="text-danger">Phải đúng định dạng ảnh/div>',
-                }
+
             }
 
         });

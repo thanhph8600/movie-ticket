@@ -66,7 +66,7 @@
                             extract($value)
                         ?>
 
-                            <a href="" class="hover  bg-orange-400 border border-white hover:bg-orange-600 rounded text-white text-center">
+                            <a href="../film/?room&&id_showtime=<?=$id_showtime?>" class="hover  bg-orange-400 border border-white hover:bg-orange-600 rounded text-white text-center">
                                 <p class=" py-1 px-6 border-b border-b-white text-sm"><?= $name ?></p>
                                 <p class=" py-2 px-6 border-b border-b-white  "><?=  substr($time_start, 0, 5)?></p>
                                 <p class=" py-1 px-6 text-sm"><?= $seats - $quantity . '/' . $seats ?> ghế</p>

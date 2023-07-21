@@ -56,29 +56,29 @@ function film_select_trong_ngay($date){
 }
 
 function film_select_xuat_chieu_trong_ngay($date,$id_film){
-    $sql = "SELECT room.name,shift.time_start, shift.time_end,ticket.quantity, room.seats, showtimes.id as id_showtime".
+    $sql = "SELECT room.name,shift.time_start, shift.time_end,sum( ticket.quantity) as quantity, room.seats, showtimes.id as id_showtime".
     " FROM `showtimes` JOIN shift on showtimes.id_shift = shift.id ".
     " JOIN room on room.id = showtimes.id_room ".
     " LEFT JOIN ticket on showtimes.id = ticket.id_showtime ".
-    " WHERE date = ? AND id_film = ?";
+    " WHERE date = ? AND id_film = ?  GROUP BY showtimes.id";
     return pdo_query($sql,$date,$id_film);
 }
 
 function film_select_xuat_chieu_chua_chieu_trong_ngay($date,$id_film,$time){
-    $sql = "SELECT room.name,shift.time_start, shift.time_end,ticket.quantity, room.seats, showtimes.id as id_showtime".
+    $sql = "SELECT room.name,shift.time_start, shift.time_end,sum( ticket.quantity) as quantity, room.seats, showtimes.id as id_showtime".
     " FROM `showtimes` JOIN shift on showtimes.id_shift = shift.id ".
     " JOIN room on room.id = showtimes.id_room ".
     " LEFT JOIN ticket on showtimes.id = ticket.id_showtime ".
-    " WHERE date = ? AND id_film = ?  AND time_start > ?";
+    " WHERE date = ? AND id_film = ?  AND time_start > ? GROUP BY showtimes.id";
     return pdo_query($sql,$date,$id_film,$time);
 }
 
 function film_select_xuat_chieu_da_chieu_trong_ngay($date,$id_film,$time){
-    $sql = "SELECT room.name,shift.time_start, shift.time_end,ticket.quantity, room.seats, showtimes.id as id_showtime".
+    $sql = "SELECT room.name,shift.time_start, shift.time_end,sum( ticket.quantity) as quantity, room.seats, showtimes.id as id_showtime".
     " FROM `showtimes` JOIN shift on showtimes.id_shift = shift.id ".
     " JOIN room on room.id = showtimes.id_room ".
     " LEFT JOIN ticket on showtimes.id = ticket.id_showtime ".
-    " WHERE date = ? AND id_film = ?  AND time_start < ?";
+    " WHERE date = ? AND id_film = ?  AND time_start < ? GROUP BY showtimes.id";
     return pdo_query($sql,$date,$id_film,$time);
 }
 
