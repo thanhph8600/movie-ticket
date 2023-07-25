@@ -23,7 +23,7 @@
     <div class="container m-auto py-4">
         <h2 class=" uppercase text-2xl text-center font-bold pb-4">hỏi & đáp</h2>
         <div class=" w-4/5  m-auto pb-2">
-            <p class=" show-qa bg-rose-950 p-4 text-lg rounded-bl-3xl rounded-tr-3xl text-white hover:bg-pink-600 cursor-pointer"><span>01 </span> Làm thế nào để mua vé online?</p>
+            <p class=" show-qa bg-rose-600 p-4 text-lg rounded-bl-3xl rounded-tr-3xl text-white hover:bg-pink-600 cursor-pointer"><span>01 </span> Làm thế nào để mua vé online?</p>
             <div class="hidden rounded-xl bg-slate-300 border p-4 my-2 ">
                 <p class=" text-center font-bold">HƯỚNG DẪN MUA VÉ ONLINE</p>
                 <p class=" text-center">Điều kiện:</p>
@@ -47,7 +47,7 @@
             </div>
         </div>
         <div class=" w-4/5  m-auto pb-2">
-            <p class=" show-qa bg-rose-950 p-4 text-lg rounded-bl-3xl rounded-tr-3xl text-white hover:bg-pink-600 cursor-pointer"><span>02 </span> Thủ tục đặt vé online và phương thức thanh toán như thế nào?</p>
+            <p class=" show-qa bg-rose-600 p-4 text-lg rounded-bl-3xl rounded-tr-3xl text-white hover:bg-pink-600 cursor-pointer"><span>02 </span> Thủ tục đặt vé online và phương thức thanh toán như thế nào?</p>
             <div class="hidden rounded-xl bg-slate-300 border p-4 my-2 ">
                 <p class=" font-bold">CÁCH ĐẶT VÉ ONLINE:</p>
                 <p>1/ Đặt vé online trên mục MUA VÉ ONLINE ở trang chủ Cinestar Cinema.</p>

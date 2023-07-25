@@ -4,32 +4,32 @@
     }
 
     .row div {
-        background: url(https://www.cinestar.com.vn/catalog/view/theme/default/images/single-chair.png) no-repeat center top;
+        background: url(https://www.cinestar.com.vn/catalog/view/theme/default/images/single-chair.png) no-repeat center -136px;
         transition: all 0.5s ease-in-out;
     }
 
     .row div.seat:hover {
-        background-position: center -46px;
+        background-position: center -92px;
         cursor: pointer;
     }
 
     .row div:focus {
-        background-position: center -46px;
+        background-position: center -92px;
     }
 
     .seat_show {
-        background-position: center 0 !important;
-    }
-
-    .seat_active {
-        background-position: center -46px !important;
-    }
-
-    .seat_actived {
         background-position: center -136px !important;
     }
 
-    .form_beverages .form {
+    .seat_active {
+        background-position: center -92px !important;
+    }
+
+    .seat_actived {
+        background-position: center 0px !important;
+    }
+
+    .form_beverages .form_beverages_con {
         animation: load_form 0.5s ease-in-out;
     }
 
@@ -91,7 +91,7 @@
 
 
 <section>
-    <div class="container  lg:w-4/5 m-auto py-4">
+    <div class="container lg:w-4/5 m-auto py-4 form_check_out ">
         <div class=" text-center  lg:w-4/5 m-auto text-lg font-bold text-white bg-gray-600 p-2 rounded-full">MÀN HÌNH</div>
         <div class=" w-3/5 m-auto py-8">
             <?php
@@ -100,7 +100,8 @@
             $ghe_du = $showtime['seats'] %  $so_ghe_moi_hang;
             for ($i = 1; $i < $row; $i++) {
                 $row_index = number_to_letter($i);
-                echo '<div class="row flex  py-2 gap-2 justify-center">';
+                echo '<div class="row flex  py-2 gap-2 justify-center items-center">
+                    <p class=" pr-10  font-bold">' . number_to_letter($i) . '</p>';
                 for ($j = 1; $j <= $so_ghe_moi_hang; $j++) {
                     $check = 0;
                     foreach ($ghe_da_chon as $key => $value) {
@@ -114,17 +115,23 @@
                         }
                     }
                     if ($check == 1)
-                        echo '   <div  class=" seat_actived flex-auto py-6  bg-gray-200 ">
-                        </div>';
+                        echo '   <div  class=" seat_actived flex-auto py-6 relative bg-gray-200 ">
+                                    <span class=" absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 text-white ">' . $j . '</span>
+                                </div>';
                     else
-                        echo '   <div row="' . $row_index . '" col="' . $j . '" class=" seat flex-auto py-6  bg-gray-200 ">
-                        </div>';
+                        echo '   <div row="' . $row_index . '" col="' . $j . '" class=" relative seat flex-auto py-6  bg-gray-200 ">
+                                    <span class=" absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 text-white">' . $j . '</span>
+                                </div>';
                 }
                 echo '</div>';
             }
 
 
-            echo '<div class="row flex  py-2 gap-2 justify-center">';
+            echo '<div class="row flex  py-2 gap-2 justify-center items-center">';
+            if($ghe_du !=0){
+                echo '<p class=" pr-10 font-bold">' .number_to_letter($i) . '</p>';
+            }
+            
             for ($j = 1; $j <= $ghe_du; $j++) {
                 $row_index = number_to_letter($row);
                 $check = 0;
@@ -139,11 +146,13 @@
                     }
                 }
                 if ($check == 1)
-                    echo '   <div  class=" seat_actived flex-auto py-6  bg-gray-200 ">
-                    </div>';
+                    echo '   <div  class=" seat_actived flex-auto py-6 relative  bg-gray-200 ">
+                                <span class=" absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 text-white">' . $j . '</span>
+                            </div>';
                 else
-                    echo '   <div row="' . $row_index . '" col="' . $j . '" class=" seat flex-auto py-6  bg-gray-200 ">
-                    </div>';
+                    echo '   <div row="' . $row_index . '" col="' . $j . '" class=" relative seat flex-auto py-6  bg-gray-200 ">
+                                <span class=" absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 text-white">' . $j . '</span>
+                            </div>';
             }
             echo '</div>';
 
@@ -171,9 +180,10 @@
         </div>
     </div>
 
+
     <div class="form_beverages z-10 relative hidden">
         <div class=" fixed h-screen w-screen z-10 bg-gray-700 bg-opacity-70 close top-0 left-0"></div>
-        <div style="max-height:800px" class="form fixed rounded top-0  -translate-x-1/2 left-1/2 w-2/5 bg-white p-4 mt-16 z-20">
+        <div style="max-height:800px" class="form_beverages_con fixed rounded top-0 -translate-x-1/2 left-1/2 w-2/5 bg-white p-4 mt-8 z-20">
             <h2 class=" font-bold text-xl uppercase text-center">Bảng nước uống</h2>
             <div style="max-height:600px" class=" overflow-y-auto">
                 <?php
@@ -187,7 +197,7 @@
                         <div class=" w-2/4">
                             <p class=" font-bold text-lg"><?= $name ?></p>
                             <span><?= $detail ?></span>
-                            <p class=" text-lg font-bold text-rose-500">Giá:<?= currency_format($price) ?></p>
+                            <p class="price_beverages text-lg font-bold text-rose-500">Giá:<?= currency_format($price) ?></p>
                         </div>
                         <div class=" w-1/4 flex flex-col gap-2 justify-center items-center">
                             <p class="price">0 đ</p>
@@ -209,15 +219,25 @@
         </div>
     </div>
 
-    <div class="check"></div>
+    <div class="popup_time_out hidden cursor-pointer">
+        <div class=" fixed z-40 top-0 left-0 w-screen h-screen bg-gray-700 bg-opacity-80 ">
+        </div>
+        <div class=" text-2xl uppercase font-bold py-20 px-8 z-40 bg-white shadow rounded-md fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            Bạn đã hết thời gian mua vé !
+        </div>
+    </div>
+
 </section>
 
 <script>
-    const formatter = new Intl.NumberFormat('vi-VN', {
-        style: 'currency',
-        currency: 'VND',
-    });
+    function checkForm() {
+        if ($('#dong_y:checked').length == 0) {
+            $('.dong_y').css('border-bottom', '1px solid red')
+            return false
+        }
 
+
+    }
 
     var mang_tat_ca_ghe = [];
 
@@ -228,7 +248,7 @@
             if (mang_tat_ca_ghe.length < 8 || $(this).hasClass("seat_active")) {
                 if ($(this).hasClass("seat_active")) {
                     $(this).removeClass("seat_active")
-                    if (!$('.seat').hasClass('seat_active')){
+                    if (!$('.seat').hasClass('seat_active')) {
                         $('.check_out_none').removeClass('check_out cursor-pointer bg-menu').addClass('bg-gray-300')
                     }
 
@@ -271,8 +291,6 @@
 
 
 
-
-
     let time = 300;
     let check_ham_set_time_out = 0;
     const $timer = $('.time_out');
@@ -287,13 +305,16 @@
                 if (time === 0) {
                     clearInterval(interval);
                     delete_tat_ca();
-                    setTimeout(() =>
-                        window.location.replace("../"), 0)
+                    $('.popup_time_out').removeClass('hidden')
                 }
             }, 1000);
         }
         check_ham_set_time_out = 1;
     }
+
+    $(document).on('click', '.popup_time_out', function() {
+        window.location.replace("../")
+    })
 
 
     let id_user = <?= $id_user ?>;
@@ -313,17 +334,17 @@
                 row_index: row_index
             },
             success: function(result) {
-                $('cursor_load').css('display', 'none')
-
                 if (result.length > 10) {
                     i = false
                 }
             }
         })
+        $('cursor_load').css('display', 'none')
         return i
     }
 
     function xoa_ghe(col_index, row_index) {
+        $('.cursor_load').css('display', 'block')
         $.ajax({
             url: './ajax.php?xoa_ghe',
             data: {
@@ -333,24 +354,23 @@
                 row_index: row_index
             },
             success: function(result) {
+                $('.cursor_load').css('display', 'none')
                 $('.check').html(result)
             }
         })
     }
 
     function delete_tat_ca() {
-        $.ajax(
-            $.ajax({
-                url: './ajax.php?xoa_tat_ca_ghe_dang_chon',
-                data: {
-                    id_user: id_user,
-                    id_showtime: id_showtime,
-                },
-                success: function(result) {
-                    $('.check').html(result)
-                }
-            })
-        )
+        $.ajax({
+            url: './ajax.php?xoa_tat_ca_ghe_dang_chon',
+            data: {
+                id_user: id_user,
+                id_showtime: id_showtime,
+            },
+            success: function(result) {
+                $('.check').html(result)
+            }
+        })
     }
 
     window.onbeforeunload = function() {
@@ -362,6 +382,7 @@
     }
 
     function open_form_login() {
+        $('.cursor_load').css('display', 'block')
         $(".popup").css("display", "block");
         $.ajax({
             url: "../user/index.php?formLogin",
@@ -369,6 +390,7 @@
                 formLogin: '',
             },
             success: function(result) {
+                $('.cursor_load').css('display', 'none')
                 $(".form").html(result);
             },
         });
@@ -385,6 +407,7 @@
 
     let tong_nuoc_uong = []
     $(document).on('click', '.cong_sp', function() {
+        
         let nuoc_uong = []
         let id_sp = $(this).parent().children('.id_beverages')
         let so_luong = $(this).parent().children('.so_sp')
@@ -409,6 +432,21 @@
         let so_luong = $(this).parent().children('.so_sp')
         if (Number(so_luong.val()) > 0)
             so_luong.val(Number(so_luong.val()) - 1)
+
+        let nuoc_uong = []
+        let id_sp = $(this).parent().children('.id_beverages')
+
+        nuoc_uong.push(id_sp.val())
+        nuoc_uong.push(so_luong.val())
+
+        let check = 0;
+        for (let i = 0; i < tong_nuoc_uong.length; i++) {
+            if (tong_nuoc_uong[i][0] === nuoc_uong[0]) {
+                tong_nuoc_uong[i][1] = parseInt(tong_nuoc_uong[i][1]) - 1;
+                check = 1;
+                break;
+            }
+        }
     })
     $(document).on('change', '.so_sp', function() {
         if ($(this).val() < 0)
@@ -431,15 +469,18 @@
 
 
     $(document).on('click', '.check_out', function() {
+        $('.cursor_load').css('display', 'block')
         if ($('.seat').hasClass('seat_active'))
             $.ajax({
-                url: './ajax.php?form_thanh_toan',
+                url: './index.php?form_check_out',
                 data: {
+                    id_showtime: id_showtime,
                     tat_ca_ghe: mang_tat_ca_ghe,
                     tong_nuoc_uong: tong_nuoc_uong,
                 },
                 success: function(result) {
-                    $('.check').html(result)
+                    $('.cursor_load').css('display', 'none')
+                    $('.form_check_out').html(result)
                 }
             })
     })

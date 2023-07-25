@@ -42,7 +42,7 @@
                     <p class="watch-movie cursor-pointer uppercase font-bold text-base bg-menu hover:bg-yellow-600 text-white px-4 py-2 rounded"><i class="fa fa-play-circle" aria-hidden="true"></i> trailer</p>
                     <?php
                     if (!empty($check_phim)) {
-                        echo '<a href="../film/?detail_showtime&id_film='.$film['id'] .'"  class="uppercase font-bold text-base bg-menu hover:bg-yellow-600 text-white px-4 py-2 rounded "><i class="fa fa-cart-plus" aria-hidden="true"></i> đặt vé</a>';
+                        echo '<a href="../film/?detail_showtime&id_film=' . $film['id'] . '"  class="uppercase font-bold text-base bg-menu hover:bg-yellow-600 text-white px-4 py-2 rounded "><i class="fa fa-cart-plus" aria-hidden="true"></i> đặt vé</a>';
                     }
                     ?>
 
@@ -78,31 +78,31 @@
                 <h4 class=" text-lg font-semibold pb-3">Sở thích theo độ tuổi</h4>
                 <div class="flex justify-center gap-4 text-sm">
                     <div class=" flex flex-col justify-center items-center gap-1">
-                        <p>13,3%</p>
+                        <p><?= $tuoi20 ?>%</p>
                         <p class=" w-4 bg-gray-200 h-32 relative ">
-                            <span style="height: 13.3%;background-image: url(https://www.lottecinemavn.com/LCHS/Image/Bg/bg_age10.png);" class="absolute contents-[] w-full  bottom-0 left-0"></span>
+                            <span style="height: <?= $tuoi20 ?>%;background-image: url(https://www.lottecinemavn.com/LCHS/Image/Bg/bg_age10.png);" class="absolute contents-[] w-full  bottom-0 left-0"></span>
                         </p>
                         <p>
                             < 20 tuổi</p>
                     </div>
                     <div class=" flex flex-col justify-center items-center gap-1">
-                        <p>70,3%</p>
+                        <p><?= $tuoi30 ?>%</p>
                         <p class=" w-4 bg-gray-200 h-32 relative ">
-                            <span style="height: 70.3%;background-image: url(https://www.lottecinemavn.com/LCHS/Image/Bg/bg_age20.png);" class="absolute contents-[] w-full  bottom-0 left-0"></span>
+                            <span style="height: <?= $tuoi30 ?>%;background-image: url(https://www.lottecinemavn.com/LCHS/Image/Bg/bg_age20.png);" class="absolute contents-[] w-full  bottom-0 left-0"></span>
                         </p>
                         <p> 20 > 30 tuổi</p>
                     </div>
                     <div class=" flex flex-col justify-center items-center gap-1">
-                        <p>4,3%</p>
+                        <p><?= $tuoi40 ?>%</p>
                         <p class=" w-4 bg-gray-200 h-32 relative ">
-                            <span style="height: 4.3%;background-image: url(https://www.lottecinemavn.com/LCHS/Image/Bg/bg_age30.png);" class="absolute contents-[] w-full  bottom-0 left-0"></span>
+                            <span style="height: <?= $tuoi40 ?>%;background-image: url(https://www.lottecinemavn.com/LCHS/Image/Bg/bg_age30.png);" class="absolute contents-[] w-full  bottom-0 left-0"></span>
                         </p>
                         <p> 30 > 40 tuổi</p>
                     </div>
                     <div class=" flex flex-col justify-center items-center gap-1">
-                        <p>1,3%</p>
+                        <p><?= $tuoi50 ?>%</p>
                         <p class=" w-4 bg-gray-200 h-32 relative ">
-                            <span style="height: 1.3%;background-image: url(https://www.lottecinemavn.com/LCHS/Image/Bg/bg_age40.png);" class="absolute contents-[] w-full  bottom-0 left-0"></span>
+                            <span style="height: <?= $tuoi50 ?>%;background-image: url(https://www.lottecinemavn.com/LCHS/Image/Bg/bg_age40.png);" class="absolute contents-[] w-full  bottom-0 left-0"></span>
                         </p>
                         <p> > 40 tuổi</p>
                     </div>
@@ -114,16 +114,16 @@
                     <div class=" flex flex-row items-center gap-1 pb-6">
                         <p class=" w-1/4">Nữ</p>
                         <p class=" w-2/5 bg-gray-200 h-6 relative ">
-                            <span style=" width: 22.1%;background-image: url(https://www.lottecinemavn.com/LCHS/Image/Bg/bg_gender_01.png);" class="absolute contents-[] h-full  bottom-0 left-0"></span>
+                            <span style=" width: <?= $female ?>%;background-image: url(https://www.lottecinemavn.com/LCHS/Image/Bg/bg_gender_01.png);" class="absolute contents-[] h-full  bottom-0 left-0"></span>
                         </p>
-                        <p class=" w-1/4"> 22,1%</p>
+                        <p class=" w-1/4"> <?= $female ?>%</p>
                     </div>
                     <div class=" flex flex-row  items-center gap-1">
                         <p class=" w-1/4">Nam</p>
                         <p class="w-2/5 bg-gray-200 h-6 relative ">
-                            <span style=" width: 79.9%;background-image: url(https://www.lottecinemavn.com/LCHS/Image/Bg/bg_gender_02.png);" class="absolute contents-[] h-full  bottom-0 left-0"></span>
+                            <span style=" width: <?= $male ?>%;background-image: url(https://www.lottecinemavn.com/LCHS/Image/Bg/bg_gender_02.png);" class="absolute contents-[] h-full  bottom-0 left-0"></span>
                         </p>
-                        <p class=" w-1/4"> 77,9%</p>
+                        <p class=" w-1/4"> <?= $male ?>%</p>
                     </div>
                 </div>
             </div>
@@ -145,37 +145,51 @@
                 </div>
                 <p class=" text-yellow-400 font-semibold danh-gia"></p>
             </div>
-            <div class=" w-3/5">
-                <textarea name="" id="" class=" w-full h-full p-3 focus:outline-none " placeholder="Viết bình luận tại đây........."></textarea>
-            </div>
-            <div class=" w-1/5 bg-main flex justify-center items-center  font-bold text-yellow-600">Bình luận</div>
+            <?php
+            if (!empty($user)) {
+                echo ' <div class=" w-4/5">
+                    <textarea name="" id="" class="  w-full h-full p-3 focus:outline-none " placeholder="Viết bình luận tại đây........."></textarea>
+                </div>
+                ';
+            } else {
+                echo '
+                <div class="formLogin w-4/5 flex justify-center items-center font-bold cursor-pointer">
+                    Bạn phải đăng nhập để có thể bình luận và đánh giá
+                </div>
+                ';
+            }
+            ?>
+
+        </div>
+        <div class=" flex flex-row-reverse">
+        <div class="comment px-6 py-2 rounded mt-2 cursor-pointer bg-slate-300 hover:bg-slate-400 hover:text-white flex justify-center items-center  font-bold">Bình luận</div>
         </div>
         <div class="my-4 border-t-2 border-t-black"></div>
-        <div>
-            <div class=" p-4 border-b">
-                <span class=" px-2 py-1 bg-menu text-white font-bold">Khách</span>
-                <span>
-                    <i class="fa fa-star text-yellow-600" aria-hidden="true"></i>
-                    <i class="fa fa-star-o text-yellow-600" aria-hidden="true"></i>
-                    <i class="fa fa-star-o text-yellow-600" aria-hidden="true"></i>
-                    <i class="fa fa-star-o text-yellow-600" aria-hidden="true"></i>
-                    <i class="fa fa-star-o text-yellow-600" aria-hidden="true"></i>
-                </span>
-                <p class=" py-2">Phim rất hay vac nó làm tôi khóc</p>
-                <p class=" text-sm">29/06/2023</p>
-            </div>
-            <div class=" p-4 border-b">
-                <span class=" px-2 py-1 bg-menu text-white font-bold">Khách</span>
-                <span>
-                    <i class="fa fa-star text-yellow-600" aria-hidden="true"></i>
-                    <i class="fa fa-star-o text-yellow-600" aria-hidden="true"></i>
-                    <i class="fa fa-star-o text-yellow-600" aria-hidden="true"></i>
-                    <i class="fa fa-star-o text-yellow-600" aria-hidden="true"></i>
-                    <i class="fa fa-star-o text-yellow-600" aria-hidden="true"></i>
-                </span>
-                <p class=" py-2">Phim rất hay vac nó làm tôi khóc</p>
-                <p class=" text-sm">29/06/2023</p>
-            </div>
+        <div class="post_comment">
+            <?php
+            foreach ($comment as $key => $value) {
+                extract($value);
+                $user = user_select_by_id($id_user);
+            ?>
+                <div class=" p-4 border-b">
+                    <span class=" px-2 py-1 bg-menu text-white font-bold"><?= $user['name'] ?></span>
+                    <span>
+                        <?php
+                        for ($i = 0; $i < $vote; $i++) {
+                            echo '<i class="fa fa-star text-yellow-600" aria-hidden="true"></i>';
+                        }
+                        for ($i = $vote; $i < 5; $i++) {
+                            echo '<i class="fa fa-star-o text-yellow-600" aria-hidden="true"></i>';
+                        }
+                        ?>
+                    </span>
+                    <p class=" py-2"><?= $content ?></p>
+                    <p class=" text-sm"><?= format_date($date_) ?></p>
+                </div>
+            <?php
+            }
+            ?>
+
         </div>
     </div>
 </section>
@@ -231,7 +245,37 @@ include './top_week.php';
     });
 
     $(document).on('click', '.close', function() {
-       window.location.reload(true);
+        window.location.reload(true);
+
+    })
+
+    $(document).on('click', '.comment', function() {
+        let check = 0;
+        if (vote == 0) {
+            $('.danh-gia').html('Bạn chưa đánh giá')
+            check = 1;
+        } else {
+            $('.danh-gia').html('')
+        }
+        if ($('textarea').val() == '' || $('textarea').val().length == 0) {
+            $('textarea').addClass('shadow-md shadow-red-500')
+            check = 1;
+        } else {
+            $('textarea').removeClass('shadow-md shadow-red-500')
+        }
+        if (check == 0) {
+            $.ajax({
+                url: './?comment',
+                data: {
+                    comment: $('textarea').val(),
+                    id_film: <?= $film['id'] ?>,
+                    vote: vote
+                },
+                success: function(data) {
+                    $('.post_comment').append(data);
+                }
+            })
+        }
 
     })
 </script>

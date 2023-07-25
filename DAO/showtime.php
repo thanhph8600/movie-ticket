@@ -81,7 +81,7 @@ class Showtime{
     
     static public function select_nameFilm_date_time_by_idShowtime($id_showtime){
         $sql = "SELECT film.name, showtimes.date, room.seats, room.name as name_room, ".
-        " showtimes.price, shift.time_start, shift.time_end ".
+        " showtimes.price, shift.time_start, shift.time_end, film.thumb ".
         " FROM `showtimes` JOIN film on showtimes.id_film = film.id ".
         " JOIN shift on shift.id = showtimes.id_shift ".
         " JOIN room ON showtimes.id_room = room.id ".

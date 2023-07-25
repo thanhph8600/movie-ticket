@@ -4,7 +4,7 @@
             <select class="date  border rounded-3xl bg-menu text-white px-2 py-4 outline-none" name="date_film" id="">
                 <?php
                 foreach ($tat_ca_ngay_chieu as $key => $value) {
-                    echo '<option value="' . $value['date'] . '"  class="p-2">Ngày: ' . $value['date'] . '</option>';
+                    echo '<option value="' . $value['date'] . '"  class="p-">Ngày: ' . $value['date'] . '</option>';
                 }
                 ?>
             </select>
@@ -15,7 +15,7 @@
             </div>
             <div class="w-3/4">
                 <h2 class=" uppercase text-3xl font-bold text-white pb-6"><?= $film['name'] ?></h2>
-                <div class="show">
+                <div class="show_xuat_chieu">
                     <div class=" text-black bg-amber-400 font-bold p-6  relative before:block before:absolute before:-inset-1 before:skew-x-12 before:bg-orange-500 before:h-72 before:-top-3 before:left-80 before:w-full">
                         <h3 class=" uppercase text-2xl font-bold pb-12">Kin start ĐÀ nẵng</h3>
                         <div class=" pb-4 text-lg font-bold">
@@ -83,7 +83,7 @@
                 id_film: '<?= $film['id'] ?>'
             },
             success: function(result) {
-                $('.show').html(result)
+                $('.show_xuat_chieu').html(result)
             }
         })
     })

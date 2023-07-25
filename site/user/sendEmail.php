@@ -13,16 +13,16 @@ use PHPMailer\PHPMailer\Exception;
 
 extract($_REQUEST);
 if (exist_parma('gui_email_don_hang')) {
-    
+
     $data = '';
     foreach ($favorites as $key =>  $value) {
         $is = '<tr>
-                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;">'.$key.'</td>
-                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;">'.$value['name'].'</td>
-                <td style="border: 1px solid #dddddd;text-align: right;padding: 8px;">'.$value['so_luong'].'</td>
-                <td style="border: 1px solid #dddddd;text-align: right;padding: 8px;">'.currency_format($value['gia']).'</td>
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;">' . $key . '</td>
+                <td style="border: 1px solid #dddddd;text-align: left;padding: 8px;">' . $value['name'] . '</td>
+                <td style="border: 1px solid #dddddd;text-align: right;padding: 8px;">' . $value['so_luong'] . '</td>
+                <td style="border: 1px solid #dddddd;text-align: right;padding: 8px;">' . currency_format($value['gia']) . '</td>
             </tr>';
-            $data = $data . $is;
+        $data = $data . $is;
     }
     $randum = substr(md5(time()), 0, 10);
     $mail = new PHPMailer(true);
@@ -49,7 +49,7 @@ if (exist_parma('gui_email_don_hang')) {
                             <p>Here is your order information.</p>
                         </div>
                         <div>
-                            Customer name : ' . $name . ' <br> Email :'.$email.' <br> Phone :' . $phone . '<br> Time orders : ' . $date . '  <br> 
+                            Customer name : ' . $name . ' <br> Email :' . $email . ' <br> Phone :' . $phone . '<br> Time orders : ' . $date . '  <br> 
                         </div>
                         <h3> Order code : ' . $ma_order . '</h3>
                 
@@ -60,12 +60,12 @@ if (exist_parma('gui_email_don_hang')) {
                                 <th style="border: 1px solid #dddddd;text-align: right;padding: 8px;">Quantity</th>
                                 <th style="border: 1px solid #dddddd;text-align: right;padding: 8px;">Price</th>
                             </tr>
-                            '.$data.'
+                            ' . $data . '
                             <tr>
                                 <td colspan="4" style=" border: 1px solid #dddddd;text-align: right;padding: 8px;">' . currency_format($tong_tien) . '</td>
                             </tr>
                         </table>
-                        <p>You can review the information orders at <a href="'.$SITE_URL.'gio_hang/chi_tiet_don_hang.php?ma_order=' . $ma_order . ''.'">Here</a></p>
+                        <p>You can review the information orders at <a href="' . $SITE_URL . 'gio_hang/chi_tiet_don_hang.php?ma_order=' . $ma_order . '' . '">Here</a></p>
                     </div>
                 </div>
                         ';
@@ -73,9 +73,35 @@ if (exist_parma('gui_email_don_hang')) {
     } catch (Exception $e) {
         echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
     }
+} elseif (exist_parma('mua_ve')) {
+    extract($_REQUEST);
+    $email = $_SESSION['user']['email'];
+    $user = user_select_by_email($email);
+    $mail = new PHPMailer(true);
+    try {
+        $mail->SMTPDebug = 2;                                 // Enable verbose debug output
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+        $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+        $mail->SMTPAuth = true;                               // Enable SMTP authentication
+        $mail->Username = 'tuyetnhung200201@gmail.com';                 // SMTP username
+        $mail->Password = 'pevupqufusoaiatg';                           // SMTP password
+        $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+        $mail->Port = 587;                                    // TCP port to connect to
+        $mail->setFrom('tuyetnhung200201@gmail.com', 'Kin Star');
+        $mail->addAddress($email, 'User');     // Add a recipient
+        $mail->isHTML(true);                                  // Set email format to HTML
+        $mail->Subject = 'Thank you for using our service';
+        $mail->Body    = '
+        <p>Xin chào ' . $user['name'] . ', <br>
+        
+';
+        $mail->send();
+    } catch (Exception $e) {
+        echo 'Message could not be sent. Mailer Error';
+    }
 } else {
     extract($_REQUEST);
-    if(!empty($daDangNhap)){
+    if (!empty($daDangNhap)) {
         $email = $_SESSION['user']['email'];
     }
     $user = user_select_by_email($email);

@@ -25,7 +25,7 @@ elseif (exist_parma('btn_insert')) {
 elseif (exist_parma('btn_delete')) {
     $film = film_select_by_id($id_film);
     unlink($UPLOAD_FILM_URL . $film['thumb']);
-    film_delete_by_id($id_film);
+    film_delete($id_film);
     $MESS = '<div class="alert alert-success text-white " role="alert">Xóa thành công</div>';
     $VIEW_NAME = './list.php';
 }

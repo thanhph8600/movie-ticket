@@ -12,9 +12,19 @@ class Beverages{
         return pdo_query_one($sql,$id);
     }
 
+    static public function select_by_idTicket($id_ticket){
+        $sql = "SELECT * FROM `bill_beverages` WHERE `id_ticket` = ?";
+        return pdo_query($sql,$id_ticket);
+    }
+
     static public function insert($name,$price,$detail,$thumb){
         $sql ="INSERT INTO `beverages`( `name`, `price`, `detail`, `thumb`) VALUES (? , ? , ?, ?)";
         pdo_execute($sql,$name,$price,$detail,$thumb);
+    }
+    
+    static public function insert_bill($id_ticket,$id_beverages,$quantity,$price){
+        $sql ="INSERT INTO `bill_beverages`(`id_ticket`, `id_beverages`, `quantity`, `price`) VALUES (?,?,?,?)";
+        pdo_execute($sql,$id_ticket,$id_beverages,$quantity,$price);
     }
 
     static public function update($name,$price,$detail,$thumb,$id){

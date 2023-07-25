@@ -13,14 +13,29 @@ class Discount{
         return pdo_query_one($sql,$id);
     }
 
-    static public function insert($name,$date_start,$date_end,$percent){
-        $sql = "INSERT INTO `discount`( `name`, `date_start`, `date_end`, `percent`) VALUES (?,?,?,?)";
-        pdo_execute($sql,$name,$date_start,$date_end,$percent);
+    static public function get_byName($name){
+        $sql = "SELECT * FROM `discount` WHERE `name` = ?";
+        return pdo_query_one($sql,$name);
     }
 
-    static public function update($name,$date_start,$date_end,$percent,$id){
-        $sql = "UPDATE `discount` SET `name`=?,`date_start`=?,`date_end`=?,`percent`=? WHERE `id` = ?";
-        pdo_execute($sql,$name,$date_start,$date_end,$percent,$id);
+    static public function get_ID_byName($name){
+        $sql = "SELECT * FROM `discount` WHERE `name` = ?";
+        return pdo_query_value($sql,$name);
+    }
+
+    static public function insert($name,$date_start,$date_end,$percent,$quantity){
+        $sql = "INSERT INTO `discount`( `name`, `date_start`, `date_end`, `percent`,`quantity`) VALUES (?,?,?,?,?)";
+        pdo_execute($sql,$name,$date_start,$date_end,$percent,$quantity);
+    }
+
+    static public function update($name,$date_start,$date_end,$percent,$quantity,$id){
+        $sql = "UPDATE `discount` SET `name`=?,`date_start`=?,`date_end`=?,`percent`=? , `quantity` = ? WHERE `id` = ?";
+        pdo_execute($sql,$name,$date_start,$date_end,$percent,$quantity,$id);
+    }
+
+    static public function update_quantity($quantity,$id){
+        $sql = "UPDATE `discount` SET `quantity` = ? WHERE `id` = ?";
+        pdo_execute($sql,$quantity,$id);
     }
 
     static public function delete($id){

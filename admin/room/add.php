@@ -133,10 +133,94 @@
                                 </div>
                                 <div class="col-6">
                                     <label for="phone">Số ghế</label>
-                                    <input class=" flex-auto focus:outline-none" type="number"  name="seats" placeholder="">
+                                    <input class=" flex-auto focus:outline-none" type="number" name="seats" placeholder="">
                                     <?php
                                     if (!empty($seats_err)) echo $seats_err;
                                     ?>
+                                </div>
+                            </div>
+                            <div class="row pb-4">
+                                <div class="col-12 d-flex gap-5">
+                                    <div>
+                                        <label for="xuat_chieu1">Xuất chiếu 1: </label>
+                                        <input type="radio" name="xuat_chieu" id="xuat_chieu1" value="xuat1">
+                                    </div>
+                                    
+                                    <div>
+                                        <input type="checkbox" name="" id="" class="xuat1">
+                                        <label for="">09:00 - 10:30</label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" name="" id="" class="xuat1">
+                                        <label for="">11:00 - 13:30</label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" name="" id="" class="xuat1">
+                                        <label for="">14:00 - 16:30</label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" name="" id="" class="xuat1">
+                                        <label for="">17:00 - 19:30</label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" name="" id="" class="xuat1">
+                                        <label for="">20:00 - 22:30</label>
+                                    </div>
+                                </div>
+                                <div class="col-12 d-flex gap-5">
+                                    <div>
+                                        <label for="xuat_chieu2">Xuất chiếu 2: </label>
+                                        <input type="radio" name="xuat_chieu" id="xuat_chieu2" value="xuat2">
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" name="" id="" class="xuat2">
+                                        <label for="">09:15 - 10:45</label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" name="" id="" class="xuat2">
+                                        <label for="">11:15 - 13:45</label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" name="" id="" class="xuat2">
+                                        <label for="">14:15 - 16:45</label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" name="" id="" class="xuat2">
+                                        <label for="">17:15 - 19:45</label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" name="" id="" class="xuat2">
+                                        <label for="">20:15 - 22:45</label>
+                                    </div>
+                                </div>
+                                <div class="col-12 d-flex gap-5">
+                                    <div>
+                                        <label for="xuat_chieu3">Xuất chiếu 3: </label>
+                                        <input type="radio" name="xuat_chieu" id="xuat_chieu3" value="xuat3">
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" name="" id="" class="xuat3">
+                                        <label for="">09:30 - 11:00</label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" name="" id="" class="xuat3">
+                                        <label for="">11:30 - 14:00</label>
+
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" name="" id="" class="xuat3">
+                                        <label for="">14:30 - 17:00</label>
+
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" name="" id="" class="xuat3">
+                                        <label for="">17:30 - 20:00</label>
+
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" name="" id="" class="xuat3">
+                                        <label for="">20:30 - 23:00</label>
+                                    </div>
                                 </div>
                             </div>
                             <input name="add" type="submit" value="Thêm">
@@ -231,6 +315,22 @@
 <script src="../../public/admin/assets/js/plugins/perfect-scrollbar.min.js"></script>
 <script src="../../public/admin/assets/js/plugins/smooth-scrollbar.min.js"></script>
 <script>
+    $('input:checkbox').attr('disabled', '');
+    $('input:radio').change(function() {
+        $('input:checkbox').attr('disabled', '');
+        $('input:checkbox').prop('checked', false);
+
+        if($(this).val() == 'xuat1'){
+            $('.xuat1').removeAttr('disabled');
+            $('.xuat1').prop('checked', true);
+        }else if($(this).val() == 'xuat2'){
+            $('.xuat2').removeAttr('disabled');
+            $('.xuat2').prop('checked', true);
+        }else{
+            $('.xuat3').removeAttr('disabled');
+            $('.xuat3').prop('checked', true);
+        }
+    })
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
         var options = {
@@ -252,8 +352,11 @@
                 },
                 seats: {
                     required: true,
+                },
+                xuat_chieu: {
+                    required: true,
                 }
-                
+
             },
             messages: {
 
@@ -261,7 +364,10 @@
                     required: '<div class="text-danger">Chưa điền tên</div>',
                 },
                 seats: {
-                    required:  '<div class="text-danger">Chưa ghế</div>',
+                    required: '<div class="text-danger">Chưa ghế</div>',
+                },
+                xuat_chieu: {
+                    required: '<div class="text-danger">Chưa chọn xuất chiêu</div>',
                 }
             }
 

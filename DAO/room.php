@@ -3,7 +3,7 @@ require_once '../../DAO/PDO.php';
 
 function room_insert($name,$seats){
     $sql = "INSERT INTO `room`( `name`, `seats`) VALUES (?,?)";
-    pdo_execute($sql,$name,$seats);
+    return last_id($sql,$name,$seats);
 }
 
 function room_update($name,$seats,$id){

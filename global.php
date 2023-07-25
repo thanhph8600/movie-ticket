@@ -5,7 +5,7 @@ if (!session_start()) {
 date_default_timezone_set('Asia/Ho_Chi_Minh');
 
 // session_unset();
-$ROOT_URL = "/kinStar";
+$ROOT_URL = "http://localhost:8080/kinStar";
 $CONTENT_URL = "$ROOT_URL/content";
 $ADMIN_URL = "$ROOT_URL/admin";
 $SITE_URL = "$ROOT_URL/site";

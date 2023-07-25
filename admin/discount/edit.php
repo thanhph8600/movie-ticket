@@ -132,7 +132,14 @@
                                     if (!empty($name_err)) echo $name_err;
                                     ?>
                                 </div>
-
+                                <div class="col-4">
+                                    <label for="">Số lượng</label>
+                                    <input class="	flex-auto focus:outline-none" type="number" name="quantity"  value="<?=$discount['quantity']?>">
+                                    <p class="chkPercent text-danger"></p>
+                                    <?php
+                                    if (!empty($percent_err)) echo $birtday_err;
+                                    ?>
+                                </div>
                             </div>
                             <div class="row pb-4">
 
@@ -304,6 +311,10 @@
                     max: 100,
                     required: true,
                 },
+                quantity: {
+                    min: 1,
+                    required: true,
+                },
             },
             messages: {
 
@@ -323,6 +334,10 @@
                     min: '<div class="text-danger">Thấp nhất là 1</div>',
                     max: '<div class="text-danger">Cao nhất là 100%</div>',
                     required: '<div class="text-danger">Chưa nhập mức giảm</div>',
+                },
+                quantity: {
+                    min: '<div class="text-danger">Thấp nhất là 1</div>',
+                    required: '<div class="text-danger">Chưa nhập số lượng</div>',
                 },
             }
 

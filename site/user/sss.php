@@ -1,0 +1,1 @@
+<p>Xin chào ' . $user['name'] . ', <br>

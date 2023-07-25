@@ -9,7 +9,7 @@ if(exist_parma('btn_add')){
 }
 elseif(exist_parma('btn_insert')){
     try {
-        Discount::insert($name,$date_start,$date_end,$percent);
+        Discount::insert($name,$date_start,$date_end,$percent,$quantity);
         $MESS = '<div class="alert alert-success text-white " role="alert">Thêm thành công</div>';
         $VIEW_NAME = './list.php';
     } catch (Exception $e) {
@@ -23,7 +23,7 @@ elseif(exist_parma('btn_edit')){
 }
 elseif(exist_parma('btn_update')){
     try {
-        Discount::update($name,$date_start,$date_end,$percent,$id_discount);
+        Discount::update($name,$date_start,$date_end,$percent,$quantity,$id_discount);
         $MESS = '<div class="alert alert-success text-white " role="alert">Cập nhật thành công</div>';
         $VIEW_NAME = './list.php';
     } catch (Exception $e) {

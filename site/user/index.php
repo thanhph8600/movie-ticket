@@ -2,6 +2,9 @@
 
 require_once "../../global.php";
 require_once "../../DAO/user.php";
+require_once "../../DAO/ticket.php";
+require_once "../../DAO/seat.php";
+require_once "../../DAO/discount.php";
 
 extract($_REQUEST);
 
@@ -140,6 +143,34 @@ elseif (exist_parma('changePass')) {
         user_changer_pass(md5($pass),$user['email']);
         echo 'Cập nhật mật khẩu thành công';
     }
+}
+elseif (exist_parma('my-ticket')) {
+    check_login();
+    $user = user_select_by_email($_SESSION['user']['email']);
+    $ticket = ticket_select_infoTicket_WHERE_idUser($user['id']);
+    $VIEW_NAME = './my-ticket.php';
+    include '../layout.php';
+}
+elseif (exist_parma('detail_ticket')) {
+    check_login();
+    $ticket = ticket_select_detail_by_idTicket($_GET['id_ticket']);
+    $seats = seat_select_by_id_ticket($ticket['id']);
+    $discount = 0;
+    if(!empty($ticket['id_discount'])){
+        $discount = Discount::get_byId($ticket['id_discount']);
+        $discount =  $ticket['price']* $ticket['quantity'] * $discount['percent']/100;
+    }
+    $sum =  $ticket['price'] * $ticket['quantity'] - $discount + $ticket['price_bill'];
+    $date_now = date('Y-m-d');
+    if($ticket['date'] < $date_now){
+        ticket_update_activated(0,$ticket['id']);
+    }
+    $time_now = date('H:i:s');
+    if($ticket['time_end'] < $time_now && $ticket['date'] = $date_now ){
+        ticket_update_activated(0,$ticket['id']);
+    }
+    $VIEW_NAME = './detail_my-ticket.php';
+    include '../layout.php';
 }
 else{
     check_login();

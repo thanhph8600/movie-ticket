@@ -57,7 +57,7 @@
                         </div>
                     </div>
 
-                    <p class=" cursor-pointer hover:text-rose-700">Vé của tôi</p>
+                    <a href="../user/?my-ticket" class=" cursor-pointer hover:text-rose-700">Vé của tôi</a>
 
                 <?php
                 }

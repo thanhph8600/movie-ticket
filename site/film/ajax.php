@@ -4,6 +4,7 @@ require_once '../../DAO/film.php';
 require_once '../../DAO/showtime.php';
 require_once '../../DAO/chair_is_waiting.php';
 require_once '../../DAO/beverages.php';
+require_once '../../DAO/discount.php';
 extract($_REQUEST);
 
 if (exist_parma('list_in_showtime')) {
@@ -129,7 +130,7 @@ if (exist_parma('list_in_showtime')) {
             <div class=" text-xl font-bold text-rose-500">'.currency_format($sum).'</div>';
         foreach ($nuoc_uong as $key => $value) {
             $beverages = Beverages::select_by_id($value[0]);
-            echo '<div>'. $value[1].' x '.$beverages['detail'].'</div>';
+            echo '<div>'. $value[1].' x '.$beverages['name'].'</div>';
         }
     }
 } elseif (exist_parma('kiem_tra_ghe')) {
@@ -143,9 +144,14 @@ if (exist_parma('list_in_showtime')) {
     chair_is_waiting_delete_row($id_user, $id_showtime, $col_index, $row_index);
 } elseif (exist_parma('xoa_tat_ca_ghe_dang_chon')) {
     chair_is_waiting_delete_by_user_idShowtime($id_user, $id_showtime);
-} elseif (exist_parma('form_thanh_toan')) {
-    extract($_REQUEST);
-    var_dump($_REQUEST);
+} 
+
+elseif (exist_parma('check_discount')) {
+    $discount = Discount::get_byName($name);
+    if($discount['quantity'] <= 0){
+        echo '1231231231231231231231231231231231231231231233123123123123123123123123123123123123123123321321321231213213213123';
+    }
+    echo $discount['percent'];
 }
 
 ?>
