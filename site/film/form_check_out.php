@@ -120,7 +120,11 @@
         $.ajax({
             url: '../user/sendEmail.php?mua_ve',
             data: {
-                name: $('.in_discount').val()
+                name: <?= $showtime['name'] ?>,
+                time_start : <?= $showtime['time_start'] ?>,
+                time_end : <?= $showtime['time_end'] ?>,
+                room : <?= $showtime['name_room'] ?>,
+                date : <?= $showtime['date'] ?>,
             },
             success: function(data) {
             }

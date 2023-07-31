@@ -166,7 +166,7 @@ elseif (exist_parma('detail_ticket')) {
         ticket_update_activated(0,$ticket['id']);
     }
     $time_now = date('H:i:s');
-    if($ticket['time_end'] < $time_now && $ticket['date'] = $date_now ){
+    if($ticket['time_end'] < $time_now && $ticket['date'] == $date_now ){
         ticket_update_activated(0,$ticket['id']);
     }
     $VIEW_NAME = './detail_my-ticket.php';

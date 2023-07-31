@@ -9,7 +9,7 @@
                 ticket_update_activated(0,$id);
             }
             $time_now = date('H:i:s');
-            if($time_end < $time_now && $date = $date_now ){
+            if($time_end < $time_now && $date == $date_now ){
                 ticket_update_activated(0,$id);
             }
             if($activated == 0){

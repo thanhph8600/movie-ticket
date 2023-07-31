@@ -145,7 +145,7 @@
                                 <div class="col-6">
                                     <label for="id_film">Tên phim </label>
                                     <span class="checkFiml ps-4 text-danger"></span>
-                                    <input type="hidden" name="id_film" id="" value="<?= $film['id'] ?>">
+                                    <input type="hidden" name="id_film" id="" class="id_film" value="<?= $film['id'] ?>">
                                     <input type="text" name="name_film" id="" value="<?= $film['name'] ?>" readonly>
                                 </div>
                                 <div class="col-3">
@@ -393,8 +393,30 @@
     }
 
     $(document).on("click", ".close_row ", function() {
-        let parent = $(this).parent().parent()
-        parent.remove()
+        let parent = $(this).parent().parent().children('div')
+        console.log(parent.children('.date').val());
+        $.ajax({
+            url: "./ajax.php?check_row",
+            data: {
+                id_room: parent.children('.id_room').val(),
+                date: parent.children('.date').val(),
+                id_film: $('.id_film').val()
+            },
+            success: function(result) {
+                $('.alert-ERR').css('display', 'none')
+                if (result.length = 0 || result.length < 12) {
+                    $('.alert-ERR').html('Đã có khách đặt chỗ')
+                    $('.alert-ERR').css('display', 'inline')
+                    setTimeout(() => {
+                        $('.alert-ERR').css('display', 'none')
+                    }, 5000);
+                } else {
+                    parent.remove()
+
+                }
+
+            },
+        });
     });
 
 

@@ -40,3 +40,8 @@ function user_changer_pass($pass,$email) {
     $sql = "UPDATE `user` SET `pass` = ? WHERE `user`.`email` = ?";
     pdo_execute($sql,$pass,$email);
 }
+
+function user_select_new_user() {
+    $sql = "SELECT * FROM `user` WHERE role =1 ORDER BY id DESC";
+    return pdo_query($sql);
+}

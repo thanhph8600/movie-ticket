@@ -17,7 +17,7 @@ elseif(exist_parma('id_ticket')){
     $id_ticket = substr($code,0,2);
     $ticket = ticket_select_detail_by_idTicket($id_ticket);
     $seat = seat_select_by_id_ticket($ticket['id']);
-    $beverages = Beverages::select_by_idTicket($id_ticket);
+    $beverages = Beverages::select_by_idTicket($ticket['id']);
     $date_now = date('Y-m-d');
     if($ticket['date'] < $date_now){
         ticket_update_activated(0,$ticket['id']);

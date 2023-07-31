@@ -25,9 +25,9 @@
 </head>
 
 <body>
-<div class="cursor_load">
+    <div class="cursor_load">
 
-</div>
+    </div>
     <div class=" min-h-screen flex flex-col">
 
         <?php
@@ -36,7 +36,7 @@
 
         <div class=" flex-auto">
             <?php
-            if(!empty($SLIDE))
+            if (!empty($SLIDE))
                 require $SLIDE;
             require $VIEW_NAME;
             ?>
@@ -46,9 +46,12 @@
         include '../layout/footer.php';
         ?>
 
+        <div id="alert" class="alert fixed right-10 bottom-10 flex flex-col gap-4 z-10">
+        </div>
     </div>
 
 </body>
+
 <script src="<?= $CONTENT_URL ?>/js/slide.js"></script>
 <script src="<?= $CONTENT_URL ?>/js/openForm.js"></script>
 <script src="<?= $CONTENT_URL ?>/js/validate.js"></script>

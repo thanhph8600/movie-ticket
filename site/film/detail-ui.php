@@ -1,11 +1,11 @@
 <section>
     <div class=" lg:w-4/5 m-auto container pt-8 pb-4 ">
-        <div class=" flex pb-4">
-            <div class=" w-4/12 rounded">
+        <div class=" lg:flex pb-4">
+            <div class=" w-5/6 mx-auto lg:w-4/12 rounded">
                 <img class="rounded-xl" src="<?= $UPLOAD_FILM_URL . $film['thumb'] ?>" alt="">
             </div>
             <div class=" flex flex-col gap-2 w-full pl-12">
-                <h2 class=" text-3xl font-semibold pb-3 mb-3 border-b-2"><?= $film['name'] ?></h2>
+                <h2 class=" text-xl lg:text-3xl font-semibold pb-3 mb-3 border-b-2"><?= $film['name'] ?></h2>
                 <div class="flex gap-2">
                     <p class=" font-bold">Đạo diễn: </p>
                     <p><?= $film['directors'] ?></p>
@@ -32,7 +32,7 @@
                 </div>
                 <div class="flex gap-2 items-center">
                     <p class=" font-bold">Rated: </p>
-                    <p class=" font-bold text-lg"><?= $film['rated'] ?></p>
+                    <p class=" font-bold text-sm lg:text-lg"><?= $film['rated'] ?></p>
                 </div>
                 <div class="gap-2 items-center ">
                     <h2 class=" text-xl font-bold">Tóm tắt</h2>
@@ -73,8 +73,8 @@
 
 <section>
     <div class="lg:w-4/5 m-auto container pb-4">
-        <div class=" flex border-t border-b">
-            <div class=" w-1/2 border-r py-6 text-center ">
+        <div class=" lg:flex border-t border-b">
+            <div class=" lg:w-1/2 border-r py-6 text-center ">
                 <h4 class=" text-lg font-semibold pb-3">Sở thích theo độ tuổi</h4>
                 <div class="flex justify-center gap-4 text-sm">
                     <div class=" flex flex-col justify-center items-center gap-1">
@@ -108,7 +108,7 @@
                     </div>
                 </div>
             </div>
-            <div class=" w-1/2 border-r py-6 text-center ">
+            <div class=" lg:w-1/2 border-t lg:border-t-0 border-r py-6 text-center ">
                 <h4 class=" text-lg font-semibold pb-3">Sở thích theo giới tính</h4>
                 <div class=" text-sm py-8">
                     <div class=" flex flex-row items-center gap-1 pb-6">
@@ -133,8 +133,8 @@
 
 <section>
     <div class="lg:w-3/5 m-auto container  py-8">
-        <div class=" flex border">
-            <div class=" w-1/5 text-center border-r p-4 flex flex-col gap-3">
+        <div class=" lg:flex border">
+            <div class=" lg:w-1/5 text-center border-r p-4 flex flex-col gap-3">
                 <p>Xếp hạng</p>
                 <div class="flex gap-1 justify-center">
                     <i class="fa fa-star-o vote cursor-pointer text-yellow-400 text-sm lg:text-xl" data-vote="1" aria-hidden="true"></i>
@@ -147,13 +147,13 @@
             </div>
             <?php
             if (!empty($user)) {
-                echo ' <div class=" w-4/5">
-                    <textarea name="" id="" class="  w-full h-full p-3 focus:outline-none " placeholder="Viết bình luận tại đây........."></textarea>
+                echo ' <div class=" lg:w-4/5">
+                    <textarea name="" id="" class=" border-t lg:border-t-0  w-full h-full p-3 focus:outline-none " placeholder="Viết bình luận tại đây........."></textarea>
                 </div>
                 ';
             } else {
                 echo '
-                <div class="formLogin w-4/5 flex justify-center items-center font-bold cursor-pointer">
+                <div class="formLogin lg:w-4/5 border-t py-6 lg:py-0 lg:border-t-0 flex justify-center items-center font-bold cursor-pointer">
                     Bạn phải đăng nhập để có thể bình luận và đánh giá
                 </div>
                 ';
@@ -246,8 +246,10 @@ include './top_week.php';
 
     $(document).on('click', '.close', function() {
         window.location.reload(true);
-
     })
+
+    var id_film = id_film;
+    console.log(id_film);
 
     $(document).on('click', '.comment', function() {
         let check = 0;
@@ -268,11 +270,12 @@ include './top_week.php';
                 url: './?comment',
                 data: {
                     comment: $('textarea').val(),
-                    id_film: <?= $film['id'] ?>,
+                    id_film: id_film,
                     vote: vote
                 },
                 success: function(data) {
                     $('.post_comment').append(data);
+                    $('textarea').val('')
                 }
             })
         }

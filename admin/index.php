@@ -1,2 +1,2 @@
 <?php
-header('location: film');
+header('location: dashboard');

@@ -1,7 +1,7 @@
-<section class=" bg-slate-800">
+<section class=" bg-slate-800 bg-opacity-25">
     <div class="container lg:w-4/5 m-auto py-12 ">
         <div class=" text-center pb-4">
-            <select class="date  border rounded-3xl bg-menu text-white px-2 py-4 outline-none" name="date_film" id="">
+            <select class="date  border rounded-3xl px-2 py-4 outline-none" name="date_film" id="">
                 <?php
                 foreach ($tat_ca_ngay_chieu as $key => $value) {
                     echo '<option value="' . $value['date'] . '"  class="p-">Ngày: ' . $value['date'] . '</option>';
@@ -23,12 +23,10 @@
                             <p><?= date("Y", strtotime($ngay_chieu)) ?></p>
                         </div>
                         <div class=" absolute left-32 top-16">
-                            <div class="flex font-normal gap-3 flex-wrap py-4 px-6 bg-gray-700 bg-opacity-30 w-full rounded-md">
+                            <div class="flex font-normal gap-3 overflow-auto w-32 lg:flex-wrap py-4 px-6 bg-gray-700 bg-opacity-30 lg:w-full rounded-md">
                                 <?php
 
-
                                 $xuat_chieu1 = film_select_xuat_chieu_trong_ngay($ngay_chieu, $film['id']);
-
 
                                 if ($date == $ngay_chieu) {
                                     $xuat_chieu2 = film_select_xuat_chieu_da_chieu_trong_ngay($ngay_chieu, $film['id'], date('H:m:s'));

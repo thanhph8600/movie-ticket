@@ -1,7 +1,7 @@
 
 <section>
     <div class="lg:w-4/5 m-auto container py-4">
-        <div class="flex justify-center gap-7 py-8">
+        <div class="flex justify-center lg:gap-7 py-8">
             <?php
             $daysOfWeek = array("Chủ Nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy");
             for ($i = 0; $i <= 7; $i++) {
@@ -10,7 +10,7 @@
                 if (date('Y-m-d', $dates) == $date) {
                     echo '
                     <div class="flex flex-col gap-2">
-                        <p>' . $daysOfWeek[$dayOfWeekIndex] . '</p>
+                        <p class="hidden lg:block">' . $daysOfWeek[$dayOfWeekIndex] . '</p>
                         <input type="hidden" class="date_today" name="" value="' . date('Y-m-d', $dates) . '">
                         <p class="show_ngay_chieu cursor-pointer  w-12 h-12 flex justify-center items-center rounded-full bg-slate-700 text-white">' . date('d', $dates) . ' </p>
                     </div>
@@ -18,7 +18,7 @@
                 } else {
                     echo '
                     <div class="flex flex-col gap-2">
-                        <p>' . $daysOfWeek[$dayOfWeekIndex] . '</p>
+                        <p class="hidden lg:block">' . $daysOfWeek[$dayOfWeekIndex] . '</p>
                         <input type="hidden" name="date_show" value="' . date('Y-m-d', $dates) . '">
                         <p class="show_ngay_chieu cursor-pointer w-12 h-12 flex justify-center items-center rounded-full text-black hover:bg-slate-700 hover:text-white">' . date('d', $dates) . '</p>
                     </div>
@@ -36,8 +36,8 @@
                 $film = film_select_by_id($id_film);
             ?>
 
-                <div class="py-4 flex items-center">
-                    <div class="w-1/3 bg-orange-400 p-3 rounded shadow-xl shadow-gray-400">
+                <div class="py-4 lg:flex items-center">
+                    <div class="lg:w-1/3 bg-orange-400 p-3 rounded shadow-xl shadow-gray-400">
                         <a href="../film/index.php?detail&&id_film=<?= $film['id'] ?>" class=" flex gap-3">
                             <img class=" float-left -ml-12 w-2/4 border-4 border-orange-200" src="<?= $UPLOAD_FILM_URL . $film['thumb'] ?>" alt="">
                             <div class="float-right text-white w-3/5  ">
@@ -47,7 +47,7 @@
                         </a>
                         <div class=" clear-both block"></div>
                     </div>
-                    <div class="w-2/3 shadow-lg shadow-gray-400 rounded-e-xl  flex pl-10 bg-orange-500 py-4 flex-wrap gap-3 ">
+                    <div class="lg:w-2/3 shadow-lg shadow-gray-400 rounded-e-xl  flex pl-10 bg-orange-500 py-4 flex-wrap gap-3 ">
                         <?php
                         $xuat_chieu1 = film_select_xuat_chieu_da_chieu_trong_ngay($date, $film['id'], date('H:m:s'));
                         $xuat_chieu2 = film_select_xuat_chieu_chua_chieu_trong_ngay($date, $film['id'], date('H:m:s'));

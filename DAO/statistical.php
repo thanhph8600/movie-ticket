@@ -27,3 +27,11 @@ function statistical_preferences_sum_by_age($id_film){
     " WHERE film.id = ?  GROUP BY film.id";
     return pdo_query_one($sql,$id_film);
 }
+
+function statistical_count_ticket_price_gourpBy_id_film(){
+    $sql ="SELECT film.name, SUM(ticket.quantity) AS quantity, ".
+    " SUM(ticket.price) as price FROM `ticket` ".
+    "JOIN showtimes ON showtimes.id = ticket.id_showtime ".
+    "JOIN film ON showtimes.id_film = film.id GROUP BY showtimes.id_film limit 0,5";
+    return pdo_query($sql);
+}

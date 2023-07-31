@@ -1,6 +1,14 @@
 <?php
-require_once "../../global.php";
-require_once "../../Dao/user.php";
+require_once '../../global.php';
+require_once '../../DAO/film.php';
+require_once '../../DAO/user.php';
+require_once '../../DAO/showtime.php';
+require_once '../../DAO/ticket.php';
+require_once '../../DAO/seat.php';
+require_once '../../DAO/discount.php';
+require_once '../../DAO/beverages.php';
+require_once '../../DAO/statistical.php';
+require_once '../../DAO/comment.php';
 
 include  "../../PHPMailer/PHPMailer.php";
 include  "../../PHPMailer/Exception.php";
@@ -75,6 +83,7 @@ if (exist_parma('gui_email_don_hang')) {
     }
 } elseif (exist_parma('mua_ve')) {
     extract($_REQUEST);
+
     $email = $_SESSION['user']['email'];
     $user = user_select_by_email($email);
     $mail = new PHPMailer(true);
@@ -93,12 +102,52 @@ if (exist_parma('gui_email_don_hang')) {
         $mail->Subject = 'Thank you for using our service';
         $mail->Body    = '
         <p>Xin chào ' . $user['name'] . ', <br>
-        
+        <div style="background-color: #ddd; padding:15px 20px">
+            <p>Cảm ơn bạn đã mua vé của chúng tôi</p>
+            <h2>Thông tin vé của bạn</h2>
+            <h4>Tên phim: ' . $name . '</h4>
+            <p>Giờ chiếu: ' . $time_start . ' - ' . $time_end . '</p>
+            <p>Phòng chiếu: ' . $name_room . '</p>
+            <p>Ngày chiếu: ' . format_date($date) . '</p>
+
+                    <div style="padding: 15px 0px;display:inline-block">
+                        <img style="padding: 15px;background:white" src="https://api.qrserver.com/v1/create-qr-code/?data=' . $ADMIN_URL . '/QR/?id_ticket=okok&amp;size=200x200" alt="" title="" />
+                    </div>
+                    <p style="font-style:italic;">Hãy đưa mã này cho nhân viên</p>
+                </div>
+    ';
+        $mail->send();
+    } catch (Exception $e) {
+        echo 'Message could not be sent. Mailer Error';
+    }
+} elseif (exist_parma('lien_he')) {
+    extract($_REQUEST);
+    $user = user_select_by_email($_SESSION['user']['email']);
+    $email = 'pht456654@gmail.com';
+    $mail = new PHPMailer(true);
+    try {
+        $mail->SMTPDebug = 2;                                 // Enable verbose debug output
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+        $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+        $mail->SMTPAuth = true;                               // Enable SMTP authentication
+        $mail->Username = 'tuyetnhung200201@gmail.com';                 // SMTP username
+        $mail->Password = 'pevupqufusoaiatg';                           // SMTP password
+        $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+        $mail->Port = 587;                                    // TCP port to connect to
+        $mail->setFrom('tuyetnhung200201@gmail.com', 'Kin Star');
+        $mail->addAddress($email, 'User');     // Add a recipient
+        $mail->isHTML(true);                                  // Set email format to HTML
+        $mail->Subject = 'You have a contact from: ' . $user['email'] . '';
+        $mail->Body    = '
+        <p> Bạn nhận được 1 yêu cầu từ email :  ' . $user['email'] . '<br> Với nội dung như sau:
+        '.$noi_dung.'
+        <p>Hãy liên lạc đến bạn đó khi có thể</p>
 ';
         $mail->send();
     } catch (Exception $e) {
         echo 'Message could not be sent. Mailer Error';
     }
+
 } else {
     extract($_REQUEST);
     if (!empty($daDangNhap)) {

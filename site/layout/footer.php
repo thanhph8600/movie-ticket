@@ -1,7 +1,7 @@
 <footer>
     <div class=" bg-main">
         <div class="container m-auto">
-            <div class="grid grid-cols-4 py-5 text-gray-300">
+            <div class="grid grid-cols-2 gap-4 lg:grid-cols-4 py-5 text-gray-300">
                 <div class=" w-4/6 m-auto">
                     <img src="<?=$CONTENT_URL?>/img/logo.png" alt="">
                 </div>

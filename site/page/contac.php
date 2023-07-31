@@ -1,23 +1,3 @@
-<section>
-    <div class="owl-carousel slide-banner owl-theme owl-loaded">
-        <div class="owl-stage-outer">
-            <div class="owl-stage">
-                <div class="owl-item ">
-                    <img src="<?= $CONTENT_URL ?>/img/slide-1.jpg" class="  " alt="...">
-                </div>
-                <div class="owl-item ">
-                    <img src="<?= $CONTENT_URL ?>/img/slide-2.jpg" class="  " alt="...">
-                </div>
-                <div class="owl-item ">
-                    <img src="<?= $CONTENT_URL ?>/img/slide-3.jpg" class="  " alt="...">
-                </div>
-                <div class="owl-item ">
-                    <img src="<?= $CONTENT_URL ?>/img/slide-4.jpg" class="  " alt="...">
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 <section>
     <div class="container m-auto py-4">
@@ -27,40 +7,45 @@
 </section>
 
 <section>
-    <div class="container m-auto py-4">
+    <div class="container m-auto py-16">
         <h2 class=" uppercase text-2xl text-center font-bold pb-4">Gửi nội dung liên hệ</h2>
-        <form action="" method="post" class=" flex flex-col justify-center items-center">
-            <textarea class=" w-3/5 m-auto outline-dotted rounded p-4" name="" id="" rows="6"></textarea>
-            <input type="submit" value="Gửi" class=" w-1/6 mt-4 cursor-pointer py-4 text-center rounded bg-blue-500 hover:bg-blue-600 text-white">
+        <form action="" method="post" class="w-3/5  m-auto flex flex-col justify-center items-center">
+            <textarea class=" w-full focus:shadow-lg focus:outline-none border-2  rounded p-4" name="" id="" rows="6"></textarea>
+            <p  class=" <?= (!empty($user)) ? 'send_email' : 'formLogin' ?>  ml-auto w-1/6 mt-4 cursor-pointer py-4 text-center rounded bg-blue-500 hover:bg-blue-600 text-white">Gửi</p>
         </form>
     </div>
 </section>
 
-<section>
-    <div class="container m-auto pb-2 mb-4  px-2 bg-gray-200 rounded">
-        <h2 class=" text-center font-bold text-3xl py-4 "> PHIM HAY TRONG TUẦN</h2>
-        <div class="slide">
-            <div class="owl-carousel slide-first owl-theme owl-loaded">
-                <div class="owl-stage-outer ">
-                    <div class="owl-stage flex">
-                        <div class="owl-item">
-                            <a href="" class=" relative item">
-                                <div class=" rounded overflow-hidden hover:opacity-80">
-                                    <img src="https://cinestar.com.vn/pictures/Cinestar/05-2023/nang-tien-ca.jpg" alt="">
-                                </div>
-                                <div class=" absolute bg-main w-full bottom-0 hidden">
-                                    <h3 class=" text-white uppercase text-lg text-center font-bold pt-2">Nàng tiên cá</h3>
-                                    <div class=" flex m-auto w-full justify-center">
-                                        <a href="" class=" block text-white py-2 px-4 bg-menu m-2 rounded hover:bg-red-500">Xem chi tiết</a>
-                                        <a href="" class=" block text-white py-2 px-4 bg-menu m-2 rounded hover:bg-red-500 ">Mua vé</a>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
+<?php
+include '../film/top_week.php';
+?>
+
+<script>
+    $('.lien_he').addClass('bg-yellow-600')
+
+    let class_name = 0;
+
+    $(document).on('click','.send_email',function(){
+        if( $('textarea').val() == ''){
+            $('textarea').addClass('border-red-500')
+        }else{
+            $('textarea').val('')
+            $('textarea').removeClass('border-red-500')
+            $('cursor_load').css('display', 'block')
+            $.ajax({
+                url: '../user/sendEmail.php?lien_he',
+                data :{
+                    noi_dung : $('textarea').val()
+                },
+                success: function(data){
+                    fun_alert(class_name++,'Chúng tôi đã nhận được email của bạn<br> hãy chờ phản hồi từ chúng tôi')
+                    $('cursor_load').css('display','none');
+                }
+            })
+
+        }
+
+    })
+</script>
 

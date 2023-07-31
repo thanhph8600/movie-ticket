@@ -340,10 +340,6 @@
     }
 
 
-    $.validator.addMethod('yourRule_date', function(value, element, param) {
-        return kiem_tra_ngay()
-    }, '<div class="text-danger">Bạn không được nhập ngày quá khứ</div> ');
-
     $(function() {
         $("form").validate({
             rules: {
@@ -374,103 +370,6 @@
         });
     });
 
-    function kiem_tra_ngay() {
-        let ngay_nhap = $('.date').val().split('-')
-        let d = new Date();
-        if (ngay_nhap.length < 2) {
-            console.log('Bạn chưa điền phần này')
-            return false
-        } else {
-            if (ngay_nhap[0] < d.getFullYear()) {
-                console.log('Bạn không được nhập ngày quá khứ')
-                return false
-            } else {
-                if (ngay_nhap[1] < (d.getMonth())) {
-                    console.log('Bạn không được nhập ngày quá khứs')
-                    return false
-                } else {
-                    if (ngay_nhap[2] < d.getDate()) {
-                        console.log('Bạn không được nhập ngày quá khứ')
-                        return false
-                    }
-                }
-            }
-        }
-        return true;
-    }
-
-
-    const input = document.getElementById('file-input');
-    const image = document.getElementById('img-preview');
-
-    // function checkproduct() {
-    //     var lf = 0;
-    //     var name = document.getElementById('nameproduct')
-    //     var price = document.getElementById('priceproduct')
-    //     var category = document.getElementById('category')
-
-    //     if (name.value == '') {
-    //         name.style.border = '1px solid red'
-    //         lf = 1;
-    //     } else {
-    //         name.style.border = '1px solid green'
-    //     }
-
-    //     var priceRegex = /^\w([0-9.,]{1,13})$/;
-    //     if (!price.value.match(priceRegex)) {
-    //         price.style.border = '1px solid red'
-    //         lf = 1;
-    //     } else {
-    //         price.style.border = '1px solid green'
-    //     }
-
-
-    //     if (category.value == 0) {
-    //         category.style.border = '1px solid red'
-    //         lf = 1;
-    //     } else {
-    //         category.style.border = '1px solid green'
-    //     }
-
-    //     if (!lf == 0) {
-    //         return false
-    //     }
-    // }
-
-
-    input.addEventListener('change', (e) => {
-        if (e.target.files.length) {
-
-            if (window.File && window.FileReader && window.FileList && window.Blob) {
-                // lay dung luong va kieu file tu the input file
-                var fsize = e.target.files[0].size;
-                var ftype = e.target.files[0].type;
-                var fname = e.target.files[0].name;
-
-
-                if (fsize > 1048576) //thuc hien dieu gi do neu dung luong file vuot qua 1MB
-                {
-
-                    alert(fsize + " bites\nToo big!");
-                } else {
-                    switch (ftype) {
-                        case 'image/png':
-                        case 'image/gif':
-                        case 'image/jpeg':
-                        case 'image/jpg':
-                        case 'image/pjpeg':
-                            break;
-                        default:
-                    }
-
-                    image.style.display = 'block'
-                    const src = URL.createObjectURL(e.target.files[0]);
-                    image.src = src;
-                }
-            }
-
-        }
-    });
 
     $('.room').addClass('active')
     $('.room').addClass('bg-gradient-primary')

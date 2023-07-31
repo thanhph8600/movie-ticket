@@ -12,6 +12,9 @@ $SITE_URL = "$ROOT_URL/site";
 $UPLOAD_FILM_URL = "../../uploaded/films/";
 $UPLOAD_USER_URL = "../../uploaded/user/";
 $UPLOAD_BEVERAGES_URL = "../../uploaded/beverages/";
+$UPLOAD_NEWS_URL = "../../uploaded/news/";
+$UPLOAD_BANNER_FILM_URL = "../../uploaded/banner/banner_film/";
+$UPLOAD_BANNER_HOME_URL = "../../uploaded/banner/banner_home/";
 
 function exist_parma($fieldname)
 {

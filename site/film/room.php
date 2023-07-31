@@ -230,6 +230,7 @@
 </section>
 
 <script>
+    let class_name = [];
     function checkForm() {
         if ($('#dong_y:checked').length == 0) {
             $('.dong_y').css('border-bottom', '1px solid red')
@@ -266,12 +267,12 @@
                         let mang_vi_tri_ghe = [$(this).attr('col'), $(this).attr('row')];
                         mang_tat_ca_ghe.push(mang_vi_tri_ghe)
                     } else {
-                        alert('ghế đang được người khác chọn')
+                        fun_alert('class'+class_name++,'Ghế đã có người chọn')
                     }
 
                 }
             } else {
-                alert('Bạn chỉ được đặt tối đa là 8 ghế')
+                fun_alert('class'+class_name++,'Bạn chỉ đặt tối đa 8 ghế')
             }
 
             let so_ghe = mang_tat_ca_ghe.length;
@@ -484,4 +485,7 @@
                 }
             })
     })
+
+    $('.phim').addClass('bg-yellow-600')
+
 </script>

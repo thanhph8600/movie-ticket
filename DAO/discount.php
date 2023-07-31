@@ -43,4 +43,9 @@ class Discount{
         return pdo_query_one($sql,$id);
     }
 
+    static public function count_discout($date){
+        $sql = "SELECT * FROM `discount` WHERE date_start <= ? AND date_end >= ? AND quantity > 0";
+        return pdo_query($sql,$date,$date);
+    }
+
 }

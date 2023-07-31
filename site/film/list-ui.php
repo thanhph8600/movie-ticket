@@ -7,7 +7,7 @@
                 <span class="show-phimDangChieu cursor-pointer text-lg font-semibold py-2 px-4 bg-menu text-white rounded hover:bg-yellow-600">Phim đang chiếu</span>
                 <span class="show-phimSapChieu cursor-pointer text-lg font-semibold py-2 px-4 bg-gray-300 text-white rounded hover:bg-pink-600">Phim sắp chiếu</span>
             </div>
-            <div class="phimDangChieu grid grid-cols-5 gap-4 pt-4">
+            <div class="phimDangChieu grid grid-cols-3 lg:grid-cols-5 gap-4 pt-4">
                 <?php
                 foreach ($film_dang_chieu as $key => $value) {
                     $film = film_select_by_id($value['id_film']);
@@ -40,7 +40,7 @@
 
             </div>
 
-            <div class="phimSapChieu hidden grid-cols-5 gap-4 pt-4">
+            <div class="phimSapChieu hidden grid-cols-3 lg:grid-cols-5 gap-4 pt-4">
                 <?php
                 foreach ($film_sap_chieu as $key => $value) {
                     extract($value) ?>

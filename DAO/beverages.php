@@ -37,4 +37,11 @@ class Beverages{
         pdo_execute($sql,$id);
     }
 
+    static public function get_price_bill_and_ticket(){
+        $sql ="SELECT SUM(ticket.price) AS price_ticket,".
+        " SUM(bill_beverages.price * bill_beverages.quantity) AS price_bill ".
+        "FROM `ticket` JOIN bill_beverages ON bill_beverages.id_ticket = ticket.id";
+        return pdo_query_one($sql);
+    }
+
 }

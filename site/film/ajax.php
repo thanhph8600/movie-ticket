@@ -5,6 +5,8 @@ require_once '../../DAO/showtime.php';
 require_once '../../DAO/chair_is_waiting.php';
 require_once '../../DAO/beverages.php';
 require_once '../../DAO/discount.php';
+require_once '../../DAO/ticket.php';
+require_once '../../DAO/user.php';
 extract($_REQUEST);
 
 if (exist_parma('list_in_showtime')) {
@@ -15,8 +17,8 @@ if (exist_parma('list_in_showtime')) {
         $film = film_select_by_id($id_film);
 ?>
 
-        <div class="py-4 flex items-center">
-            <div class="w-1/3 bg-orange-400 p-3 rounded shadow-xl shadow-gray-400">
+        <div class="py-4 lg:flex items-center">
+            <div class="lg:w-1/3 bg-orange-400 p-3 rounded shadow-xl shadow-gray-400">
                 <a href="../film/index.php?detail&&id_film=<?= $id_film ?>" class=" flex gap-3">
                     <img class=" float-left -ml-12 w-2/4 border-4 border-orange-200" src="<?= $UPLOAD_FILM_URL . $film['thumb'] ?>" alt="">
                     <div class="float-right text-white w-3/5  ">
@@ -26,7 +28,7 @@ if (exist_parma('list_in_showtime')) {
                 </a>
                 <div class=" clear-both block"></div>
             </div>
-            <div class="w-2/3 shadow-lg shadow-gray-400 rounded-e-xl  flex pl-10 bg-orange-500 py-4 flex-wrap gap-3 ">
+            <div class="lg:w-2/3 shadow-lg shadow-gray-400 rounded-e-xl  flex pl-10 bg-orange-500 py-4 flex-wrap gap-3 ">
                 <?php
                 $xuat_chieu1 = film_select_xuat_chieu_trong_ngay($date, $id_film, date('H:m:s'));
 
@@ -74,7 +76,7 @@ if (exist_parma('list_in_showtime')) {
             <p><?= date("Y", strtotime($ngay_chieu)) ?></p>
         </div>
         <div class=" absolute left-32 top-16">
-            <div class="flex font-normal gap-3 flex-wrap py-4 px-6 bg-gray-700 bg-opacity-30 w-full rounded-md">
+            <div class="flex font-normal gap-3 overflow-auto w-32 lg:flex-wrap py-4 px-6 bg-gray-700 bg-opacity-30 lg:w-full rounded-md">
                 <?php
 
 
@@ -148,8 +150,12 @@ if (exist_parma('list_in_showtime')) {
 
 elseif (exist_parma('check_discount')) {
     $discount = Discount::get_byName($name);
-    if($discount['quantity'] <= 0){
-        echo '1231231231231231231231231231231231231231231233123123123123123123123123123123123123123123321321321231213213213123';
+    $user = user_select_by_email($_SESSION['user']['email']);
+    $used = ticket_check_discount_used($user['id'],$discount['id']);
+    if(count($used) >0 || $discount['quantity'] <= 0 || $discount['date_start'] > date('Y-m-d') || $discount['date_end'] < date('Y-m-d')){
+        echo '12312312312312312312312312312312312312
+        31231233123123123123123123123123123123123123
+        123123321321321231213213213123';
     }
     echo $discount['percent'];
 }

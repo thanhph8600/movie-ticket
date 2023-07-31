@@ -102,7 +102,7 @@
                       </p>
                     </td>
                     <td>
-                      <p class="text-xl font-weight-bold mb-0 ms-4"><?= $premiere ?>
+                      <p class="text-xl font-weight-bold mb-0 ms-4"><?= format_date($premiere) ?>
                       </p>
                     </td>
                     <td class="align-middle">

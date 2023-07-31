@@ -185,3 +185,24 @@ const formatter = new Intl.NumberFormat('vi-VN', {
   style: 'currency',
   currency: 'VND',
 });
+
+
+function fun_alert(class_name, content) {
+  $('.alert').append('<div class="alert-content  cursor-pointer alert-oppen ' + class_name + '">' + content + '</div>')
+  setTimeout(() => {
+    delete_alert(class_name)
+  }, 3000);
+}
+
+function delete_alert(class_name){
+  setTimeout(() => {
+    $('.alert').children('div.' + class_name).removeClass('alert-oppen').addClass('alert-close')
+  }, 500);
+}
+
+$(document).on('click', '.alert-content', function() {
+  $(this).removeClass('alert-oppen').addClass('alert-close')
+  setInterval(function() {
+      $(this).remove()
+  }, 500);
+})

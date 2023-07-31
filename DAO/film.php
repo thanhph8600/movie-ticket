@@ -15,7 +15,7 @@ function film_update($name,$directors,$actor,$genre,$premiere,$time,$language, $
 
 
 function film_select_all(){
-    $sql = "SELECT * FROM `film`";
+    $sql = "SELECT * FROM `film`  ORDER BY  `film`.`premiere` DESC";
     return pdo_query($sql);
 }
 
@@ -31,23 +31,26 @@ function film_select_top10($date){
 }
 
 function film_select_dang_chieu($date){
-    $sql = "SELECT * FROM `film` JOIN showtimes ON film.id = showtimes.id_film WHERE premiere < ? AND showtimes.date > ? GROUP BY film.id";
+    $sql = "SELECT * FROM `film` JOIN showtimes ON film.id = showtimes.id_film WHERE premiere <= ? AND showtimes.date >= ? GROUP BY film.id";
     return pdo_query($sql,$date,$date);
 }
 
 function film_select_sap_chieu($date){
-    $sql = "SELECT * FROM `film` WHERE premiere >? ORDER BY premiere ASC";
+    $sql = "SELECT * FROM `film` WHERE premiere > ? ORDER BY premiere ASC";
     return pdo_query($sql,$date);
 }
 
 function film_select_trong_tuan($date){
-    $sql = "SELECT * FROM `film` JOIN showtimes ON film.id = showtimes.id_film WHERE premiere < ? AND showtimes.date > ? GROUP BY film.id limit 0,10";
+    $sql = "SELECT * FROM `film` JOIN showtimes ON film.id = showtimes.id_film WHERE premiere <= ? AND showtimes.date >= ? GROUP BY film.id limit 0,10";
     return pdo_query($sql,$date,$date);
 }
 
 function film_check_phim_da_chieu($id,$date){
-    $sql = "SELECT * FROM `film` WHERE id = ? AND premiere < ?";
-    return pdo_query($sql,$id,$date);
+    $sql = "SELECT * FROM `film` ".
+    " JOIN showtimes ON showtimes.id_film = film.id ".
+    " WHERE film.id = ? AND film.premiere <= ? ".
+    " AND showtimes.date >= ? GROUP BY film.id";
+    return pdo_query($sql,$id,$date,$date);
 }
 
 function film_select_trong_ngay($date){
@@ -92,4 +95,8 @@ function film_delete($id){
     pdo_execute($sql,$id);
 }
 
+function film_search($name){
+    $sql = "SELECT * FROM `film` WHERE name LIKE '%".$name."%' limit 0,5";
+    return pdo_query($sql);
+}
 

@@ -29,3 +29,8 @@ function shift_update($time_start,$time_end,$id_shift){
     $sql = "UPDATE `shift` SET `time_start`= ?,`time_end`= ? WHERE id = ?";
     return pdo_query($sql,$time_start,$time_end,$id_shift);
 }
+
+function shift_delete_by_idRoom($id_room){
+    $sql = "DELETE FROM `shift` WHERE id_room =  ?";
+    return pdo_query($sql,$id_room);
+}

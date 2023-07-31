@@ -73,6 +73,13 @@ class Showtime{
         return pdo_query_value($sql,$date,$id_room,$id_shift);
     }
 
+    static public function check_row($id_film,$date,$id_room){
+        $sql = "SELECT showtimes.id FROM `showtimes` ".
+        " JOIN ticket ON ticket.id_showtime = showtimes.id ".
+        "WHERE id_film = ? AND date = ? AND id_room = ?";
+        return pdo_query_value($sql,$id_film,$date,$id_room);
+    }
+
     static public function find_id_shift_by_date_idRoom($date,$id_room){
         $sql = "SELECT id_shift FROM `showtimes` WHERE `date` = ? AND id_room = ?";
         return pdo_query($sql,$date,$id_room);

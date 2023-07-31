@@ -116,7 +116,11 @@ if (exist_parma('first')) {
     if ($ticket) {
         echo 'okddd';
     }
-} else {
+}
+elseif (exist_parma('check_row')) {
+    $check = Showtime::check_row($id_film,$date,$id_room);
+} 
+else {
     echo 1;
 }
 ?>

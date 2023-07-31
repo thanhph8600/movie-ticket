@@ -71,12 +71,56 @@
                     <span class="nav-link-text ms-1">Nước uống</span>
                 </a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link text-white comment" href="../comment/index.php">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="fa fa-commenting" aria-hidden="true"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Bình luận</span>
+                </a>
+            </li>
+
             <li class="nav-item">
                 <a class="nav-link text-white qr" href="../QR/index.php">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="fa fa-qrcode" aria-hidden="true"></i>
                     </div>
                     <span class="nav-link-text ms-1">Quét mã QR</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link text-white statistical" href="../statistical/index.php">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="fa fa-line-chart" aria-hidden="true"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Thống kê</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white question" href="../question/index.php">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="fa fa-question-circle" aria-hidden="true"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Câu hỏi</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link text-white banner" href="../banner/index.php">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="fa fa-picture-o" aria-hidden="true"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Banner</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white news" href="../news/index.php">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Tin tức</span>
                 </a>
             </li>
         </ul>
