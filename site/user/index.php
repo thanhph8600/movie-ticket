@@ -5,6 +5,7 @@ require_once "../../DAO/user.php";
 require_once "../../DAO/ticket.php";
 require_once "../../DAO/seat.php";
 require_once "../../DAO/discount.php";
+require_once "../../DAO/beverages.php";
 
 extract($_REQUEST);
 
@@ -171,6 +172,13 @@ elseif (exist_parma('detail_ticket')) {
     }
     $VIEW_NAME = './detail_my-ticket.php';
     include '../layout.php';
+
+}
+elseif (exist_parma('cancel_ticket')) {
+    ticket_update_activated(2,$id_ticket);
+    ticket_update_quantity(0,$id_ticket);
+    seat_delete_by_idTicket($id_ticket);
+    Beverages::delete_by_idTicket($id_ticket);
 }
 else{
     check_login();

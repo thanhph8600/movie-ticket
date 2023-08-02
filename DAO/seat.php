@@ -23,3 +23,8 @@ function seat_insert($id_ticket,$row_index,$col_index){
     $sql = "INSERT INTO `seats`(`id_ticket`, `row_index`, `col_index`) VALUES (?,?,?)";
     return pdo_query($sql,$id_ticket,$row_index,$col_index);
 }
+
+function seat_delete_by_idTicket($id_ticket){
+    $sql = "DELETE FROM `seats` WHERE `id_ticket` = ?";
+    pdo_execute($sql,$id_ticket);
+}

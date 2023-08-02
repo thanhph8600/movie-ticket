@@ -21,6 +21,12 @@ function ticket_update_activated($activated,$id_ticket){
     return last_id($sql,$activated,$id_ticket);
 }
 
+function ticket_update_quantity($quantity,$id_ticket){
+    $sql = "UPDATE `ticket` SET `quantity`= ? WHERE id = ?";
+    return last_id($sql,$quantity,$id_ticket);
+}
+
+
 function ticket_sum_quantity(){
     $sql = "SELECT sum(quantity) as quantity FROM `ticket`";
     return pdo_query_value($sql);

@@ -37,6 +37,11 @@ class Beverages{
         pdo_execute($sql,$id);
     }
 
+    static public function delete_by_idTicket($id_ticket){
+        $sql ="DELETE FROM  `bill_beverages` WHERE `id_ticket` = ?";
+        pdo_execute($sql,$id_ticket);
+    }
+
     static public function get_price_bill_and_ticket(){
         $sql ="SELECT SUM(ticket.price) AS price_ticket,".
         " SUM(bill_beverages.price * bill_beverages.quantity) AS price_bill ".
