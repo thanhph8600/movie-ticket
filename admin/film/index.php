@@ -8,6 +8,7 @@ check_login();
 
 extract($_REQUEST);
 
+$activated = 1;
 if (exist_parma('btn_add')) {
     $VIEW_NAME = './add.php';
 } elseif (exist_parma('btn_insert')) {
@@ -18,7 +19,7 @@ if (exist_parma('btn_add')) {
     } else {
         try {
             $thumb = save_file('upload', $UPLOAD_FILM_URL);
-            film_insert($name, $directors, $actor, $genre, $premiere, $time, $language, $rated, $trailer, $description, $thumb);
+            film_insert($name, $directors, $actor, $genre, $premiere, $time, $language, $rated, $trailer, $description, $thumb,$activated);
             $VIEW_NAME = './list.php';
             $MESS = '<div class="alert alert-success text-white " role="alert">Thêm thành công</div>';
         } catch (Exception $th) {
@@ -50,7 +51,7 @@ if (exist_parma('btn_add')) {
             }
             $VIEW_NAME = './list.php';
             $MESS = '<div class="alert alert-success text-white " role="alert">Sửa thành công</div>';
-            film_update($name, $directors, $actor, $genre, $premiere, $time, $language, $rated, $trailer, $description, $thumb, $id_film);
+            film_update($name, $directors, $actor, $genre, $premiere, $time, $language, $rated, $trailer, $description, $thumb,$activated, $id_film);
         } catch (Exception $th) {
             $VIEW_NAME = './add.php';
             $MESS = '<div class="alert alert-warning text-white " role="alert">Sửa thất bại</div>';
@@ -58,7 +59,10 @@ if (exist_parma('btn_add')) {
     }
 } else {
     $VIEW_NAME = './list.php';
+    if(exist_parma('khong_hoat_dong'))
+        $activated = 0;
+    $films = film_select_dang_hoat_dong($activated);
 }
-$films = film_select_all();
+$films = film_select_dang_hoat_dong($activated);
 
 include '../layout.php';

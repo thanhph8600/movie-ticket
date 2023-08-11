@@ -13,14 +13,20 @@ if (exist_parma('btn_add')) {
         $MESS = '<div class="p-2">Email đã được dùng</div>';
         $VIEW_NAME = './add.php';
     } else {
-        try {
-            $thumb =  save_file('upload', $UPLOAD_USER_URL);
-            user_insert($name, $phone, $birtday, $email, md5($pass), $sex, $role, $activated, $thumb);
-            $MESS = '<div class="alert alert-success text-white " role="alert">Thêm thành công</div>';
-            $VIEW_NAME = './list.php';
-        } catch (Exception $ex) {
-            $MESS = '<div class="alert alert-warning text-white">Tạo thất bại</div>';
+        $admin = user_select_by_email($_SESSION['user']['email']);
+        if($admin['role'] == 0 && $role == 0){
+            $MESS = '<div class="alert alert-warning text-white">Bạn không thể tạo 1 tài khoản nhân viên</div>';
             $VIEW_NAME = './add.php';
+        }else{
+            try {
+                $thumb =  save_file('upload', $UPLOAD_USER_URL);
+                user_insert($name, $phone, $birtday, $email, md5($pass), $sex, $role, $activated, $thumb);
+                $MESS = '<div class="alert alert-success text-white " role="alert">Thêm thành công</div>';
+                $VIEW_NAME = './list.php';
+            } catch (Exception $ex) {
+                $MESS = '<div class="alert alert-warning text-white">Tạo thất bại</div>';
+                $VIEW_NAME = './add.php';
+            }
         }
     }
 } elseif (exist_parma('btn_edit')) {
@@ -29,8 +35,13 @@ if (exist_parma('btn_add')) {
         $MESS = '<div class="alert alert-warning text-white">Không thể xem người quảng trị</div>';
         $VIEW_NAME = './list.php';
     } else if ($user['role'] == 0 && $_SESSION['user']['role'] == 0) {
-        $MESS = '<div class="alert alert-warning text-white">Không thể xem nhân viên khác</div>';
-        $VIEW_NAME = './list.php';
+        if($user['email'] == $_SESSION['user']['email'])
+            $VIEW_NAME = './edit.php';
+        else {
+            $MESS = '<div class="alert alert-warning text-white">Không thể xem nhân viên khác</div>';
+            $VIEW_NAME = './list.php';
+        }
+
     }  else {
         $VIEW_NAME = './edit.php';
     }
@@ -41,17 +52,23 @@ if (exist_parma('btn_add')) {
     }
 
     try {
-        if (!empty($_FILES['upload']['name'])) {
-            $thumb = save_file('upload', $UPLOAD_USER_URL);
-            if (!empty($thumb_old)) {
-                unlink($UPLOAD_USER_URL . $thumb_old);
+        $admin = user_select_by_email($_SESSION['user']['email']);
+        if($admin['role'] == 0 && $role == 0){
+            $MESS = '<div class="alert alert-warning text-white">Bạn không thể cập nhật 1 tài khoản nhân viên</div>';
+            $VIEW_NAME = './list.php';
+        }else{
+            if (!empty($_FILES['upload']['name'])) {
+                $thumb = save_file('upload', $UPLOAD_USER_URL);
+                if (!empty($thumb_old)) {
+                    unlink($UPLOAD_USER_URL . $thumb_old);
+                }
+            } else {
+                $thumb = $thumb_old;
             }
-        } else {
-            $thumb = $thumb_old;
+            user_update_all($name, $phone, $birtday, $email, $pass, $sex, $role, $activated, $thumb, $id_user);
+            $MESS = '<div class="alert alert-success text-white " role="alert">Cập nhật thành công</div>';
+            $VIEW_NAME = './list.php';
         }
-        user_update_all($name, $phone, $birtday, $email, $pass, $sex, $role, $activated, $thumb, $id_user);
-        $MESS = '<div class="alert alert-success text-white " role="alert">Cập nhật thành công</div>';
-        $VIEW_NAME = './list.php';
     } catch (Exception $th) {
         $MESS = '<div class="alert alert-warning text-white">Cập nhật thất bại</div>';
         $VIEW_NAME = './edit.php';

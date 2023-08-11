@@ -8,6 +8,7 @@ require_once '../../DAO/beverages.php';
 require_once '../../DAO/discount.php';
 require_once '../../DAO/user.php';
 require_once '../../DAO/comment.php';
+check_login();
 
 extract($_REQUEST);
 $date_now = date('Y-m-d');

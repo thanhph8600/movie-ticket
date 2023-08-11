@@ -46,6 +46,11 @@ function ticket_check_discount_used($id_user,$id_discount){
     return pdo_query($sql,$id_user);
 }
 
+function ticket_select_activated($id_ticket){
+    $sql ="SELECT ticket.activated FROM `ticket` WHERE id = ?";
+    return pdo_query_value($sql,$id_ticket);
+}
+
 function ticket_select_infoTicket_WHERE_idUser($id_user){
     $sql = "SELECT ticket.id, ticket.code,ticket.activated,ticket.price AS price_ticket,".
     " SUM(bill_beverages.price) as price_bill,showtimes.date,film.name, film.thumb,".
@@ -59,10 +64,10 @@ function ticket_select_infoTicket_WHERE_idUser($id_user){
 }
 
 function ticket_select_detail_by_idTicket($id_ticket){
-    $sql = "SELECT ticket.id, ticket.code,ticket.activated,ticket.quantity,showtimes.price,".
-    "ticket.id_discount, SUM(bill_beverages.price) as price_bill,film.name, room.name as name_room,".
-    " film.thumb,film.rated,showtimes.date,shift.time_start,shift.time_end ".
-    "FROM `ticket` JOIN showtimes on showtimes.id = ticket.id_showtime ".
+    $sql = "SELECT ticket.id, ticket.code, ticket.activated, ticket.quantity, showtimes.price,".
+    " ticket.id_discount, SUM(bill_beverages.price) as price_bill, film.name, room.name as name_room,".
+    " film.thumb, film.rated, showtimes.date, shift.time_start, shift.time_end ".
+    " FROM `ticket` JOIN showtimes on showtimes.id = ticket.id_showtime ".
     " JOIN film ON film.id = showtimes.id_film JOIN room on room.id = showtimes.id_room ".
     " JOIN shift ON shift.id = showtimes.id_shift ".
     " LEFT JOIN bill_beverages on bill_beverages.id_ticket = ticket.id ".

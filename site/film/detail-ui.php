@@ -162,7 +162,7 @@
 
         </div>
         <div class=" flex flex-row-reverse">
-        <div class="comment px-6 py-2 rounded mt-2 cursor-pointer bg-slate-300 hover:bg-slate-400 hover:text-white flex justify-center items-center  font-bold">Bình luận</div>
+            <div class="comment px-6 py-2 rounded mt-2 cursor-pointer bg-slate-300 hover:bg-slate-400 hover:text-white flex justify-center items-center  font-bold">Bình luận</div>
         </div>
         <div class="my-4 border-t-2 border-t-black"></div>
         <div class="post_comment">
@@ -266,6 +266,9 @@ include './top_week.php';
             $('textarea').removeClass('shadow-md shadow-red-500')
         }
         if (check == 0) {
+            $('.comment').addClass('dang_load')
+            $('.comment').html('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>')
+            $('.dang_load').removeClass('comment')
             $.ajax({
                 url: './?comment',
                 data: {
@@ -274,8 +277,11 @@ include './top_week.php';
                     vote: vote
                 },
                 success: function(data) {
-                    $('.post_comment').append(data);
                     $('textarea').val('')
+                    $('.dang_load').addClass('comment')
+                    $('.comment').removeClass('dang_load')
+                    $('.comment').html('Bình luận')
+                    $('.post_comment').append(data);
                 }
             })
         }

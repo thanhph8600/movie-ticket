@@ -1,7 +1,7 @@
 <?php
 require_once '../../global.php';
 require_once '../../DAO/news.php';
-
+check_login();
 extract($_REQUEST);
 
 if (exist_parma('btn_add')) {

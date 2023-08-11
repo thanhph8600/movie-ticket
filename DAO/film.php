@@ -2,21 +2,26 @@
 require_once '../../DAO/PDO.php';
 
 
-function film_insert($name,$directors,$actor,$genre,$premiere,$time,$language, $rated, $trailer, $description, $thumb){
-    $sql ="INSERT INTO `film`( `name`, `directors`, `actor`, `genre`, `premiere`, `time`, `language`, `rated`, `trailer`, `description`, `thumb`) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-    pdo_execute($sql,$name,$directors,$actor,$genre,$premiere,$time,$language, $rated, $trailer, $description, $thumb);
+function film_insert($name,$directors,$actor,$genre,$premiere,$time,$language, $rated, $trailer, $description, $thumb,$activated){
+    $sql ="INSERT INTO `film`( `name`, `directors`, `actor`, `genre`, `premiere`, `time`, `language`, `rated`, `trailer`, `description`, `thumb`,`activated`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+    pdo_execute($sql,$name,$directors,$actor,$genre,$premiere,$time,$language, $rated, $trailer, $description, $thumb,$activated);
 }
 
 
-function film_update($name,$directors,$actor,$genre,$premiere,$time,$language, $rated, $trailer, $description, $thumb,$id){
-    $sql ="UPDATE `film` SET `name`=?,`directors`=?,`actor`=?,`genre`=?,`premiere`=?,`time`=?,`language`=?,`rated`=?,`trailer`=?,`description`=?,`thumb`=? WHERE `id` = ?";
-    pdo_execute($sql,$name,$directors,$actor,$genre,$premiere,$time,$language, $rated, $trailer, $description, $thumb,$id);
+function film_update($name,$directors,$actor,$genre,$premiere,$time,$language, $rated, $trailer, $description, $thumb,$activated,$id){
+    $sql ="UPDATE `film` SET `name`=?,`directors`=?,`actor`=?,`genre`=?,`premiere`=?,`time`=?,`language`=?,`rated`=?,`trailer`=?,`description`=?,`thumb`=? , `activated` = ? WHERE `id` = ?";
+    pdo_execute($sql,$name,$directors,$actor,$genre,$premiere,$time,$language, $rated, $trailer, $description, $thumb,$activated,$id);
 }
 
 
 function film_select_all(){
     $sql = "SELECT * FROM `film`  ORDER BY  `film`.`premiere` DESC";
     return pdo_query($sql);
+}
+
+function film_select_dang_hoat_dong($activated){
+    $sql = "SELECT * FROM `film`WHERE activated = ? ORDER BY `film`.`premiere` DESC";
+    return pdo_query($sql,$activated);
 }
 
 function film_select_by_id($id){

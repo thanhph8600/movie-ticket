@@ -13,7 +13,9 @@ class Beverages{
     }
 
     static public function select_by_idTicket($id_ticket){
-        $sql = "SELECT * FROM `bill_beverages` WHERE `id_ticket` = ?";
+        $sql = "SELECT bill_beverages.*, beverages.name FROM `bill_beverages` ".
+        " JOIN beverages ON beverages.id = bill_beverages.id_beverages ".
+        " WHERE `id_ticket` = ?";
         return pdo_query($sql,$id_ticket);
     }
 

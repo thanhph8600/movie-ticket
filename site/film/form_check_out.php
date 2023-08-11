@@ -25,8 +25,8 @@
                         <?php
                         foreach ($tat_ca_ghe as $key => $value) {
                             echo '<p>' . $value[1] . $value[0] . '</p>';
-                            echo '<input type="hidden" name="row[]" value="'.$value[1].'">';
-                            echo '<input type="hidden" name="col[]" value="'.$value[0].'">';
+                            echo '<input type="hidden" class="row" name="row[]" value="' . $value[1] . '">';
+                            echo '<input type="hidden" class="col" name="col[]" value="' . $value[0] . '">';
                         }
                         ?>
                     </div>
@@ -55,8 +55,8 @@
                                 </p>
                             </div>
                             ';
-                        echo '<input type="hidden" name="id_beverages[]" value="'.$beverages['id'].'">';
-                        echo '<input type="hidden" name="quantity_beverages[]" value="'.$value[1].'">';
+                            echo '<input type="hidden" class="beverages" name="id_beverages[]" value="' . $beverages['id'] . '">';
+                            echo '<input type="hidden" class="quantity_beverages" name="quantity_beverages[]" value="' . $value[1] . '">';
                         }
                         ?>
 
@@ -107,30 +107,21 @@
             <label for="dong_y" class="dong_y">Tôi đồng ý với những quy định trên</label>
         </div>
         <div class=" flex flex-row-reverse py-2">
-            <input type="hidden" name="id_showtime" value="<?=$id_showtime?>">
-            <input type="hidden" name="quantity_seat" value="<?=count($tat_ca_ghe)?>">
-            <input type="hidden" class="price_ticket" name="price_ticket" value="<?=$tong_tien_ve?>">
-            <input type="hidden" name="price_beverages" value="<?=$tong_tien_ve?>">
+            <input type="hidden" class="id_showtime" name="id_showtime" value="<?= $id_showtime ?>">
+            <input type="hidden" name="quantity_seat" value="<?= count($tat_ca_ghe) ?>">
+            <input type="hidden" class="price_ticket" name="price_ticket" value="<?= $tong_tien_ve ?>">
+            <input type="hidden" name="price_beverages" value="<?= $tong_tien_ve ?>">
             <input type="submit" class="hoan_thanh_toan px-4 py-2 text-xl font-bold uppercase bg-orange-500 text-white rounded cursor-pointer" value="Thanh toán">
         </div>
     </div>
 </form>
 <script>
-    function checkForm(){
-        $.ajax({
-            url: '../user/sendEmail.php?mua_ve',
-            data: {
-                name: <?= $showtime['name'] ?>,
-                time_start : <?= $showtime['time_start'] ?>,
-                time_end : <?= $showtime['time_end'] ?>,
-                room : <?= $showtime['name_room'] ?>,
-                date : <?= $showtime['date'] ?>,
-            },
-            success: function(data) {
-            }
-        })
-
+    function checkForm() {
+        if ($('#dong_y').val() != 1) {
+            return false
+        }
     }
+
     $(document).on('click', '.check_discount', function() {
         $('.check_discount').html('<i class=" text-lg fa fa-spinner fa-spin fa-3x fa-fw"></i>');
         $(".check_discount").addClass("dang_load").removeClass("check_discount");
@@ -156,10 +147,9 @@
         })
     })
 
-    function discount(discount){
-        $('.price_ticket').val(<?=$tong_tien_ve?> - discount * <?=$tong_tien_ve?>/100)
-        $('.so_tien_giam').html(formatter.format(discount * <?=$tong_tien_ve?> / 100))
-        $('.so_tien_thanh_toan').html(formatter.format(<?=$tong_tien?> - (discount * <?=$tong_tien_ve?> / 100)))
+    function discount(discount) {
+        $('.price_ticket').val(<?= $tong_tien_ve ?> - discount * <?= $tong_tien_ve ?> / 100)
+        $('.so_tien_giam').html(formatter.format(discount * <?= $tong_tien_ve ?> / 100))
+        $('.so_tien_thanh_toan').html(formatter.format(<?= $tong_tien ?> - (discount * <?= $tong_tien_ve ?> / 100)))
     }
-
 </script>

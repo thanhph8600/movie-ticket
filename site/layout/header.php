@@ -1,8 +1,8 @@
 <header>
-    <div class="bg-main">
+    <div class="header bg-main">
         <div class="container m-auto">
             <div class="flex justify-between items-center">
-                <div class=" flex-none w-20 lg:w-44 py-2">
+                <div class="header-logo flex-none w-20 lg:w-44 py-2">
                     <a href="../page/"><img src="../../content/img/logo.png" class=" w-full" alt=""></a>
                 </div>
                 <div class="hidden  flex-auto mx-10 lg:flex justify-between items-center relative bg-black   py-3 px-2 rounded-2xl">
@@ -77,21 +77,30 @@
 <section class="popup z-50 hidden">
     <div class="close z-50  fixed w-full h-screen bg-slate-800 top-0 left-0 bg-opacity-40"></div>
     <div class=" fixed z-50  top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full lg:w-1/2 bg-white rounded">
-        <div class="close absolute top-1 right-2"><i class="fa fa-times-circle  hover:text-white hover:bg-black rounded-full cursor-pointer" aria-hidden="true"></i></div>
+        <div class="close absolute top-1 right-2"><i class="fa fa-times-circle  hover:text-white hover:bg-black rounded-full cursor-pointer " aria-hidden="true"></i></div>
         <div class="form p-4 z-50 ">
 
         </div>
     </div>
 </section>
-
 <script>
+
     window.addEventListener('scroll', () => {
         if (window.scrollY > 100) {
             $('.show_user').slideUp();
             $('.closeShowUser').addClass('hidden')
             $('.show_search').html('')
-
         }
+
+        if($('body').height() > 1500)
+            if (window.scrollY > 100 ) {
+                $('.header').addClass('fixed w-full z-30 bg-black bg-opacity-60 ')
+                $('.header-logo').addClass('lg:w-26').removeClass('lg:w-44')
+            } else {
+                $('.header').removeClass('fixed w-full z-30 bg-black bg-opacity-60')
+                $('.header-logo').removeClass('lg:w-26').addClass('lg:w-44')
+            }
+
     })
 
     $(document).on('click', '.show', function() {

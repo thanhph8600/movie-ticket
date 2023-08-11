@@ -181,7 +181,7 @@
     </div>
 
 
-    <div class="form_beverages z-10 relative hidden">
+    <div class="form_beverages z-40 relative hidden">
         <div class=" fixed h-screen w-screen z-10 bg-gray-700 bg-opacity-70 close top-0 left-0"></div>
         <div style="max-height:800px" class="form_beverages_con fixed rounded top-0 -translate-x-1/2 left-1/2 w-2/5 bg-white p-4 mt-8 z-20">
             <h2 class=" font-bold text-xl uppercase text-center">Bảng nước uống</h2>

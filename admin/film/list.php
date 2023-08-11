@@ -64,8 +64,11 @@
         <div class="card-body px-0 pb-2">
           <div class="table-responsive p-0">
             <div class="d-flex justify-content-between col-11 m-auto">
-                <div></div>
-              <form action="./index.php?btn_add" method="post" >
+              <div class="d-flex gap-2">
+                <a href="./?dang_hoat_dong" type="button" class="btn btn-success">Đang hoạt động</a>
+                <a href="./?khong_hoat_dong"  type="button" class="btn btn-secondary">Không hoạt động</a>
+              </div>
+              <form action="./index.php?btn_add" method="post">
                 <input name="next" type="submit" value="Thêm phim" class="input_Addproduct">
               </form>
             </div>
@@ -73,9 +76,8 @@
               <thead>
                 <tr>
                   <th class="text-secondary opacity-7">Film</th>
-                  <th class="text-secondary opacity-7">Đạo diễn</th>
-
                   <th class="text-secondary opacity-7 ">Ngày công chiếu</th>
+                  <th class="text-secondary opacity-7"></th>
                   <th class="text-secondary opacity-7"></th>
                   <th class="text-secondary opacity-7"></th>
                 </tr>
@@ -89,7 +91,7 @@
                     <td>
                       <div class="d-flex px-2 py-1">
                         <div>
-                          <img src="../../uploaded/films/<?= $thumb?>" class="avatar avatar-xxl me-3 border-radius-lg" alt="user2">
+                          <img src="../../uploaded/films/<?= $thumb ?>" class="avatar avatar-xxl me-3 border-radius-lg" alt="user2">
                         </div>
                         <div class="d-flex flex-column justify-content-center">
                           <h6 class="name"><?= $name ?></h6>
@@ -98,12 +100,15 @@
                       </div>
                     </td>
                     <td>
-                      <p class="text-xl font-weight-bold mb-0 ms-4"><?= $directors ?>
+                      <p class="text-xl font-weight-bold mb-0 ms-4"><?= format_date($premiere) ?>
                       </p>
                     </td>
                     <td>
-                      <p class="text-xl font-weight-bold mb-0 ms-4"><?= format_date($premiere) ?>
-                      </p>
+                      <?php
+                      if ($activated == 1)
+                        echo '<a href="../showtime/?btn_add&id_film=<?=$id?>" class="text-xl font-weight-bold mb-0 ms-4">Tạo lịch chiếu</a>';
+                      ?>
+
                     </td>
                     <td class="align-middle">
                       <form action="./index.php?btn_edit" method="post">

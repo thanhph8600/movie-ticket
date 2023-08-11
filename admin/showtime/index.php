@@ -8,6 +8,11 @@ check_login();
 extract($_REQUEST);
 
 if (exist_parma('btn_add')) {
+    $id_film = 0;
+    if(!empty($_GET['id_film']))
+        $id_film = $_GET['id_film'];
+
+    $film_dang_hoat_dong = film_select_dang_hoat_dong(1);
     $VIEW_NAME = './add.php';
 } elseif (exist_parma('btn_insert')) {
     if(empty($id_film) || empty($id_room) || empty($price)){

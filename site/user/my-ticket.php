@@ -14,21 +14,21 @@
                     ticket_update_activated(0, $id);
                 }
                 if ($activated == 0) {
-                    $activated = '<span class=" text-red-500">Không hoạt động</span>';
+                    $activated = '<span class=" text-red-500">Phim đã xem</span>';
                 } elseif($activated == 1) {
-                    $activated = '<span class=" text-green-500">Đang hoạt động</span>';
+                    $activated = '<span class=" text-green-500">Phim sắp xem</span>';
                 }elseif($activated == 2) {
-                    $activated = '<span class=" text-red-500">Vé đã bị hủy</span>';
+                    $activated = '<span class=" text-red-500">Phim đã hủy</span>';
                 }
                 $price = $price_ticket + $price_bill;
             ?>
-                <div class=" border-t border-b rounded-md p-4 my-4 flex gap-4  items-center">
+                <div class=" border-t border-b rounded-md p-4 my-4 flex flex-wrap gap-4  items-center">
                     <div class=" w-1/6">
-                        <div class=" w-3/6 m-auto">
+                        <div class=" lg:w-3/6 m-auto">
                             <img src="<?= $UPLOAD_FILM_URL . $thumb ?>" alt="">
                         </div>
                     </div>
-                    <div class=" w-3/5 flex gap-2">
+                    <div class=" lg:w-3/5 flex gap-2">
                         <div>
                             <p>Mã vé </p>
                             <p>Ngày chiếu</p>
@@ -44,7 +44,7 @@
                             <p><?= currency_format($price) ?></p>
                         </div>
                     </div>
-                    <div>
+                    <div class=" ml-auto">
                         <a href="../user/?detail_ticket&&id_ticket=<?= $id ?>" class=" hover:text-rose-500 hover:border-b-rose-500">
                             Xem chi tiết
                             <i class="fa fa-eye" aria-hidden="true"></i>
@@ -62,6 +62,9 @@
 </section>
 <script>
     $('.list').css('max-height','900px')
+    if($('.list').height() < 900){
+        $('.more-read').addClass('hidden')
+    }
     $(document).on('click','.more-read',function(){
         $('.list').css('max-height','10000px')
         $(this).html('Rút gọn')

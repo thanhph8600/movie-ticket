@@ -148,8 +148,13 @@
                                     <select name="id_film" class="id_film">
                                         <option value="0">- - - - - - - - - - - - Chọn film - - - - - - - - - - - - -</option>
                                         <?php
-                                        foreach ($films as $key => $value) {
-                                            echo '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
+                                        var_dump($id_film);
+                                        foreach ($film_dang_hoat_dong as $key => $value) {
+                                            if($id_film == $value['id'] ){
+                                                echo '<option  selected  value="' . $value['id'] . '" checked>' . $value['name'] . '</option>';
+                                            }else{
+                                                echo '<option value="' . $value['id'] . '">' . $value['name'] . '</option>';
+                                            }
                                         }
                                         ?>
                                     </select>

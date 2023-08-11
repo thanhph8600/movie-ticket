@@ -84,6 +84,39 @@ if (exist_parma('gui_email_don_hang')) {
 } elseif (exist_parma('mua_ve')) {
     extract($_REQUEST);
 
+    ticket_update_activated(1, $id_ticket);
+    $ticket = ticket_select_detail_by_idTicket($id_ticket);
+    $seats = seat_select_by_id_ticket($ticket['id']);
+    $beverages = Beverages::select_by_idTicket($id_ticket);
+
+    $ghe = '   ';
+    foreach ($seats as $key => $value) {
+        $ghe = $ghe .  $value['row_index'] . $value['col_index'] . '   ';
+    }
+
+    $nuoc = '';
+    foreach ($beverages as $key => $value) {
+        $nuoc = $nuoc . '<tr>
+        <td style="border: 1px solid black;text-align: left;padding: 0 8px;">
+            ' . $value['quantity'] . ' x ' . $value['name'] . '
+        </td>
+        <td style="border: 1px solid black;text-align: left;padding: 8px;">' . currency_format($value['price'] * $value['quantity']) . '</td>
+        </tr>
+        ';
+    }
+    if(!empty($beverages)){
+        $nuoc = '<tr>
+                <td rowspan="' . (count($beverages) + 1) . '" style="border: 1px solid black;text-align: left;padding: 8px;">Combo:</td>
+            </tr>' . $nuoc;
+    }
+
+    $discount = 0;
+    if (!empty($ticket['id_discount'])) {
+        $discount = Discount::get_byId($ticket['id_discount']);
+        $discount =  $ticket['price'] * $ticket['quantity'] * $discount['percent'] / 100;
+    }
+    $sum =  $ticket['price'] * $ticket['quantity'] - $discount + $ticket['price_bill'];
+
     $email = $_SESSION['user']['email'];
     $user = user_select_by_email($email);
     $mail = new PHPMailer(true);
@@ -99,19 +132,32 @@ if (exist_parma('gui_email_don_hang')) {
         $mail->setFrom('tuyetnhung200201@gmail.com', 'Kin Star');
         $mail->addAddress($email, 'User');     // Add a recipient
         $mail->isHTML(true);                                  // Set email format to HTML
-        $mail->Subject = 'Thank you for using our service';
+        $mail->Subject = 'Thank you for using our service' . $ticket['code'];
         $mail->Body    = '
         <p>Xin chào ' . $user['name'] . ', <br>
         <div style="background-color: #ddd; padding:15px 20px">
             <p>Cảm ơn bạn đã mua vé của chúng tôi</p>
             <h2>Thông tin vé của bạn</h2>
-            <h4>Tên phim: ' . $name . '</h4>
-            <p>Giờ chiếu: ' . $time_start . ' - ' . $time_end . '</p>
-            <p>Phòng chiếu: ' . $name_room . '</p>
-            <p>Ngày chiếu: ' . format_date($date) . '</p>
-
+            <h4>Tên phim: ' . $ticket['name'] . '</h4>
+            <p>Giờ chiếu: ' . $ticket['time_start'] . ' - ' . $ticket['time_end'] . '</p>
+            <p>Phòng chiếu: ' . $ticket['name_room'] . '</p>
+            <p>Ngày chiếu: ' . format_date($ticket['date']) . '</p>
+            <table style="font-family: arial, sans-serif;border-collapse: collapse;width: 100%;">
+            <tr>
+                <td style="border: 1px solid black;text-align: left;padding: 8px;">Ghế:</td>
+                <td style="border: 1px solid black;text-align: left;padding: 0 8px;">
+                    ' . $ghe . '
+                </td>
+                <td style="border: 1px solid black;text-align: left;padding: 8px;">' . currency_format($ticket['price'] * $ticket['quantity']) . '</td>
+            </tr>
+            ' . $nuoc . '        
+            <tr style="font-weight:bold">
+                <td colspan="2" style="border: 1px solid black;text-align: left;padding: 8px;">Tổng</td>
+                <td style="border: 1px solid black;text-align: left;padding: 8px;">' . currency_format($sum) . '</td>
+            </tr>
+        </table>
                     <div style="padding: 15px 0px;display:inline-block">
-                        <img style="padding: 15px;background:white" src="https://api.qrserver.com/v1/create-qr-code/?data=' . $ADMIN_URL . '/QR/?id_ticket=okok&amp;size=200x200" alt="" title="" />
+                        <img style="padding: 15px;background:white" src="https://api.qrserver.com/v1/create-qr-code/?data=' . $ADMIN_URL . '/QR/?id_ticket=' . $ticket['code'] . '&amp;size=200x200" alt="" title="" />
                     </div>
                     <p style="font-style:italic;">Hãy đưa mã này cho nhân viên</p>
                 </div>
@@ -140,14 +186,13 @@ if (exist_parma('gui_email_don_hang')) {
         $mail->Subject = 'You have a contact from: ' . $user['email'] . '';
         $mail->Body    = '
         <p> Bạn nhận được 1 yêu cầu từ email :  ' . $user['email'] . '<br> Với nội dung như sau:
-        '.$noi_dung.'
+        ' . $noi_dung . '
         <p>Hãy liên lạc đến bạn đó khi có thể</p>
 ';
         $mail->send();
     } catch (Exception $e) {
         echo 'Message could not be sent. Mailer Error';
     }
-
 } else {
     extract($_REQUEST);
     if (!empty($daDangNhap)) {

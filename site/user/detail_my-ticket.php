@@ -53,7 +53,7 @@
         <p class=" italic text-center py-2">Vui lòng đưa mã này cho nhân viên</p>
         <div class="flex flex-row-reverse">
             <?php
-            if ($ticket['activated'] == 1) {
+            if ($ticket['activated'] == 1 || $ticket['activated'] == 3) {
                 $class = 'cancel cursor-pointer bg-menu hover:bg-rose-600';
             } else {
                 $class = 'bg-gray-500';
@@ -63,6 +63,8 @@
             <p class=" checkk"></p>
         </div>
     </div>
+    <input type="hidden" class="id_ticket" value="<?= $ticket['id'] ?>">
+    <input type="hidden" class="activated" value="<?= $ticket['activated'] ?>">
 </section>
 
 <script>
@@ -72,15 +74,31 @@
             $.ajax({
                 url: './index.php?cancel_ticket',
                 data: {
-                    id_ticket: <?= $ticket['id'] ?>
+                    id_ticket: $('.id_ticket').val()
                 },
                 success: function(data) {
                     $('.cursor_load').css('display', 'none')
                     $('.cancel').addClass('bg-gray-500').removeClass('cancel cursor-pointer bg-menu hover:bg-rose-600')
-                    fun_alert('a','Hủy vé thành công')
-                    $('.checkk').html(data)
+                    if (data.length < 5) {
+                        fun_alert('a', 'Hủy vé thành công')
+                    } else {
+                        fun_alert('b', data)
+
+                    }
+
                 }
             })
         }
     })
+    if ($('.activated').val() == 3) {
+        $.ajax({
+            url: '../user/sendEmail.php?mua_ve',
+            data: {
+                id_ticket: $('.id_ticket').val(),
+            },
+            success: function(data) {
+                console.log(data);
+            }
+        })
+    }
 </script>

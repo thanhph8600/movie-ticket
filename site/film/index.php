@@ -131,7 +131,7 @@ if (exist_parma('detail')) {
     } else {
         $id_discount = null;
     }
-    $code = 0;
+    $code = 3; 
     $actived = 1;
     $id_ticket = ticket_insert($code, $user['id'], $id_showtime, $quantity_seat, $id_discount, $price_ticket, $actived);
     $code = $id_ticket . rand(1000, 9999);

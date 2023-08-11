@@ -124,7 +124,7 @@
                     <div class="table-responsive p-0">
                         <form action="./index.php?btn_update" enctype="multipart/form-data" method="post" style="display:flex;width:95%;margin:auto">
                             <div class="row pb-4">
-                                <div class="col-6">
+                                <div class="col-5">
                                     <label for="">Tên film</label>
                                     <input name="name" type="text" 
                                         value="<?=$film['name']?>"
@@ -133,13 +133,31 @@
                                     if (!empty($name_err)) echo $name_err;
                                     ?>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-4">
                                     <label for="">Đạo diễn</label>
                                     <input name="directors" type="text" id="directors" 
                                         value="<?=$film['directors']?>"
                                     >
                                     <?php
                                     if (!empty($directors_err)) echo $directors_err;
+                                    ?>
+                                </div>
+                                <div class="col-3">
+                                    <label for="" class="">Trạng thái:</label>
+                                    <div class=" py-3 d-flex">
+                                        <div>
+                                            <input class="sex" type="radio" name="activated" value="1" id="hoat_dong" <?= ($film['activated'] == 1) ? 'checked' : '' ?>>
+                                            <label for="hoat_dong">Hoạt động</label>
+                                        </div>
+                                        <div class=" ps-3">
+                                            <input class="sex" type="radio" name="activated" id="khong_hoat_dong" value="0" <?= ($film['activated'] == 0) ? 'checked' : '' ?>>
+                                            <label for="khong_hoat_dong">Không hoạt động</label>
+                                        </div>
+                                    </div>
+                                    <p class="chkRole text-danger"></p>
+
+                                    <?php
+                                    if (!empty($activated_err)) echo $activated_err;
                                     ?>
                                 </div>
                             </div>

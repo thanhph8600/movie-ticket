@@ -1,7 +1,7 @@
 <section>
     <div class="container m-auto py-4">
-        <div class="flex gap-3">
-            <div class="w-1/4 border rounded-md shadow-lg">
+        <div class="lg:flex gap-3">
+            <div class="lg:w-1/4 border rounded-md shadow-lg">
                 <div class="flex p-4 items-center gap-3 border-b">
                     <div class=" w-20 h-20 rounded-full overflow-hidden border-2 border-gray-400">
                         <img class=" w-full h-full" src="<?= $UPLOAD_USER_URL . $user['thumb'] ?>" alt="">
@@ -21,7 +21,7 @@
                     </p>
                 </div>
             </div>
-            <div class="w-3/4 p-4 border rounded-md shadow-md">
+            <div class="lg:w-3/4 mt-5 lg:mt-0 p-4 border rounded-md shadow-md">
                 <div class="infoUser">
                     <div class=" check-form">
                         <?php
@@ -31,7 +31,7 @@
                         ?>
                     </div>
                     <h2 class=" font-bold text-xl text-center py-3">Thông tin tài khoản</h2>
-                    <form action="../user/?update" method="post" class=" w-3/4 m-auto" enctype="multipart/form-data">
+                    <form action="../user/?update" method="post" class=" lg:w-3/4 m-auto" enctype="multipart/form-data">
                         <div class="flex gap-4 py-2">
                             <div class=" w-1/2 m-auto p-2">
                                 <div class="flex border-b border-b-rose-700 pb-2">
